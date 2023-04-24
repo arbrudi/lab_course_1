@@ -1,0 +1,30 @@
+nav {
+  border-radius: 35px;
+  background-color: rgba(6, 104, 231, 0.555);
+  overflow: hidden;
+  margin-left: 50px;
+  margin-right: 50px;
+}
+  nav ul {
+    list-style-type: none;
+    margin: 0;
+    padding: 0px;
+  }
+  
+  nav li {
+    display: inline-block;
+    padding-top: 24px;
+    padding-bottom: 24px;
+  }
+  
+  nav a {
+    text-decoration: none;    
+    color: black;
+    font-weight: bold;
+    padding: 24px 32px;
+  }
+  
+  nav a:hover {
+    background: rgba(4, 56, 124, 0.555);
+    color: white;
+  }
