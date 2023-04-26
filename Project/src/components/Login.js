@@ -37,7 +37,8 @@ const Login = () => {
           />
         </div>
         <button type="submit" className="btn btn-primary">Login</button>
-      </form>
+        <div className='go-to-register'><a href="/Register">Register</a></div> 
+      </form>  
     </div>
   );
 }
