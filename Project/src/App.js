@@ -11,6 +11,7 @@ import ArticlePage from './pages/ArticlePage';
 import PageNotFound from './pages/PageNotFound';
 import UserDashboard from './pages/UserDashboard';
 import AdminDashboard from './pages/AdminDashboard';
+import Login from './components/Login';
 
 function App() {
   return (
@@ -20,6 +21,7 @@ function App() {
    
     <div className="page-body">
     <Routes>
+    
     <Route path="/" element = {<HomePage />} />
     <Route path="/about" element = {<AboutPage />} />
     <Route path="/books" element = {<BookList />} />
@@ -29,6 +31,8 @@ function App() {
     <Route path="/userdashboard" element = {<UserDashboard />} />
     <Route path="/admindashboard" element = {<AdminDashboard />} />
     <Route path="/*" element = {<PageNotFound />} />
+    <Route path="/login" element = {<Login/>} />
+    
     </Routes>
     </div>
     </div>
