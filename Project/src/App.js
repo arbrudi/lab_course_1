@@ -12,6 +12,7 @@ import PageNotFound from './pages/PageNotFound';
 import UserDashboard from './pages/UserDashboard';
 import AdminDashboard from './pages/AdminDashboard';
 import Login from './components/Login';
+import Register from './components/Register';
 
 function App() {
   return (
@@ -32,6 +33,7 @@ function App() {
     <Route path="/admindashboard" element = {<AdminDashboard />} />
     <Route path="/*" element = {<PageNotFound />} />
     <Route path="/login" element = {<Login/>} />
+    <Route path="/register" element = {<Register/>} />
     
     </Routes>
     </div>
