@@ -36,6 +36,13 @@ Create Table Favorite_Books (
     CONSTRAINT PK_Favorite_Books PRIMARY Key (User_ID,ISBN)
 )
 
+Create table Book_Comments(
+    User_ID int References Client(User_ID) not null,
+    ISBN int References Books(ISBN) not null,
+    CONSTRAINT PK_Book_Comments PRIMARY Key (User_ID,ISBN),
+    B_comments varchar(MAX)
+)
+
 CREATE Table Articles(
     Article_ID VARCHAR(50) PRIMARY KEY,
     Article_image VARBINARY(MAX),
