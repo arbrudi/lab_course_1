@@ -59,6 +59,14 @@ Create table Article_Comments(
     CONSTRAINT PK_Article_Comments PRIMARY Key (User_ID,Article_ID),
     A_comments varchar(MAX)
 
+)
+
+
+CREATE Table Events (
+    Event_ID VarChar(255) PRIMARY Key,
+    Event_image VARBINARY(MAX),
+    Event_description VARCHAR(MAX),
+    Event_date date
 );
 
 
