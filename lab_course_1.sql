@@ -34,7 +34,7 @@ Create Table Favorite_Books (
     User_ID int References Client(User_ID) not null,
     ISBN int References Books(ISBN) not null,
     CONSTRAINT PK_Favorite_Books PRIMARY Key (User_ID,ISBN)
-)
+);
 
 
 
