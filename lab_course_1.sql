@@ -68,6 +68,12 @@ Create table Article_Comments(
 
 )
 
+Create Table Favorite_Articles (
+    User_ID int References Client(User_ID) not null,
+    Article_ID VARCHAR(50) References Articles(Article_ID) not null,
+    CONSTRAINT PK_Favorite_Articles PRIMARY Key (User_ID,Article_ID)
+)
+
 
 CREATE Table Events (
     Event_ID VarChar(255) PRIMARY Key,
@@ -83,69 +89,3 @@ Create table Event_participants (
     Constraint PK_Event_participants PRIMARY KEY (User_ID,Event_ID)
 )
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-Select * from Client
-Select * from Books
-Select * from Book_Ratings
-Select * from Favorite_Books
-Select * from Book_Comments
-
-alter table Books 
-alter column Book_description VARCHAR(MAX) 
-
-drop table Books
-
-Insert into Client (Name,Surname,User_Role,Email,Password,Username)
-VALUES('Arb','Rudi','Admin','arbrudi@gmail.com','Arbi123','arbrudi')
-
-Insert into Books
-VALUES ('11111',null,'The 7 wonders of the world','filan fisteku','sci-fi','Hello')
-Insert into Books
-VALUES ('11112',null,'The 8 wonders of the world','filane fisteku','sci-fi','Hellooooooooooooooooooooooooooooo')
-
-Insert into Book_Ratings
-VALUES('100', '11111','5')
-Insert into Book_Ratings
-VALUES('100', '11112','4')
-
-Insert into Favorite_Books
-VALUES('100', '11111')
-Insert into Favorite_Books
-VALUES('100', '11112')
-
-Insert into Book_Comments
-VALUES('100', '11111','The best book I have ever read!')
-Insert into Book_Comments
-VALUES('100', '11112','Good enough. Highly recommend it!')
-
-Select cl.Name, b.Book_title, br.B_Rating
-From Book_Ratings br Inner Join Client cl on br.User_ID = cl.User_ID
-INNER JOIN Books b on br.ISBN = b.ISBN
