@@ -25,12 +25,12 @@ function AboutPage() {
       <p>{slides[currentSlide].caption}</p> 
       
     <div className="sliderp">
-  <img src="./images/left-arrow.png" alt="Left Arrow" onClick={() => setCurrentSlide(currentSlide === 0 ? slides.length - 1 : currentSlide - 1)} />
+  <img src="https://icons.veryicon.com/png/o/system/dan_system/left-arrow-5.png" alt="Left Arrow" onClick={() => setCurrentSlide(currentSlide === 0 ? slides.length - 1 : currentSlide - 1)} />
 </div>
 
   
       <div className="slidern">
-  <img src="./images/right-arrow.png" alt="Right Arrow" onClick={() => setCurrentSlide(currentSlide === slides.length - 1 ? 0 : currentSlide + 1)}/>
+  <img src="https://icon-library.com/images/right-arrow-icon-png/right-arrow-icon-png-7.jpg"alt="Right Arrow" onClick={() => setCurrentSlide(currentSlide === slides.length - 1 ? 0 : currentSlide + 1)}/>
 </div> 
 <div className="elements">Who are we?</div> 
 <div className="atributes">elibrary is an application that will help students and other people to have access to different books and articles.
