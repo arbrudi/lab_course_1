@@ -23,7 +23,18 @@ CREATE TABLE Books(
     
 )
 
+Create Table Book_Ratings(
+    User_ID int References Client(User_ID) not null,
+    ISBN int References Books(ISBN) not null,
+    CONSTRAINT PK_Book_Ratings PRIMARY Key (User_ID,ISBN),
+    B_Rating int not null
+)
 
+Create Table Favorite_Books (
+    User_ID int References Client(User_ID) not null,
+    ISBN int References Books(ISBN) not null,
+    CONSTRAINT PK_Favorite_Books PRIMARY Key (User_ID,ISBN)
+)
 
 
 
