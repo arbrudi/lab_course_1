@@ -67,7 +67,14 @@ CREATE Table Events (
     Event_image VARBINARY(MAX),
     Event_description VARCHAR(MAX),
     Event_date date
-);
+)
+
+
+Create table Event_participants (
+    Event_ID varchar(255) References Events(Event_ID),
+    User_ID int not null References Client(User_ID),
+    Constraint PK_Event_participants PRIMARY KEY (User_ID,Event_ID)
+)
 
 
 
