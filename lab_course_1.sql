@@ -42,7 +42,26 @@ CREATE Table Articles(
     Article_title varchar(255),
     Article_type varchar(50),
     Article_Description VARCHAR(MAX)
+)
+
+
+Create Table Article_Ratings(
+    User_ID int References Client(User_ID) not null,
+    Article_ID VARCHAR(50) References Articles(Article_ID) not null,
+    CONSTRAINT PK_Article_Ratings PRIMARY Key (User_ID, Article_ID),
+    A_Rating int not null
+)
+
+
+Create table Article_Comments(
+    User_ID int References Client(User_ID) not null,
+    Article_ID VARCHAR(50) References Articles(Article_ID) not null,
+    CONSTRAINT PK_Article_Comments PRIMARY Key (User_ID,Article_ID),
+    A_comments varchar(MAX)
+
 );
+
+
 
 
 
