@@ -13,6 +13,16 @@ Password VARCHAR(255) not null,
 )
 
 
+CREATE TABLE Books(
+    ISBN int PRIMARY KEY not null,
+    Book_image VARBINARY(MAX),
+    Book_title VARCHAR(255) not null,
+    Book_author VARCHAR(255) not null,
+    Book_genre VARCHAR(255) not null,
+    Book_description VARCHAR(MAX) not null,
+    
+)
+
 
 
 
