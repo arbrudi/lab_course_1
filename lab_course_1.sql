@@ -36,6 +36,13 @@ Create Table Favorite_Books (
     CONSTRAINT PK_Favorite_Books PRIMARY Key (User_ID,ISBN)
 )
 
+Create table Book_Comments(
+    User_ID int References Client(User_ID) not null,
+    ISBN int References Books(ISBN) not null,
+    CONSTRAINT PK_Book_Comments PRIMARY Key (User_ID,ISBN),
+    B_comments varchar(MAX)
+)
+
 CREATE Table Articles(
     Article_ID VARCHAR(50) PRIMARY KEY,
     Article_image VARBINARY(MAX),
@@ -59,7 +66,22 @@ Create table Article_Comments(
     CONSTRAINT PK_Article_Comments PRIMARY Key (User_ID,Article_ID),
     A_comments varchar(MAX)
 
-);
+)
+
+
+CREATE Table Events (
+    Event_ID VarChar(255) PRIMARY Key,
+    Event_image VARBINARY(MAX),
+    Event_description VARCHAR(MAX),
+    Event_date date
+)
+
+
+Create table Event_participants (
+    Event_ID varchar(255) References Events(Event_ID),
+    User_ID int not null References Client(User_ID),
+    Constraint PK_Event_participants PRIMARY KEY (User_ID,Event_ID)
+)
 
 
 
