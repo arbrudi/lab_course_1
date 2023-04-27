@@ -34,7 +34,16 @@ Create Table Favorite_Books (
     User_ID int References Client(User_ID) not null,
     ISBN int References Books(ISBN) not null,
     CONSTRAINT PK_Favorite_Books PRIMARY Key (User_ID,ISBN)
+)
+
+CREATE Table Articles(
+    Article_ID VARCHAR(50) PRIMARY KEY,
+    Article_image VARBINARY(MAX),
+    Article_title varchar(255),
+    Article_type varchar(50),
+    Article_Description VARCHAR(MAX)
 );
+
 
 
 
