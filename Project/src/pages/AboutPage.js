@@ -1,5 +1,5 @@
 import React, { useState } from "react"; 
-import '../components/components_css/slider.css' ; 
+import '../pages/pages_css/slider.css' ; 
 
 function AboutPage() { 
  
