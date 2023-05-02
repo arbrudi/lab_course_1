@@ -1,18 +1,20 @@
 import {Link} from 'react-router-dom';
+import "./components_css/admin_nav_style.css";
+
 const AdminNav = () =>{
     return(
-        <nav>
+        <nav className="admin-nav-sidebar">
             <ul>
-                <li><Link to="/">Users</Link></li>
-                <li><Link to="/about">Books</Link></li>
-                <li><Link to="/books">Articles</Link></li>
-                <li><Link to="/articles">Events</Link></li>
-                <li><Link to="/userdashboard">Donations</Link></li>
-                <li><Link to ="/login">Logout</Link></li>
-           
+                <li><Link to="/admin">Users</Link></li>
+                <li><Link to="/admin">Books</Link></li>
+                <li><Link to="/admin">Articles</Link></li>
+                <li><Link to="/admin">Events</Link></li>
+                <li><Link to="/admin">Donations</Link></li>
+                <li><Link to ="/admin">Logout</Link></li>
             </ul>
         </nav>
     );
-}
+  }
+  
 
 export default AdminNav;

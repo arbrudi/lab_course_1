@@ -23,6 +23,6 @@ nav {
   }
   
   nav a:hover {
-    background: rgba(4, 56, 124, 0.555);
+    background: #ddd(4, 56, 124, 0.555);
     color: white;
   }

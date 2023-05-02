@@ -29,7 +29,7 @@ function App() {
             <Route path="/books/:bookid" element={<BookPage />} />
             <Route path="/articles" element={<ArticleList />} />
             <Route path="/articles/:articleid" element={<ArticlePage />} />
-            <Route path="/client" element={<UserDashboard />} />
+            <Route path="/user" element={<UserDashboard />} />
             <Route path="/admin" element={<AdminDashboard />} />
             <Route path="/*" element={<PageNotFound />} />
             <Route path="/login" element={<Login />} />
