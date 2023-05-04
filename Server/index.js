@@ -143,7 +143,7 @@ const Event_ID=req.body.Event_ID ;
 const Event_image=req.body.Event_description; 
 const Event_description=req.body.Event_description ; 
 const Event_date=req.body.Event_date;
-db.query("Update events set Event_image=? , Event_description=? , Event_date=? where Event_ID=?",[Event_image,Event_description,Event_date,Event_ID,],(err,result)=>{
+db.query("Update events set Event_image=? , Event_description=? , Event_date=? WHERE Event_ID=?",[Event_image,Event_description,Event_date,Event_ID,],(err,result)=>{
   if(err){
     console.log(err);   
   } 
@@ -154,7 +154,7 @@ db.query("Update events set Event_image=? , Event_description=? , Event_date=? w
 }) 
 app.delete ('/admin/event/delete/:Event_ID',(req,res)=>{
 const Event_ID=req.params.Event_ID ;
-db.query("Delete from events where Event_ID=? " , [Event_ID],(err,result)=>{
+db.query("Delete FROM events WHERE Event_ID=? " , [Event_ID],(err,result)=>{
   
 if(err){
   console.log(err) 
