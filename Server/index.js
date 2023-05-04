@@ -143,7 +143,7 @@ const Event_ID=req.body.Event_ID ;
 const Event_image=req.body.Event_description; 
 const Event_description=req.body.Event_description ; 
 const Event_date=req.body.Event_date;
-db.query("Update events set Event_image=? , Event_description=? , Event_date=? WHERE Event_ID=?",[Event_image,Event_description,Event_date,Event_ID,],(err,result)=>{
+db.query("Update events set Event_image=? , Event_description=? , Event_date=? where Event_ID=?",[Event_image,Event_description,Event_date,Event_ID,],(err,result)=>{
   if(err){
     console.log(err);   
   } 
@@ -154,7 +154,7 @@ db.query("Update events set Event_image=? , Event_description=? , Event_date=? W
 }) 
 app.delete ('/admin/event/delete/:Event_ID',(req,res)=>{
 const Event_ID=req.params.Event_ID ;
-db.query("Delete FROM events WHERE Event_ID=? " , [Event_ID],(err,result)=>{
+db.query("Delete from events where Event_ID=? " , [Event_ID],(err,result)=>{
   
 if(err){
   console.log(err) 
@@ -165,6 +165,138 @@ res.send(result)
 }
 }) 
 })
+
+// eris - articles
+
+
+
+app.post('/admin/articles/create', (req, res) => {
+  console.log(req.body);
+  const Article_ID = req.body.Article_ID;
+  const Article_image = req.body.Article_image;
+  const Article_title = req.body.Article_title;
+  const Article_type = req.body.Article_type;
+  const Article_Description = req.body.Article_Description;
+
+  db.query(
+    'INSERT INTO articles (Article_ID, Article_image, Article_title, Article_type, Article_Description) VALUES (?, ?, ?, ?, ?)',
+    [Article_ID, Article_image, Article_title, Article_type, Article_Description],
+    (err, result) => {
+      if (err) {
+        console.log(err);
+      } else {
+        res.send('Value inserted');
+      }
+    }
+  );
+});
+
+app.get('/admin/articles/', (req, res) => {
+  db.query('SELECT * FROM articles', (err, result) => {
+    if (err) {
+      console.log(err);
+    } else {
+      res.send(result);
+    }
+  });
+});
+
+app.put('/admin/articles/update', (req, res) => {
+  const Article_ID = req.body.Article_ID;
+  const Article_image = req.body.Article_image;
+  const Article_title = req.body.Article_title;
+  const Article_type = req.body.Article_type;
+  const Article_Description = req.body.Article_Description;
+
+  db.query(
+    'UPDATE articles SET Article_image=?, Article_title=?, Article_type=?, Article_Description=? WHERE Article_ID=?',
+    [Article_image, Article_title, Article_type, Article_Description, Article_ID],
+    (err, result) => {
+      if (err) {
+        console.log(err);
+      } else {
+        res.send(result);
+      }
+    }
+  );
+});
+
+
+
+
+app.delete('/admin/articles/delete/:Article_ID', (req, res) => {
+  const Article_ID = req.params.Article_ID;
+  db.query('DELETE FROM articles WHERE Article_ID=?', Article_ID, (err, result) => {
+    if (err) {
+      console.log(err);
+    } else {
+      res.send(result);
+    }
+  });
+});
+// Leka - 
+
+app.post('/admin/books/create', (req, res) => {
+  console.log(req.body);
+  const ISBN = req.body.ISBN; 
+  const Book_image = req.body.Book_image;
+  const Book_title = req.body.Book_title;
+  const Book_author = req.body.Book_author;
+  const Book_genre = req.body.Book_genre;
+  const Book_description = req.body.Book_description;
+
+  db.query(
+    'INSERT INTO books (ISBN, Book_image,Book_title,Book_author,Book_genre,Book_description) VALUES (?,?,?,?,?,?)',
+    [ISBN,Book_image, Book_title, Book_author, Book_genre, Book_description],
+    (err, result) => {
+      if (err) {
+        console.log(err);
+      } else {
+        res.send('Values Inserted');
+      }
+    }
+  );
+});
+
+app.get('/admin/books', (req, res) => {
+db.query("SELECT * FROM books", (err, result) => {
+if (err) {
+    console.log(err);
+} else {
+    res.send(result);
+}
+});
+});
+
+app.put("/admin/books/update", (req, res) => {
+  const ISBN= req.body.ISBN;
+  const Book_description = req.body.Book_description;
+  db.query(
+  "UPDATE books SET Book_description = ? WHERE ISBN = ?",
+   [Book_description, ISBN],
+    (err, result) => {
+      if (err) {
+        console.log(err);
+      } else {
+        res.send(result);
+      }
+    }
+  );
+});
+
+app.delete('/admin/books/delete/:ISBN', (req, res) => {
+  const ISBN = req.params.ISBN
+  db.query ("DELETE FROM books WHERE ISBN = ?", ISBN,(err, result) => {
+    if (err) {
+      console.log(err);
+    } else {
+      res.send(result);
+    }
+  })
+})
+
+
+
 
 app.listen(PORT,()=>{
 console.log(`The server is running on port ${PORT}`);
