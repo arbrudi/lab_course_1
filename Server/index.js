@@ -108,6 +108,64 @@ app.delete('/admin/users/delete/:id',(req,res)=>{
   })
 })
 
+//Riona - Events Management 
+app.post("/admin/event/create", (req, res) => { 
+  console.log(req.body )
+const Event_ID = req.body.Event_ID;
+const Event_image = req.body.Event_image;
+const Event_description = req.body.Event_description;
+const Event_date = req.body.Event_date; 
+
+db.query(
+  'INSERT INTO events (Event_ID, Event_image, Event_description, Event_date) VALUES (?, ?, ?, ?)',
+  [Event_ID, Event_image, Event_description, Event_date],
+  (err, result) => {
+    if (err) {
+      console.log(err)
+    } 
+    else {
+      res.send("Values inserted");
+    }
+  }
+); 
+});
+app.get('/admin/event',(req,res)=>{
+  db.query("Select * from events", (err,result)=>{
+      if(err){
+          console.log(err)
+      }else{
+          res.send(result)
+      }
+  })
+}) 
+app.put('/admin/event/update',(req,res)=>{
+const Event_ID=req.body.Event_ID ; 
+const Event_image=req.body.Event_description; 
+const Event_description=req.body.Event_description ; 
+const Event_date=req.body.Event_date;
+db.query("Update events set Event_image=? , Event_description=? , Event_date=? where Event_ID=?",[Event_image,Event_description,Event_date,Event_ID,],(err,result)=>{
+  if(err){
+    console.log(err);   
+  } 
+  else{
+    res.send(result);
+  }
+}); 
+}) 
+app.delete ('/admin/event/delete/:Event_ID',(req,res)=>{
+const Event_ID=req.params.Event_ID ;
+db.query("Delete from events where Event_ID=? " , [Event_ID],(err,result)=>{
+  
+if(err){
+  console.log(err) 
+} 
+else 
+{ 
+res.send(result) 
+}
+}) 
+})
+
 app.listen(PORT,()=>{
 console.log(`The server is running on port ${PORT}`);
-});
+}); 

@@ -41,11 +41,65 @@ const AdminDashboard = ()=> {
        setUserList(userList.filter((val)=>{
         return val.User_ID != User_ID;
        }))
-      })
-    }
+      }) 
+    
+    } 
+    //Riona  
+  const [Event_ID, setEvent_ID] = useState(''); 
+  const [Event_image, setEvent_image] = useState(''); 
+  const [Event_description, setEvent_description] = useState(''); 
+  const [Event_date, setEvent_date] = useState(''); 
+  const [eventlist,seteventlist]=useState([]); 
+
+  const [newEvent_description,setNewEvent_description]=useState([]) 
+  const [newEvent_image,setNewEvent_image]=useState([]) 
+  const [newEvent_date,setNewEvent_date]=useState([]) 
+
+
+  const addEvent = () => {
+    Axios.post('http://localhost:3001/admin/event/create',{
+      Event_ID: Event_ID, 
+      Event_image: Event_image, 
+      Event_description: Event_description, 
+      Event_date: Event_date
+    }) 
+    .then(() => {
+      seteventlist([...eventlist,{Event_ID: Event_ID, 
+        Event_image: Event_image, 
+        Event_description: Event_description, 
+        Event_date: Event_date, 
+      }, 
+    ])
+    });
+  }; 
+  const getEvent =()=>{ Axios.get('http://localhost:3001/admin/event')
+
+  .then((response) => {
+   seteventlist(response.data)
+    
+  }) 
+} 
+const updateEvent=(Event_ID)=>{
+  Axios.put("http://localhost:3001/admin/event/update",{Event_description:newEvent_description,Event_ID:Event_ID,Event_image:newEvent_image,Event_date:newEvent_date}).then((response)=>{ 
+
+  seteventlist(eventlist.map((val)=>{
+    return val.Event_ID==Event_ID ? {Event_ID: Event_ID, Event_image:newEvent_image,Event_description:newEvent_description,Event_date:newEvent_date} : val 
+  }) 
+  )
   
+  })}  
+
+  
+ const deleteEvent =(Event_ID)=>{
+    Axios.delete(`http://localhost:3001/admin/event/delete/${Event_ID}`).then((response)=>{
+      seteventlist(eventlist.filter((val)=>{
+        return val.Event_ID!=Event_ID
+      }))
+    })
+  } 
+
     return (
-     
+     <>
       <div className="App">
     
         <div className="users-list">
@@ -96,8 +150,83 @@ const AdminDashboard = ()=> {
          
     </div>
     </div>
-    
-    );  
-    }
+      <div className="App"> 
+        <div className="users-table">
+          <label>Id:</label>
+          <input 
+            type="text"
+            onChange={(event) => { 
+              setEvent_ID(event.target.value);
+            }}
+          /> 
+          <label>Images:</label>
+          <input 
+            type="url" 
+            onChange={(event) => { 
+              setEvent_image(event.target.value);
+            }}
+          /> 
+          <label>Description:</label>
+          <input 
+            type="text"
+            onChange={(event) => { 
+              setEvent_description(event.target.value);
+            }}
+          /> 
+          <label>Date:</label> 
+          <input 
+            type="date" 
+            onChange={(event) => { 
+              setEvent_date(event.target.value);
+            }}
+          /> 
+          <button onClick={addEvent}>Add Event</button> 
+        </div> 
+        <div className="e">
+        <button onClick={getEvent}>Show Events</button> 
+        {eventlist.map((val,key)=>{
+          return (<div className="a"> 
+          <div>
+            <h3> Event id:{val.Event_ID}</h3> 
+            <img src={val.Event_image} alt="event" />
+       <h3>Descrition:{val.Event_description}</h3> 
+           <h3>Date:{val.Event_date}</h3> 
+           </div> 
+           <div> 
+            <input type="text" 
+            placeholder="2000..." 
+            onChange={(event) => { 
+              setNewEvent_description(event.target.value) 
+              
+            }}/> 
+            <input type="url" 
+            placeholder="2000..." 
+            onChange={(event) => { 
+              setNewEvent_image(event.target.value) 
+              
+            }}/>
+            <input type="date" 
+            placeholder="2000..." 
+            onChange={(event) => { 
+              setNewEvent_date(event.target.value) 
+              
+            }}/>
+           <button onClick={()=>{updateEvent
+             (val.Event_ID)}}>Update </button>  
+             
+               
+             <button onClick={()=>{deleteEvent
+            (val.Event_ID)}
+            }>Delete</button> 
+           </div> 
+          </div> 
+          )
+        })} 
+        </div>
+      </div>
+      </>
+    );
+  }
+   
 
 export default AdminDashboard;
