@@ -97,6 +97,91 @@ const updateEvent=(Event_ID)=>{
       }))
     })
   } 
+  //erisi
+  const [Article_ID, setArticle_ID] = useState("");
+  const [Article_image	, setArticle_image	] = useState("");
+  const [Article_title, setArticle_title] = useState("");
+  const [Article_type, setArticle_type] = useState("");
+  const [Article_Description, setArticle_Description] = useState("");
+  const [Article_list, setArticle_list] = useState([]);
+
+  const [newArticle_image, setNewArticle_image] = useState("");
+  const [newArticle_title, setNewArticle_title] = useState("");
+  const [newArticle_type, setNewArticle_type] = useState("");
+  const [newArticle_Description, setNewArticle_Description] = useState("");
+
+  const addArticle = () => {
+    Axios.post('http://localhost:3001/admin/articles/create', {
+      Article_ID: Article_ID,
+      Article_image	: Article_image	,
+      Article_title: Article_title,
+      Article_type: Article_type,
+
+      Article_Description: Article_Description
+    }).then(() => {
+      setArticle_list([...Article_list, {
+        Article_ID: Article_ID,
+        Article_image	: Article_image	,
+        Article_title: Article_title,
+        Article_type: Article_type,
+        Article_Description: Article_Description
+      }]);
+    });
+  };
+
+  const getArticle = () => {
+    Axios.get("http://localhost:3001/admin/articles").then((response) => {
+      setArticle_list(response.data);
+    });
+  };
+
+ 
+
+
+ const updateAllArticles= (Article_ID) => {
+    Axios.put("http://localhost:3001/admin/articles/update", { 
+      Article_image	 :newArticle_image	,
+      Article_title :newArticle_title,
+      Article_type :newArticle_type,
+      Article_Description:newArticle_Description,
+      Article_ID: Article_ID }).then(
+      (response) => {
+      setArticle_list(Article_list.map((val)=>{
+
+      return val.Article_ID=== Article_ID ?
+       {
+        Article_image	 :newArticle_image	,
+        Article_title :newArticle_title,
+        Article_type :newArticle_type,
+        Article_Description:newArticle_Description
+      }:val
+      }));
+    }   
+  );
+};
+
+
+
+
+
+
+const deletearticles =(Article_ID) =>{
+  Axios.delete(`http://localhost:3001/admin/articles/delete/${Article_ID}`).then((response) => {
+ 
+     setArticle_list(Article_list.filter((val)=>{
+
+  return  val.Article_ID !== Article_ID;
+ 
+     }))
+   
+  })
+};
+
+
+
+
+
+
 
     return (
      <>
@@ -223,7 +308,106 @@ const updateEvent=(Event_ID)=>{
           )
         })} 
         </div>
+
+{/*eris */}
       </div>
+      <div className='information'>
+
+      <label>ID	</label> 
+        <input type='text' onChange={(event) => {setArticle_ID	(event.target.value)} } />
+
+        <label>Image	</label> 
+        <input type='text' onChange={(event) => {setArticle_image	(event.target.value)} } />
+
+        <label>Title</label>
+        <input type='text' onChange={(event) => {setArticle_title(event.target.value)} } />
+
+        <label>Type</label>
+        <input type='url' onChange={(event) => {setArticle_type(event.target.value)} }/>
+
+
+
+        <label>Description (year)</label>
+        <input type='text' onChange={(event) => {setArticle_Description(event.target.value)} } />
+
+        <button onClick={addArticle} >Add Article</button>
+      </div>
+
+      <div className="Articles">
+        <button onClick={getArticle}>Show Articles</button>
+        
+        {Article_list.map((val, key) => {
+          return (
+            <div className="Article" key={key}>
+              <div>
+                <h3>ID	: {val.Article_ID	}</h3> 
+                <img src={val.Article_image} alt="event" />  
+                <h3>Title: {val.Article_title}</h3>
+                <h3>Type: {val.Article_type}</h3>
+
+                <h3>Description: {val.Article_Description}</h3>
+              </div>
+              <div>
+           
+
+                
+                <input
+                  type="url"
+                  placeholder="Img"
+                  onChange={(event) => {
+                    setNewArticle_image(event.target.value);
+                  }}
+                />
+                  <input
+                  type="text"
+                  placeholder="Title"
+                  onChange={(event) => {
+                    setNewArticle_title(event.target.value);
+                  }}
+                />
+                  <input
+                  type="text"
+                  placeholder="Type"
+                  onChange={(event) => {
+                    setNewArticle_type(event.target.value);
+                  }}
+                />
+                  <input
+                  type="text"
+                  placeholder="Description"
+                  onChange={(event) => {
+                    setNewArticle_Description(event.target.value);
+                  }}
+                />
+
+
+
+
+
+
+                <button
+                  onClick={() => {
+                    updateAllArticles(val.Article_ID);
+                  }}
+                >
+                  {" "}
+                  Update title
+                </button>
+
+                
+
+                <button onClick={()=>(deletearticles(val.Article_ID))}>Delete</button>
+              </div>
+            </div>
+          );
+        })}
+</div>
+
+
+
+
+
+
       </>
     );
   }
