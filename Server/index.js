@@ -1,11 +1,8 @@
 import express, { json } from 'express';
 const app = express();
-import { createConnection } from 'mysql';
 import cors from 'cors';
-const PORT=3001;
+import { createConnection } from 'mysql';
 
-app.use(cors());
-app.use(json());
 //db connection
 const db = createConnection({
     user:'root',
@@ -14,46 +11,47 @@ const db = createConnection({
     database:'idk'
 });
 
-//routes
-//CREATE USER
-app.post('/register', (req,res) =>{
-    //calling data from the frontend to backend (requesting)
-    const name = req.body.name;
-    const surname = req.body.surname;
-    const user_role = req.body.user_role;
-    const email = req.body.email;
-    const username = req.body.username;
-    const password = req.body.password;
+const PORT=3001;
 
-    // Check if email or username already exist in the database
-    db.query('SELECT * FROM client WHERE email = ? OR username = ?', [email, username], (err, result) => {
-        if (err) {
-            console.log(err);
-            res.send("Error checking if user exists");
-        } else {
-            if (result.length > 0) {
-                // Email or username already exist in database, send error message
-                let message = "User with this email or username already exists";
-                res.status(400).send(message);
-            } else {
-                // Insert new user into the database
-                db.query('INSERT INTO client (Name,Surname,User_Role,Email,Username,Password) VALUES (?,?,?,?,?,?)',
-                    [name, surname, user_role, email, username, password],
-                    (err,result) =>{
-                        if(err){
-                            console.log(err);
-                            res.send("Error registering user");
-                        } else {
-                            res.send("User Registered Successfully");
-                            console.log("Successful Registration");
-                        }
-                    }
-                );
-            }
-        }
-    });
-});
+app.use(cors());
+app.use(json());
 
+app.post('/create', (req,res) =>{
+  //calling data from the frontend to backend (requesting)
+  const name = req.body.name;
+  const surname = req.body.surname;
+  const user_role = req.body.user_role;
+  const email = req.body.email;
+  const username = req.body.username;
+  const password = req.body.password;
+
+  // Check if email or username already exist in the database
+  db.query('SELECT * FROM client WHERE email = ? OR username = ?', [email, username], (err, result) => {
+      if (err) {
+          console.log(err);
+          res.send("Error checking if user exists");
+      } else {
+          if (result.length > 0) {
+              // Email or username already exist in database, send error message
+              let message = "User with this email or username already exists";
+              res.status(400).send(message);
+          } else {
+              // Insert new user into the database
+              db.query('INSERT INTO client (Name,Surname,User_Role,Email,Username,Password) VALUES (?,?,?,?,?,?)',
+                  [name, surname, user_role, email, username, password],
+                  (err,result) =>{
+                      if(err){
+                          console.log(err);
+                          res.send("Error registering user");
+                      } else {
+                          res.send("User Registered Successfully");
+                      }
+                  }
+              );
+          }
+      }
+  });
+  });
 // Login route
 app.post('/login', (req, res) => {
     const email = req.body.email;
@@ -75,11 +73,41 @@ app.post('/login', (req, res) => {
       }
     });
   });
-  
+//calling all users
+app.get('/admin/users', (req, res) => {
+db.query('SELECT * FROM client',(err,result)=>{
+  if(err){
+    console.log(err);
+  }else{
+    res.send(result);
+  }
+})
+})
+   
+//UPDATE USERS
+app.put('/admin/users/update',(req,res)=>{
+  const User_ID = req.body.User_ID;
+  const {Name, Surname,User_Role,Email, Username, Password} = req.body;
+  db.query("UPDATE client SET Name = ?, Surname=?, User_Role=?, Email = ?, Username = ?, Password = ? WHERE User_ID = ?",[Name, Surname,User_Role,Email, Username, Password, User_ID], (err,result)=> {
+    if(err){
+      console.log(err);
+    }else{
+      res.send(result);
+    }
+  })
+})
 
-
-
+app.delete('/admin/users/delete/:id',(req,res)=>{
+  const User_ID = req.params.id
+  db.query("DELETE FROM client WHERE User_ID=?", [User_ID],(err,result)=>{
+    if(err){
+      console.log(err)
+    }else{
+      res.send(result);
+    }
+  })
+})
 
 app.listen(PORT,()=>{
-    console.log(`The server is running on port ${PORT}`);
-    });
+console.log(`The server is running on port ${PORT}`);
+});

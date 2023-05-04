@@ -1,28 +1,29 @@
 nav {
   background-color: rgba(6, 104, 231, 0.555);
   overflow: hidden;
+  height: 100%;
 }
 
-  nav ul {
-    list-style-type: none;
-    margin: 0;
-    padding: 0;
-  }
-  
-  nav li {
-    display: inline-block;
-    padding-top: 24px;
-    padding-bottom: 24px;
-  }
-  
-  nav a {
-    text-decoration: none;    
-    color: black;
-    font-weight: bold;
-    padding: 24px 32px;
-  }
-  
-  nav a:hover {
-    background: #ddd(4, 56, 124, 0.555);
-    color: white;
-  }
+nav ul {
+  list-style-type: none;
+  margin: 0;
+  padding: 0;
+}
+
+nav li {
+  display: inline-block;
+  padding-top: 24px;
+  padding-bottom: 24px;
+}
+
+nav a {
+  text-decoration: none;    
+  color: black;
+  font-weight: bold;
+  padding: 24px 32px;
+}
+
+nav a:hover {
+  background: #ddd(4, 56, 124, 0.555);
+  color: white;
+}
