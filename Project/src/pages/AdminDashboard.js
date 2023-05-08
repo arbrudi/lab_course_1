@@ -2,7 +2,7 @@ import AdminNav from "../components/adminNav";
 import "../pages/pages_css/admin_style.css"
 import Axios from 'axios';
 import React, { useState } from 'react';
-
+//Arbi
 const AdminDashboard = ()=> {
     const [userList, setUserList] = useState([]);
     const [newName, setNewName] = useState('');
@@ -205,7 +205,7 @@ const deletearticles =(Article_ID) =>{
   })
 };
 
-{/*leka */}
+{/*Leka */}
 
 const [ISBN, setISBN] = useState()
 const [Book_image, setBook_image] = useState('')
@@ -267,7 +267,7 @@ const updatebooksBook_description = (ISBN) => {
 const deletebooks = (ISBN) => {
   Axios.delete(`http://localhost:3001/admin/books/delete/${ISBN}`).then((response)=> {
     setbooksList(booksList.filter((val)=> {
-      return val.ISBN !== ISBN
+      return val.ISBN !== ISBN;
     }))
   })
 };

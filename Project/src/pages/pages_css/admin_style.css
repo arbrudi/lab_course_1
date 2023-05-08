@@ -4,30 +4,30 @@ table {
     font-size: 14px;
   }
   
-  /* Add spacing between table cells */
+
   td,
   th {
     padding: 8px;
   }
   
-  /* Add a border to table cells */
+ 
   td,
   th {
     border: 1px solid #ccc;
   }
   
-  /* Add background color to table header */
+ 
   th {
     background-color: #f2f2f2;
     font-weight: bold;
   }
   
-  /* Add hover effect to table rows */
+  
   tr:hover {
     background-color: #f5f5f5;
   }
   
-  /* Style the "Users" button */
+
   button {
     background-color: #4caf50;
     color: white;
@@ -37,16 +37,11 @@ table {
     margin-bottom: 16px;
   }
   
-  /* Style the container */
-  .App {
+  .users-list {
+    margin-bottom: 16px;
     max-width: 800px;
     margin: 0 auto;
     padding: 16px;
-  }
-  
-  /* Style the user list container */
-  .users-list {
-    margin-bottom: 16px;
   }
   .user-table {
     border-collapse: collapse;

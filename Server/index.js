@@ -28,19 +28,18 @@ app.post('/admin/users/create', (req,res) =>{
   const User_ID = req.body.User_ID;
 
 
-  // Check if email or username already exist in the database
+  //Login
   db.query('SELECT * FROM client WHERE email = ? OR username = ?', [email, username], (err, result) => {
       if (err) {
           console.log(err);
           res.send("Error checking if user exists");
       } else {
           if (result.length > 0) {
-              // Email or username already exist in database, send error message
               let message = "User with this email or username already exists";
               res.status(400).send(message);
           } else {
-              // Insert new user into the database
-              db.query('INSERT INTO client (User_ID, Name,Surname,User_Role,Email,Username,Password) VALUES (?,?,?,?,?,?,?)',
+           
+              db.query('INSERT INTO client (User_ID, Name, Surname, User_Role, Email, Username, Password) VALUES (?,?,?,?,?,?,?)',
                   [User_ID,name, surname, user_role, email, username, password],
                   (err,result) =>{
                       if(err){
