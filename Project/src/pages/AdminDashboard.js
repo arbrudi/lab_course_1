@@ -451,10 +451,6 @@ const deletebooks = (ISBN) => {
         })} 
         </div>
 
-
-
-  
-
 {/*eris */}
       </div>
       <div className='information'>

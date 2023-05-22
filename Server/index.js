@@ -17,8 +17,9 @@ app.use(cors());
 app.use(json());
 //Arbi - Register, Login, User Management CRUD
 
+// CREATE NEW USER (UM CRUD)
 app.post('/admin/users/create', (req,res) =>{
-  //calling data from the frontend to backend (requesting)
+
   const name = req.body.name;
   const surname = req.body.surname;
   const user_role = req.body.user_role;
@@ -27,8 +28,6 @@ app.post('/admin/users/create', (req,res) =>{
   const password = req.body.password;
   const User_ID = req.body.User_ID;
 
-
-  //Login
   db.query('SELECT * FROM client WHERE email = ? OR username = ?', [email, username], (err, result) => {
       if (err) {
           console.log(err);
@@ -179,6 +178,7 @@ app.get('/admin/event',(req,res)=>{
       }
   })
 }) 
+
 app.put('/admin/event/update',(req,res)=>{
 const Event_ID=req.body.Event_ID ; 
 const Event_image=req.body.Event_description; 

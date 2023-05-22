@@ -40,7 +40,7 @@ function App() {
         </div>
       </div>
       <div className='footer-app'>
-       {/* <Footer /> */}
+       <Footer /> 
       </div>
     </BrowserRouter>
   );
