@@ -1,5 +1,7 @@
 import React, { useState } from "react"; 
 import '../pages/pages_css/slider.css' ; 
+import NavBar from '../components/NavBar';
+import Footer from '../components/Footer';
 
 function AboutPage() { 
  
@@ -20,6 +22,10 @@ function AboutPage() {
   ];
 
   return (
+    <>
+    <div className="nav-bar">
+    <NavBar />
+    </div>
     <div className="slider">
       <img src={slides[currentSlide].image} alt={slides[currentSlide].caption} />
       <p>{slides[currentSlide].caption}</p> 
@@ -58,8 +64,11 @@ The client has the possibility of donating various donations, whether money, old
   new knowledge. Partnership with others would help us to create new experiences and to offer users a wider range of services. 
   Anyone who wants to create a partnership with us or wants to donate can contact us through the data found in our application."</div>
  </div> 
-
+ <Footer />
+ </>
   );
 };
+
+
 
 export default AboutPage; 

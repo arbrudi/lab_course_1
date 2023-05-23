@@ -2,6 +2,8 @@ import AdminNav from "../components/adminNav";
 import "../pages/pages_css/admin_style.css"
 import Axios from 'axios';
 import React, { useState } from 'react';
+import NavBar from '../components/NavBar';
+import Footer from '../components/Footer';
 //Arbi
 const AdminDashboard = ()=> {
     const [userList, setUserList] = useState([]);
@@ -13,12 +15,12 @@ const AdminDashboard = ()=> {
     const [newPassword, setNewPassword] = useState('');
 
     const [name, setName] = useState('');
-  const [surname, setSurname] = useState('');
-  const [user_role, setUser_role] = useState('');
-  const [email, setEmail] = useState('');
-  const [username, setUsername] = useState('');
-  const [password, setPassword] = useState('');
-  const[User_ID, setUser_ID] = useState();
+    const [surname, setSurname] = useState('');
+    const [user_role, setUser_role] = useState('');
+    const [email, setEmail] = useState('');
+    const [username, setUsername] = useState('');
+    const [password, setPassword] = useState('');
+    const[User_ID, setUser_ID] = useState();
 
   const handleSubmit = (event) => {
     event.preventDefault();
@@ -125,7 +127,7 @@ const updateEvent=(Event_ID)=>{
       }))
     })
   } 
-  //erisi
+  //Erisi
   const [Article_ID, setArticle_ID] = useState("");
   const [Article_image	, setArticle_image	] = useState("");
   const [Article_title, setArticle_title] = useState("");
@@ -163,9 +165,6 @@ const updateEvent=(Event_ID)=>{
     });
   };
 
- 
-
-
  const updateAllArticles= (Article_ID) => {
     Axios.put("http://localhost:3001/admin/articles/update", { 
       Article_image	 :newArticle_image	,
@@ -188,11 +187,6 @@ const updateEvent=(Event_ID)=>{
   );
 };
 
-
-
-
-
-
 const deletearticles =(Article_ID) =>{
   Axios.delete(`http://localhost:3001/admin/articles/delete/${Article_ID}`).then((response) => {
  
@@ -206,7 +200,6 @@ const deletearticles =(Article_ID) =>{
 };
 
 {/*Leka */}
-
 const [ISBN, setISBN] = useState()
 const [Book_image, setBook_image] = useState('')
 const [Book_title, setBook_title] = useState('')
@@ -271,12 +264,14 @@ const deletebooks = (ISBN) => {
     }))
   })
 };
-
-
     return (
      <>
-      <div className="App">
-    
+     <NavBar />
+      <div className="admin_page">
+      <div className="admin_nav">
+      <AdminNav />
+    </div>
+    <div className="test">
         <div className="users-list">
      
           <button onClick={getUsers}>Users</button>
@@ -374,11 +369,11 @@ const deletebooks = (ISBN) => {
                 ))}
             </tbody>
           </table>
-         
-    </div>
-    </div>
-      <div className="App"> 
-        <div className="users-table">
+          </div>
+   
+   
+        <div className="event-table"> {/*EVENT    -- event-table */}
+
           <label>Id:</label>
           <input 
             type="text"
@@ -440,7 +435,6 @@ const deletebooks = (ISBN) => {
             }}/>
            <button onClick={()=>{updateEvent
              (val.Event_ID)}}>Update </button>  
-             
                
              <button onClick={()=>{deleteEvent
             (val.Event_ID)}
@@ -449,12 +443,10 @@ const deletebooks = (ISBN) => {
           </div> 
           )
         })} 
-        </div>
 
-{/*eris */}
+{/*Eris */}
       </div>
       <div className='information'>
-
       <label>ID	</label> 
         <input type='text' onChange={(event) => {setArticle_ID	(event.target.value)} } />
 
@@ -466,8 +458,6 @@ const deletebooks = (ISBN) => {
 
         <label>Type</label>
         <input type='url' onChange={(event) => {setArticle_type(event.target.value)} }/>
-
-
 
         <label>Description (year)</label>
         <input type='text' onChange={(event) => {setArticle_Description(event.target.value)} } />
@@ -490,9 +480,6 @@ const deletebooks = (ISBN) => {
                 <h3>Description: {val.Article_Description}</h3>
               </div>
               <div>
-           
-
-                
                 <input
                   type="url"
                   placeholder="Img"
@@ -521,12 +508,6 @@ const deletebooks = (ISBN) => {
                     setNewArticle_Description(event.target.value);
                   }}
                 />
-
-
-
-
-
-
                 <button
                   onClick={() => {
                     updateAllArticles(val.Article_ID);
@@ -535,9 +516,6 @@ const deletebooks = (ISBN) => {
                   {" "}
                   Update title
                 </button>
-
-                
-
                 <button onClick={()=>(deletearticles(val.Article_ID))}>Delete</button>
               </div>
             </div>
@@ -582,7 +560,6 @@ const deletebooks = (ISBN) => {
 
       <div className="books">
        
-
         {booksList.map((val, key) => {
           return (
             <div className="book" key={key}>
@@ -618,8 +595,9 @@ const deletebooks = (ISBN) => {
         })}
 
 </div>
-
-
+</div>
+</div>
+<Footer />
       </>
     );
   }

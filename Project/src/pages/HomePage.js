@@ -1,9 +1,13 @@
 import React from 'react';
 import './pages_css/Homepage_style.css';
 import { Carousel } from 'react-bootstrap';
+import NavBar from '../components/NavBar';
+import Footer from '../components/Footer';
 
 function HomePage() {
     return (
+        <>
+        <NavBar />
         <div className="home-container">
             <h1>Welcome to the e-Library!</h1>
             <p>Here, you can browse through our collection of books, articles, and other resources.</p>
@@ -73,6 +77,8 @@ function HomePage() {
                 </Carousel>
             </div>
         </div>
+        <Footer />
+        </>
     );
 }
 
