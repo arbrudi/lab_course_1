@@ -2,6 +2,10 @@ import AdminNav from "../components/adminNav";
 import "../pages/pages_css/admin_style.css"
 import Axios from 'axios';
 import React, { useState } from 'react';
+import NavBar from '../components/NavBar';
+import Footer from '../components/Footer';
+
+
 //Arbi
 const AdminDashboard = ()=> {
     const [userList, setUserList] = useState([]);
@@ -165,8 +169,6 @@ const updateEvent=(Event_ID)=>{
     });
   };
 
- 
-
 
  const updateAllArticles= (Article_ID) => {
     Axios.put("http://localhost:3001/admin/articles/update", { 
@@ -289,8 +291,12 @@ const deletebooks = (ISBN) => {
 
     return (
      <>
-      <div className="App">
-    
+     <NavBar />
+      <div className="admin_page">
+      <div className="admin_nav">
+      <AdminNav />
+    </div>
+    <div className="test">
         <div className="users-list">
      
           <button onClick={getUsers}>Users</button>
@@ -390,7 +396,7 @@ const deletebooks = (ISBN) => {
           </table>
          
     </div>
-    </div>
+   
       <div className="App"> 
         <div className="users-table">
           <label>Id:</label>
@@ -467,7 +473,7 @@ const deletebooks = (ISBN) => {
 
 {/*eris */}
       </div>
-      <div className='Article-input'>
+      <div className='information'>
 
       <label>ID	</label> 
         <input type='text' onChange={(event) => {setArticle_ID	(event.target.value)} } />
@@ -545,15 +551,13 @@ const deletebooks = (ISBN) => {
                   Update
                 </button>
 
-                
-
                 <button onClick={()=>(deletearticles(val.Article_ID))}>Delete</button>
               </div>
             </div>
           );
         })}
 </div>
-
+{/* LEKA */}
 <div className="information">
       <label>ISBN:</label>
         <input type="number"
@@ -641,9 +645,6 @@ const deletebooks = (ISBN) => {
               }} 
             />
 
-
-
-
               <button onClick={() => {
                 updateAll_books(val.ISBN);
                 }}
@@ -659,7 +660,9 @@ const deletebooks = (ISBN) => {
         })}
 
 </div>
-
+</div>
+</div>
+<Footer />
 
       </>
     );
