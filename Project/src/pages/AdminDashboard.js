@@ -2,7 +2,7 @@ import AdminNav from "../components/adminNav";
 import "../pages/pages_css/admin_style.css"
 import Axios from 'axios';
 import React, { useState } from 'react';
-
+//Arbi
 const AdminDashboard = ()=> {
     const [userList, setUserList] = useState([]);
     const [newName, setNewName] = useState('');
@@ -11,6 +11,36 @@ const AdminDashboard = ()=> {
     const [newEmail, setNewEmail] = useState('');
     const [newUsername, setNewUsername] = useState('');
     const [newPassword, setNewPassword] = useState('');
+
+    const [name, setName] = useState('');
+  const [surname, setSurname] = useState('');
+  const [user_role, setUser_role] = useState('');
+  const [email, setEmail] = useState('');
+  const [username, setUsername] = useState('');
+  const [password, setPassword] = useState('');
+  const[User_ID, setUser_ID] = useState();
+
+
+  {/* Comment */}
+  const handleSubmit = (event) => {
+    event.preventDefault();
+    if (name === '' || surname === '' || user_role === '' || email === '' || username === '' || password === '') {
+      alert('Please fill in all the fields');
+    } else {
+      Axios.post('http://localhost:3001/admin/users/create', {
+        name: name,
+        surname: surname,
+        user_role: user_role,
+        email: email,
+        username: username,
+        password: password,
+        User_ID: User_ID
+      }).then(() => {
+        console.log('Successful');
+        alert("User Registered! Refresh the page or press the Users' button again!")
+      });
+    }
+  };
   
     const getUsers = () => {
         Axios.get('http://localhost:3001/admin/users').then((response) => {
@@ -177,7 +207,7 @@ const deletearticles =(Article_ID) =>{
   })
 };
 
-{/*leka */}
+{/*Leka */}
 
 const [ISBN, setISBN] = useState()
 const [Book_image, setBook_image] = useState('')
@@ -191,6 +221,8 @@ const [newBook_image, setnewBook_image] = useState('')
 const [newBook_title, setnewBook_title] = useState('')
 const [newBook_author, setnewBook_author] = useState('')
 const [newBook_genre, setnewBook_genre] = useState('')
+
+
 
 const [booksList, setbooksList] = useState([]);
 
@@ -249,14 +281,10 @@ const updateAll_books = (ISBN) => {
 const deletebooks = (ISBN) => {
   Axios.delete(`http://localhost:3001/admin/books/delete/${ISBN}`).then((response)=> {
     setbooksList(booksList.filter((val)=> {
-      return val.ISBN !== ISBN
+      return val.ISBN !== ISBN;
     }))
   })
 };
-
-
-
-
 
 
     return (
@@ -266,7 +294,59 @@ const deletebooks = (ISBN) => {
         <div className="users-list">
      
           <button onClick={getUsers}>Users</button>
-          
+          <div className="users-table">
+          <label>User_ID</label>
+          <input 
+            type="number"
+            onChange={(event) => { 
+              setUser_ID(event.target.value);
+            }}
+          /> 
+          <label>Name</label>
+          <input 
+            type="text" 
+            onChange={(event) => { 
+              setName(event.target.value);
+            }}
+          /> 
+          <label>Surname:</label>
+          <input 
+            type="text"
+            onChange={(event) => { 
+              setSurname(event.target.value);
+            }}
+          /> 
+             <label>User Role:</label>
+          <input 
+            type="text"
+            onChange={(event) => { 
+              setUser_role(event.target.value);
+            }}
+          /> 
+             <label>Email:</label>
+          <input 
+            type="email"
+            onChange={(event) => { 
+              setEmail(event.target.value);
+            }}
+          /> 
+             <label>Username:</label>
+          <input 
+            type="text"
+            onChange={(event) => { 
+              setUsername(event.target.value);
+            }}
+          /> 
+             <label>Password:</label>
+          <input 
+            type="password"
+            onChange={(event) => { 
+              setPassword(event.target.value);
+            }}
+          /> 
+         
+          <button onClick={handleSubmit}>Create New User</button> 
+        </div> 
           <table className="user-table">
             <thead>
               <tr>
@@ -385,13 +465,9 @@ const deletebooks = (ISBN) => {
         })} 
         </div>
 
-
-
-  
-
 {/*eris */}
       </div>
-      <div className='information'>
+      <div className='Article-input'>
 
       <label>ID	</label> 
         <input type='text' onChange={(event) => {setArticle_ID	(event.target.value)} } />
@@ -460,18 +536,13 @@ const deletebooks = (ISBN) => {
                   }}
                 />
 
-
-
-
-
-
                 <button
                   onClick={() => {
                     updateAllArticles(val.Article_ID);
                   }}
                 >
                   {" "}
-                  Update title
+                  Update
                 </button>
 
                 
@@ -539,35 +610,40 @@ const deletebooks = (ISBN) => {
               placeholder="2000..." 
               onChange={(event) => {
                setnewBook_image(event.target.value);
-              }}  />
-                <input 
+              }} 
+            />
+            <input 
               type="text" 
               placeholder="2000..." 
               onChange={(event) => {
                setnewBook_title(event.target.value);
-              }}  />
-                <input 
+              }} 
+            />
+            <input 
               type="text" 
               placeholder="2000..." 
               onChange={(event) => {
                setnewBook_author(event.target.value);
-              }}  />
-                <input 
+              }} 
+            />
+            <input 
               type="text" 
               placeholder="2000..." 
               onChange={(event) => {
                setnewBook_genre(event.target.value);
-
-               
-              }}  />
-
-              <input 
+              }} 
+            />
+            <input 
               type="text" 
               placeholder="2000..." 
               onChange={(event) => {
                setNewBook_description(event.target.value);
-              }}  />
-           
+              }} 
+            />
+
+
+
+
               <button onClick={() => {
                 updateAll_books(val.ISBN);
                 }}
