@@ -10,8 +10,9 @@ import PageNotFound from './pages/PageNotFound';
 import UserDashboard from './pages/UserDashboard';
 import AdminDashboard from './pages/AdminDashboard';
 import Login from './pages/Login';
-import Register from './pages/Register';
-
+import Register from './pages/Register'; 
+import Createe from './pages/createe';
+import Update from './pages/Update'; 
 function App() {
   return (
     <BrowserRouter>
@@ -33,7 +34,8 @@ function App() {
             <Route path="/login" element={<Login />} />
             <Route path="/register" element={<Register />} />
             <Route path="/home" element={<HomePage />} />
-
+            <Route path="/create" element={<Createe />} /> 
+            <Route path="/update/:Event_ID" element={<Update />} />
           </Routes>
         </div>
       </div>
