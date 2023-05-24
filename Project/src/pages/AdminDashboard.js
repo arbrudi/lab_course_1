@@ -187,6 +187,10 @@ const [Book_genre, setBook_genre] = useState('')
 const [Book_description, setBook_description] = useState('')
 
 const [newBook_description, setNewBook_description] = useState('')
+const [newBook_image, setnewBook_image] = useState('')
+const [newBook_title, setnewBook_title] = useState('')
+const [newBook_author, setnewBook_author] = useState('')
+const [newBook_genre, setnewBook_genre] = useState('')
 
 const [booksList, setbooksList] = useState([]);
 
@@ -220,16 +224,22 @@ const getbooks = () => {
   });
 };
 
-const updatebooksBook_description = (ISBN) => {
-  Axios.put("http://localhost:3001/admin/books/update" ,{ Book_description: newBook_description, ISBN: ISBN}).then(
+const updateAll_books = (ISBN) => {
+  Axios.put("http://localhost:3001/admin/books/update" ,{
+     Book_description: newBook_description, 
+      ISBN: ISBN  ,
+     Book_image: newBook_image
+  , Book_author: newBook_author
+  , Book_title: newBook_title
+  , Book_genre: newBook_genre }).then(
     (response) => {
       setbooksList(booksList.map((val)=> {
         return val.ISBN === ISBN ? 
         {ISBN: val.ISBN, 
-          Book_image: val.Book_image
-          , Book_author: val.Book_author
-          , Book_title: val.Book_title
-          , Book_genre: val.Book_genre
+          Book_image: newBook_image
+          , Book_author: newBook_author
+          , Book_title: newBook_title
+          , Book_genre: newBook_genre
           , Book_description: newBook_description} : val
       }))
     }
@@ -528,11 +538,38 @@ const deletebooks = (ISBN) => {
               type="text" 
               placeholder="2000..." 
               onChange={(event) => {
+               setnewBook_image(event.target.value);
+              }}  />
+                <input 
+              type="text" 
+              placeholder="2000..." 
+              onChange={(event) => {
+               setnewBook_title(event.target.value);
+              }}  />
+                <input 
+              type="text" 
+              placeholder="2000..." 
+              onChange={(event) => {
+               setnewBook_author(event.target.value);
+              }}  />
+                <input 
+              type="text" 
+              placeholder="2000..." 
+              onChange={(event) => {
+               setnewBook_genre(event.target.value);
+
+               
+              }}  />
+
+              <input 
+              type="text" 
+              placeholder="2000..." 
+              onChange={(event) => {
                setNewBook_description(event.target.value);
-              }} 
-            />
+              }}  />
+           
               <button onClick={() => {
-                updatebooksBook_description(val.ISBN);
+                updateAll_books(val.ISBN);
                 }}
               > 
               {" "}

@@ -166,6 +166,72 @@ res.send(result)
 }) 
 })
 
+//leka book crud
+
+app.post('/admin/books/create', (req, res) => {
+  console.log(req.body);
+  const ISBN = req.body.ISBN; 
+  const Book_image = req.body.Book_image;
+  const Book_title = req.body.Book_title;
+  const Book_author = req.body.Book_author;
+  const Book_genre = req.body.Book_genre;
+  const Book_description = req.body.Book_description;
+
+  db.query(
+    'INSERT INTO books (ISBN, Book_image,Book_title,Book_author,Book_genre,Book_description) VALUES (?,?,?,?,?,?)',
+    [ISBN,Book_image, Book_title, Book_author, Book_genre, Book_description],
+    (err, result) => {
+      if (err) {
+        console.log(err);
+      } else {
+        res.send('Values Inserted');
+      }
+    }
+  );
+});
+
+app.get('/admin/books', (req, res) => {
+db.query("SELECT * FROM books", (err, result) => {
+if (err) {
+    console.log(err);
+} else {
+    res.send(result);
+}
+});
+});  
+
+app.put("/admin/books/update", (req, res) => {
+  const ISBN = req.body.ISBN; 
+  const Book_image = req.body.Book_image;
+  const Book_title = req.body.Book_title;
+  const Book_author = req.body.Book_author;
+  const Book_genre = req.body.Book_genre;
+  const Book_description = req.body.Book_description;
+  db.query(
+  "UPDATE books SET  Book_image = ? ,Book_title = ? ,Book_author = ?,Book_genre = ?, Book_description = ?  WHERE ISBN = ?",
+   [Book_image,Book_title,Book_author,Book_genre,Book_description, ISBN],
+    (err, result) => {
+      if (err) {
+        console.log(err);
+      } else {
+        res.send(result);
+      }
+    }
+  );
+});
+
+
+app.delete('/admin/books/delete/:ISBN', (req, res) => {
+  const ISBN = req.params.ISBN
+  db.query ("DELETE FROM books WHERE ISBN = ?", ISBN,(err, result) => {
+    if (err) {
+      console.log(err);
+    } else {
+      res.send(result);
+    }
+  })
+})
+
 app.listen(PORT,()=>{
 console.log(`The server is running on port ${PORT}`);
 }); 
