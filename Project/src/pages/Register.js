@@ -31,6 +31,7 @@ const Register = () => {
   };
 
   return (
+    <div className='bg-img'>
     <div className="register-container">
       <form onSubmit={handleSubmit} className="register-form">
         <h2 className="register-heading">Register</h2>
@@ -100,6 +101,7 @@ const Register = () => {
         <div className='go-to-login'> <Link to="/login">Login</Link></div>
 
       </form>
+    </div>
     </div>
   );
 }

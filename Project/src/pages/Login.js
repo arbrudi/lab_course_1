@@ -3,6 +3,7 @@ import { Link } from 'react-router-dom';
 import '../pages/pages_css/Login_style.css';
 import Axios from 'axios';
 
+
 const Login = () => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
@@ -25,6 +26,7 @@ const Login = () => {
   };
 
   return (
+    <div className='bg-image'>
     <div className="login-container">
       <form className="login-form">
         <h2 className="login-heading">Login</h2>
@@ -53,6 +55,8 @@ const Login = () => {
         <button type="submit" className="btn btn-primary" onClick={loginUser}>Login</button>
         <div className='go-to-register'><Link to="/register">Register</Link></div> 
       </form>  
+    </div>
+    
     </div>
   );
 }

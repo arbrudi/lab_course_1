@@ -2,7 +2,7 @@ import {Link} from 'react-router-dom';
 import './components_css/NavBar_style.css';
 const NavBar = () =>{
     return(
-        <nav>
+        <nav className='nav-1'>
             <ul>
                 <li><Link to="/">Home</Link></li>
                 <li><Link to="/about">About</Link></li>

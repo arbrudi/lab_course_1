@@ -1,13 +1,18 @@
+.bg-image{
+  background-image: url(../../img/pexels-photo.jpg);
+  background-size: cover;
+}
 .login-container {
     height: 100vh;
     display: flex;
     align-items: center;
     justify-content: center;
+    
   }
   
   .login-form {
     width: 400px;
-    background-color: #f5f5f5;
+    background-color: #f5f5f5d6;
     padding: 30px;
     border-radius: 10px;
     box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
@@ -17,11 +22,13 @@
     margin-top: 0px;
     margin-bottom: 30px;
     text-align: center;
+    
   }
   
   .form-label {
     display: block;
     margin-bottom: 10px;
+    
   }
   
   .form-control {
@@ -34,7 +41,7 @@
   }
   
   .btn {
-    background-color: #007bff;
+    background-color: #7c80a9;
     color: #fff;
     border: none;
     padding: 10px 20px;
@@ -44,5 +51,5 @@
   }
   
   .btn:hover {
-    background-color: #0069d9;
+    background-color: #7F7EDB;
   }

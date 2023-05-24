@@ -235,3 +235,187 @@ app.delete('/admin/books/delete/:ISBN', (req, res) => {
 app.listen(PORT,()=>{
 console.log(`The server is running on port ${PORT}`);
 }); 
+
+
+
+/////
+
+
+import AdminNav from "../components/adminNav";
+import "../pages/pages_css/admin_style.css"
+import Axios from 'axios';
+import React, { useState } from 'react';
+
+const AdminDashboard = ()=> {
+    const [userList, setUserList] = useState([]);
+    const [newName, setNewName] = useState('');
+    const [newSurname, setNewSurname] = useState('');
+    const [newUser_Role, setNewUser_Role] = useState('');
+    const [newEmail, setNewEmail] = useState('');
+    const [newUsername, setNewUsername] = useState('');
+    const [newPassword, setNewPassword] = useState('');
+  
+    const getUsers = () => {
+        Axios.get('http://localhost:3001/admin/users').then((response) => {
+          console.log(response);
+          setUserList(response.data);
+        });
+      };
+
+    const updateUser = (User_ID) => {
+      Axios.put('http://localhost:3001/admin/users/update', {
+        Name: newName,
+        Surname: newSurname,
+        User_Role:newUser_Role,
+        Email:newEmail,
+        Username: newUsername,
+        Password: newPassword,
+        User_ID:User_ID
+      }).then((response) => {
+        console.log(response)
+        setUserList(userList.map((val)=>{
+          return val.User_ID === User_ID ? {User_ID: val.User_ID, Name:newName, Surname: newSurname, User_Role: newUser_Role, Email: newEmail, Username: newUsername, Password: newPassword}: val
+        }))
+      });
+    };
+    
+    const deleteUser = (User_ID)=>{
+      Axios.delete(`http://localhost:3001/admin/users/delete/${User_ID}`).then((response)=>{
+       setUserList(userList.filter((val)=>{
+        return val.User_ID != User_ID;
+       }))
+      }) 
+    
+    } 
+    //Riona  
+  const [Event_ID, setEvent_ID] = useState(''); 
+  const [Event_image, setEvent_image] = useState(''); 
+  const [Event_description, setEvent_description] = useState(''); 
+  const [Event_date, setEvent_date] = useState(''); 
+  const [eventlist,seteventlist]=useState([]); 
+
+  const [newEvent_description,setNewEvent_description]=useState([]) 
+  const [newEvent_image,setNewEvent_image]=useState([]) 
+  const [newEvent_date,setNewEvent_date]=useState([]) 
+
+
+  const addEvent = () => {
+    Axios.post('http://localhost:3001/admin/event/create',{
+      Event_ID: Event_ID, 
+      Event_image: Event_image, 
+      Event_description: Event_description, 
+      Event_date: Event_date
+    }) 
+    .then(() => {
+      seteventlist([...eventlist,{Event_ID: Event_ID, 
+        Event_image: Event_image, 
+        Event_description: Event_description, 
+        Event_date: Event_date, 
+      }, 
+    ])
+    });
+  }; 
+  const getEvent =()=>{ Axios.get('http://localhost:3001/admin/event')
+
+  .then((response) => {
+   seteventlist(response.data)
+    
+  }) 
+} 
+const updateEvent=(Event_ID)=>{
+  Axios.put("http://localhost:3001/admin/event/update",{Event_description:newEvent_description,Event_ID:Event_ID,Event_image:newEvent_image,Event_date:newEvent_date}).then((response)=>{ 
+
+  seteventlist(eventlist.map((val)=>{
+    return val.Event_ID==Event_ID ? {Event_ID: Event_ID, Event_image:newEvent_image,Event_description:newEvent_description,Event_date:newEvent_date} : val 
+  }) 
+  )
+  
+  })}  
+
+  
+ const deleteEvent =(Event_ID)=>{
+    Axios.delete(`http://localhost:3001/admin/event/delete/${Event_ID}`).then((response)=>{
+      seteventlist(eventlist.filter((val)=>{
+        return val.Event_ID!=Event_ID
+      }))
+    })
+  } 
+  //erisi
+  const [Article_ID, setArticle_ID] = useState("");
+  const [Article_image	, setArticle_image	] = useState("");
+  const [Article_title, setArticle_title] = useState("");
+  const [Article_type, setArticle_type] = useState("");
+  const [Article_Description, setArticle_Description] = useState("");
+  const [Article_list, setArticle_list] = useState([]);
+
+  const [newArticle_image, setNewArticle_image] = useState("");
+  const [newArticle_title, setNewArticle_title] = useState("");
+  const [newArticle_type, setNewArticle_type] = useState("");
+  const [newArticle_Description, setNewArticle_Description] = useState("");
+
+  const addArticle = () => {
+    Axios.post('http://localhost:3001/admin/articles/create', {
+      Article_ID: Article_ID,
+      Article_image	: Article_image	,
+      Article_title: Article_title,
+      Article_type: Article_type,
+
+      Article_Description: Article_Description
+    }).then(() => {
+      setArticle_list([...Article_list, {
+        Article_ID: Article_ID,
+        Article_image	: Article_image	,
+        Article_title: Article_title,
+        Article_type: Article_type,
+        Article_Description: Article_Description
+      }]);
+    });
+  };
+
+  const getArticle = () => {
+    Axios.get("http://localhost:3001/admin/articles").then((response) => {
+      setArticle_list(response.data);
+    });
+  };
+
+ 
+
+
+ const updateAllArticles= (Article_ID) => {
+    Axios.put("http://localhost:3001/admin/articles/update", { 
+      Article_image	 :newArticle_image	,
+      Article_title :newArticle_title,
+      Article_type :newArticle_type,
+      Article_Description:newArticle_Description,
+      Article_ID: Article_ID }).then(
+      (response) => {
+      setArticle_list(Article_list.map((val)=>{
+
+      return val.Article_ID=== Article_ID ?
+       {
+        Article_image	 :newArticle_image	,
+        Article_title :newArticle_title,
+        Article_type :newArticle_type,
+        Article_Description:newArticle_Description
+      }:val
+      }));
+    }   
+  );
+};
+
+
+
+
+
+
+const deletearticles =(Article_ID) =>{
+  Axios.delete(`http://localhost:3001/admin/articles/delete/${Article_ID}`).then((response) => {
+ 
+     setArticle_list(Article_list.filter((val)=>{
+
+  return  val.Article_ID !== Article_ID;
+ 
+     }))
+   
+  })
+};
