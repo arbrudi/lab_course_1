@@ -103,6 +103,7 @@ const AdminDashboard = ()=> {
   const [Article_Description, setArticle_Description] = useState("");
   const [Article_list, setArticle_list] = useState([]);
 
+  
   const [newArticle_image, setNewArticle_image] = useState("");
   const [newArticle_title, setNewArticle_title] = useState("");
   const [newArticle_type, setNewArticle_type] = useState("");
@@ -136,7 +137,7 @@ const AdminDashboard = ()=> {
 
  const updateAllArticles= (Article_ID) => {
     Axios.put("http://localhost:3001/admin/articles/update", { 
-      Article_image	 :newArticle_image	,
+      Article_image	 :newArticle_image,
       Article_title :newArticle_title,
       Article_type :newArticle_type,
       Article_Description:newArticle_Description,
@@ -146,6 +147,7 @@ const AdminDashboard = ()=> {
 
       return val.Article_ID=== Article_ID ?
        {
+      
         Article_image	 :newArticle_image	,
         Article_title :newArticle_title,
         Article_type :newArticle_type,
@@ -408,87 +410,66 @@ const deletebooks = (ISBN) => {
       </div>
       <div className='information'>
 
-      <label>ID	</label> 
-        <input type='text' onChange={(event) => {setArticle_ID	(event.target.value)} } />
+     
+
+      <table>
+       <label>ID	</label> 
+       <td><input type='text' onChange={(event) => {setArticle_ID	(event.target.value)} } /></td> 
 
         <label>Image	</label> 
-        <input type='text' onChange={(event) => {setArticle_image	(event.target.value)} } />
+       <td><input type='text' onChange={(event) => {setArticle_image	(event.target.value)} } /></td> 
 
         <label>Title</label>
-        <input type='text' onChange={(event) => {setArticle_title(event.target.value)} } />
+       <td><input type='text' onChange={(event) => {setArticle_title(event.target.value)} } /></td> 
 
         <label>Type</label>
-        <input type='url' onChange={(event) => {setArticle_type(event.target.value)} }/>
+    <td><input type='url' onChange={(event) => {setArticle_type(event.target.value)} }/></td>     
 
 
 
         <label>Description (year)</label>
         <input type='text' onChange={(event) => {setArticle_Description(event.target.value)} } />
-
+</table>
         <button onClick={addArticle} >Add Article</button>
       </div>
 
       <div className="Articles">
         <button onClick={getArticle}>Show Articles</button>
-        
-        {Article_list.map((val, key) => {
-          return (
-            <div className="Article" key={key}>
-              <div>
-                <h3>ID	: {val.Article_ID	}</h3> 
-                <img src={val.Article_image} alt="event" />  
-                <h3>Title: {val.Article_title}</h3>
-                <h3>Type: {val.Article_type}</h3>
+        </div>
+        <table className="user-table">
+            <thead>
+              <tr>
+                <th>Article ID</th>
+                <th>Article Image</th>
+                <th>Article Title</th>
+                <th>Article Type</th>
+                <th>Article Description</th>
+                <th>Edit</th>
+                <th>Delete</th>
+              </tr>
+            </thead>
+            <tbody>
+            {Article_list.map((val, key) => ( 
+                <tr key={val.key}>
+                  <td>{val.Article_ID}</td>
+                  <td></td>
+                  <td>{val.Article_title}</td>
+                  <td>{val.Article_type}</td>
+                  <td>{val.Article_Description}</td>
+                  <td>
+                      <input placeholder ="Article Title" defaultValue={val.Article_title} onChange={(event) => setNewArticle_title(event.target.value)} />
+                      <input placeholder ="Article Type" defaultValue={val.Article_type} onChange={(event) => setNewArticle_type(event.target.value)} />
+                      <input placeholder ="Article Description" defaultValue={val.Article_Description} onChange={(event) => setNewArticle_Description(event.target.value)} />
+                       <button variant="primary" onClick={() =>{updateAllArticles(val.Article_ID)} }>
+                      Edit
+                    </button>
+                  </td>
+                  <td><button onClick={()=>{deletearticles(val.Article_ID)}}>Delete</button></td>
+                </tr>
+                ))}
+            </tbody>
+          </table>
 
-                <h3>Description: {val.Article_Description}</h3>
-              </div>
-              <div>
-           
-
-                
-                <input
-                  type="url"
-                  placeholder="Img"
-                  onChange={(event) => {
-                    setNewArticle_image(event.target.value);
-                  }}
-                />
-                  <input
-                  type="text"
-                  placeholder="Title"
-                  onChange={(event) => {
-                    setNewArticle_title(event.target.value);
-                  }}
-                />
-                  <input
-                  type="text"
-                  placeholder="Type"
-                  onChange={(event) => {
-                    setNewArticle_type(event.target.value);
-                  }}
-                />
-                  <input
-                  type="text"
-                  placeholder="Description"
-                  onChange={(event) => {
-                    setNewArticle_Description(event.target.value);
-                  }}
-                />
-
-                <button
-                  onClick={() => {
-                    updateAllArticles(val.Article_ID);
-                  }}
-                >
-                  {" "}
-                  Update
-                </button>
-
-                <button onClick={()=>(deletearticles(val.Article_ID))}>Delete</button>
-              </div>
-            </div>
-          );
-        })}
 </div>
 {/* LEKA */}
 <div className="information">
@@ -527,8 +508,6 @@ const deletebooks = (ISBN) => {
       </div>
 
       <div className="books">
-       
-
         {booksList.map((val, key) => {
           return (
             <div className="book" key={key}>
@@ -594,7 +573,7 @@ const deletebooks = (ISBN) => {
 
 </div>
 </div>
-</div>
+
 <Footer />
 
       </>

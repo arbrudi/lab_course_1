@@ -206,8 +206,6 @@ app.post('/createe', (req, res) => {
 
 // eris - articles
 
-
-
 app.post('/admin/articles/create', (req, res) => {
   console.log(req.body);
   const Article_ID = req.body.Article_ID;
@@ -245,7 +243,7 @@ app.put('/admin/articles/update', (req, res) => {
   const Article_title = req.body.Article_title;
   const Article_type = req.body.Article_type;
   const Article_Description = req.body.Article_Description;
-
+  
   db.query(
     'UPDATE articles SET Article_image=?, Article_title=?, Article_type=?, Article_Description=? WHERE Article_ID=?',
     [Article_image, Article_title, Article_type, Article_Description, Article_ID],
@@ -258,9 +256,6 @@ app.put('/admin/articles/update', (req, res) => {
     }
   );
 });
-
-
-
 
 app.delete('/admin/articles/delete/:Article_ID', (req, res) => {
   const Article_ID = req.params.Article_ID;
