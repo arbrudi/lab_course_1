@@ -508,71 +508,47 @@ const deletebooks = (ISBN) => {
       </div>
 
       <div className="books">
-        {booksList.map((val, key) => {
-          return (
-            <div className="book" key={key}>
-              <div>
-              <h3>ISBN: {val.ISBN}</h3>  
-              <img src={val.Book_image} alt="event" />
-              <h3>Book_title: {val.Book_title}</h3>
-              <h3>Book_author: {val.Book_author}</h3>
-              <h3>Book_genre: {val.Book_genre}</h3>
-              <h3>Book_description: {val.Book_description}</h3>
-              </div>
-            <div>
-              {" "}
-              <input 
-              type="text" 
-              placeholder="2000..." 
-              onChange={(event) => {
-               setnewBook_image(event.target.value);
-              }} 
-            />
-            <input 
-              type="text" 
-              placeholder="2000..." 
-              onChange={(event) => {
-               setnewBook_title(event.target.value);
-              }} 
-            />
-            <input 
-              type="text" 
-              placeholder="2000..." 
-              onChange={(event) => {
-               setnewBook_author(event.target.value);
-              }} 
-            />
-            <input 
-              type="text" 
-              placeholder="2000..." 
-              onChange={(event) => {
-               setnewBook_genre(event.target.value);
-              }} 
-            />
-            <input 
-              type="text" 
-              placeholder="2000..." 
-              onChange={(event) => {
-               setNewBook_description(event.target.value);
-              }} 
-            />
-
-              <button onClick={() => {
-                updateAll_books(val.ISBN);
-                }}
-              > 
-              {" "}
-              Update
-              </button>
-
-              <button onClick={()=>{deletebooks(val.ISBN)}}>Delete</button>
-            </div>
-          </div>
-        );
-        })}
-
+      <button onClick={getbooks}>Show Books</button>
+        </div>
+        <table className="user-table">
+            <thead>
+              <tr>
+                <th>ISBN</th>
+                <th>Book Image</th>
+                <th>Book Title</th> 
+                <th>Book author</th>
+                <th>Book genre</th>
+               
+                <th>Book Description</th>
+                <th>Edit</th>
+                <th>Delete</th>
+              </tr>
+            </thead>
+            <tbody>
+            {booksList.map((val, key) => ( 
+                <tr key={val.key}>
+                  <td>{val.ISBN}</td>
+                  <td></td>
+                  <td>{val.Book_title}</td>
+                  <td>{val.Book_author}</td>
+                  <td>{val.Book_genre}</td>
+                  <td>{val.Book_description}</td>
+                  <td>
+                      <input placeholder ="book title" defaultValue={val.Book_title} onChange={(event) => setnewBook_title(event.target.value)} />
+                      <input placeholder ="book author" defaultValue={val.Book_author} onChange={(event) => setnewBook_author(event.target.value)} />
+                      <input placeholder ="book genre" defaultValue={val.Book_genre} onChange={(event) => setnewBook_genre(event.target.value)} />
+                      <input placeholder ="book Description" defaultValue={val.Book_description} onChange={(event) => setNewBook_description(event.target.value)} />
+                        <button variant="primary" onClick={() =>{updateAll_books(val.ISBN)} }>
+                      Edit
+                    </button>
+                  </td>
+                  <td><button onClick={()=>{deletebooks(val.ISBN)}}>Delete</button></td>
+                </tr>
+                ))}
+            </tbody>
+          </table>
 </div>
-</div>
+
 
 <Footer />
 
