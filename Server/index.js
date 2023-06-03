@@ -18,15 +18,23 @@ app.use(json());
 //Arbi - Register, Login, User Management CRUD
 
 // CREATE NEW USER (UM CRUD)
-app.post('/admin/users/create', (req,res) =>{
+app.post('/admin/user/create', (req,res) =>{
 
-  const name = req.body.name;
-  const surname = req.body.surname;
-  const user_role = req.body.user_role;
+ 
   const email = req.body.email;
   const username = req.body.username;
-  const password = req.body.password;
-  const User_ID = req.body.User_ID;
+
+  const sql = "INSERT INTO client (User_ID, Name, Surname, User_Role, Email, Username, Password) VALUES (?, ?, ?, ?,?,?,?)";
+    const values = [
+      req.body.User_ID,
+      req.body.Name,
+      req.body.Surname,
+      req.body.User_Role,
+      req.body.Email,
+      req.body.Username,
+      req.body.Password
+    ];
+  
 
   db.query('SELECT * FROM client WHERE email = ? OR username = ?', [email, username], (err, result) => {
       if (err) {
@@ -38,9 +46,7 @@ app.post('/admin/users/create', (req,res) =>{
               res.status(400).send(message);
           } else {
            
-              db.query('INSERT INTO client (User_ID, Name, Surname, User_Role, Email, Username, Password) VALUES (?,?,?,?,?,?,?)',
-                  [User_ID,name, surname, user_role, email, username, password],
-                  (err,result) =>{
+             db.query(sql, values, (err, data) => { 
                       if(err){
                           console.log(err);
                           res.send("Error registering user");
@@ -114,7 +120,7 @@ app.post('/login', (req, res) => {
     });
   });
 //calling all users
-app.get('/admin/users', (req, res) => {
+app.get('/admin/user', (req, res) => {
 db.query('SELECT * FROM client',(err,result)=>{
   if(err){
     console.log(err);
@@ -125,7 +131,7 @@ db.query('SELECT * FROM client',(err,result)=>{
 })
    
 //UPDATE USERS
-app.put('/admin/users/update',(req,res)=>{
+app.put('/admin/user/update/:User_ID',(req,res)=>{
   const User_ID = req.body.User_ID;
   const {Name, Surname,User_Role,Email, Username, Password} = req.body;
   db.query("UPDATE client SET Name = ?, Surname=?, User_Role=?, Email = ?, Username = ?, Password = ? WHERE User_ID = ?",[Name, Surname,User_Role,Email, Username, Password, User_ID], (err,result)=> {
@@ -137,7 +143,7 @@ app.put('/admin/users/update',(req,res)=>{
   })
 })
 
-app.delete('/admin/users/delete/:id',(req,res)=>{
+app.delete('/admin/user/delete/:id',(req,res)=>{
   const User_ID = req.params.id
   db.query("DELETE FROM client WHERE User_ID=?", [User_ID],(err,result)=>{
     if(err){

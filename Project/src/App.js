@@ -13,6 +13,8 @@ import Login from './pages/Login';
 import Register from './pages/Register'; 
 import Createe from './pages/createe';
 import Update from './pages/Update'; 
+import CreateUser from './components/CRUDS/User_Management/CreateUser';
+import UpdateUser from './components/CRUDS/User_Management/UpdateUser';
 function App() {
   return (
     <BrowserRouter>
@@ -36,6 +38,8 @@ function App() {
             <Route path="/home" element={<HomePage />} />
             <Route path="/create" element={<Createe />} /> 
             <Route path="/update/:Event_ID" element={<Update />} />
+            <Route path="/admin/user/create" element={<CreateUser />} />
+            <Route path="/admin/user/update/:User_ID" element={<UpdateUser />} />
           </Routes>
         </div>
       </div>

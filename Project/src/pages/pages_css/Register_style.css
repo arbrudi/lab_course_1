@@ -40,7 +40,7 @@
     font-size: 16px;
   }
   
-  .btn {
+  .btn-register {
     background-color: #7F7EDB;
     color: #fff;
     border: none;
@@ -50,6 +50,6 @@
     cursor: pointer;
   }
   
-  .btn:hover {
+  .btn-register:hover {
     background-color: #6c6bca;
   }

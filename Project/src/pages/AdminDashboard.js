@@ -4,81 +4,26 @@ import Axios from 'axios';
 import React, {useEffect, useState } from 'react';
 import NavBar from '../components/NavBar';
 import Footer from '../components/Footer'; 
-import {Link} from 'react-router-dom'
+import {Link} from 'react-router-dom';
 
 
 //Arbi
 const AdminDashboard = ()=> {
-    const [userList, setUserList] = useState([]);
-    const [newName, setNewName] = useState('');
-    const [newSurname, setNewSurname] = useState('');
-    const [newUser_Role, setNewUser_Role] = useState('');
-    const [newEmail, setNewEmail] = useState('');
-    const [newUsername, setNewUsername] = useState('');
-    const [newPassword, setNewPassword] = useState('');
+  const [User, setUsers] = useState([]);
 
-    const [name, setName] = useState('');
-  const [surname, setSurname] = useState('');
-  const [user_role, setUser_role] = useState('');
-  const [email, setEmail] = useState('');
-  const [username, setUsername] = useState('');
-  const [password, setPassword] = useState('');
-  const[User_ID, setUser_ID] = useState();
-
-
-  {/* Comment */}
-  const handleSubmit = (event) => {
-    event.preventDefault();
-    if (name === '' || surname === '' || user_role === '' || email === '' || username === '' || password === '') {
-      alert('Please fill in all the fields');
-    } else {
-      Axios.post('http://localhost:3001/admin/users/create', {
-        name: name,
-        surname: surname,
-        user_role: user_role,
-        email: email,
-        username: username,
-        password: password,
-        User_ID: User_ID
-      }).then(() => {
-        console.log('Successful');
-        alert("User Registered! Refresh the page or press the Users' button again!")
-      });
-    }
-  };
-  
-    const getUsers = () => {
-        Axios.get('http://localhost:3001/admin/users').then((response) => {
-          console.log(response);
-          setUserList(response.data);
-        });
-      };
-
-    const updateUser = (User_ID) => {
-      Axios.put('http://localhost:3001/admin/users/update', {
-        Name: newName,
-        Surname: newSurname,
-        User_Role:newUser_Role,
-        Email:newEmail,
-        Username: newUsername,
-        Password: newPassword,
-        User_ID:User_ID
-      }).then((response) => {
-        console.log(response)
-        setUserList(userList.map((val)=>{
-          return val.User_ID === User_ID ? {User_ID: val.User_ID, Name:newName, Surname: newSurname, User_Role: newUser_Role, Email: newEmail, Username: newUsername, Password: newPassword}: val
-        }))
-      });
-    };
-    
-    const deleteUser = (User_ID)=>{
-      Axios.delete(`http://localhost:3001/admin/users/delete/${User_ID}`).then((response)=>{
-       setUserList(userList.filter((val)=>{
-        return val.User_ID != User_ID;
-       }))
-      }) 
-    
-    } 
+  useEffect(() => {
+    Axios.get('http://localhost:3001/admin/user')
+      .then(res => setUsers(res.data))
+      .catch(err => console.log(err));
+  }, []);
+const handleDeleteU =async (User_ID)=>{
+  try{
+    await Axios.delete(`http://localhost:3001/admin/user/delete/${User_ID}`) 
+    window.location.reload() 
+  } catch(err){
+    console.log(err);
+  }
+}
     //Riona  
     const [events, setEvents] = useState([]);
 
@@ -157,10 +102,6 @@ const AdminDashboard = ()=> {
     }   
   );
 };
-
-
-
-
 
 
 const deletearticles =(Article_ID) =>{
@@ -264,61 +205,9 @@ const deletebooks = (ISBN) => {
     </div>
     <div className="test">
         <div className="users-list">
-     
-          <button onClick={getUsers}>Users</button>
-          <div className="users-table">
-          <label>User_ID</label>
-          <input 
-            type="number"
-            onChange={(event) => { 
-              setUser_ID(event.target.value);
-            }}
-          /> 
-          <label>Name</label>
-          <input 
-            type="text" 
-            onChange={(event) => { 
-              setName(event.target.value);
-            }}
-          /> 
-          <label>Surname:</label>
-          <input 
-            type="text"
-            onChange={(event) => { 
-              setSurname(event.target.value);
-            }}
-          /> 
-             <label>User Role:</label>
-          <input 
-            type="text"
-            onChange={(event) => { 
-              setUser_role(event.target.value);
-            }}
-          /> 
-             <label>Email:</label>
-          <input 
-            type="email"
-            onChange={(event) => { 
-              setEmail(event.target.value);
-            }}
-          /> 
-             <label>Username:</label>
-          <input 
-            type="text"
-            onChange={(event) => { 
-              setUsername(event.target.value);
-            }}
-          /> 
-             <label>Password:</label>
-          <input 
-            type="password"
-            onChange={(event) => { 
-              setPassword(event.target.value);
-            }}
-          /> 
-         
-          <button onClick={handleSubmit}>Create New User</button> 
-        </div> 
+        <Link to="/admin/user/create" className='btn'>
+          <button className='btn-new-user'>Create New User</button>
+        </Link>
           <table className="user-table">
             <thead>
               <tr>
@@ -329,36 +218,29 @@ const deletebooks = (ISBN) => {
                 <th>Email</th>
                 <th>Username</th>
                 <th>Password</th>
-                <th>Edit</th>
-                <th>Delete</th>
+                <th>Action</th>
+                
               </tr>
             </thead>
             <tbody>
-            {userList.map((val,key) => ( 
-                <tr key={val.key}>
-                  <td>{val.User_ID}</td>
-                  <td>{val.Name}</td>
-                  <td>{val.Surname}</td>
-                  <td>{val.User_Role}</td>
-                  <td>{val.Email}</td>
-                  <td>{val.Username}</td>
-                  <td>{val.Password}</td>
-                  <td>
-                <input placeholder ="Name" defaultValue={val.Name} onChange={(event) => setNewName(event.target.value)} />
-                <input placeholder ="Surname" defaultValue={val.Surname} onChange={(event) => setNewSurname(event.target.value)} />
-                <input placeholder ="User Role" defaultValue={val.User_Role} onChange={(event) => setNewUser_Role(event.target.value)} />
-                <input placeholder ="Email" defaultValue={val.Email} onChange={(event) => setNewEmail(event.target.value)} />
-                <input placeholder ="Username" defaultValue={val.Username} onChange={(event) => setNewUsername(event.target.value)} />
-                <input placeholder ="Password" defaultValue={val.Password} onChange={(event) => setNewPassword(event.target.value)} />
-        
-                    <button variant="primary" onClick={() =>{updateUser(val.User_ID)} }>
-                      Edit
-                    </button>
-                  </td>
-                  <td><button onClick={()=>{deleteUser(val.User_ID)}}>Delete</button></td>
-                </tr>
-                ))}
-            </tbody>
+            {User.map((data, i) => (
+              <tr key={i}>
+                <td>{data.User_ID}</td>
+                <td>{data.Name }</td>
+                <td>{data.Surname }</td>
+                <td>{data.User_Role}</td>
+                <td>{data.Email}</td> 
+                <td>{data.Username}</td> 
+                <td>{data.Password}</td> 
+                <td className="buttons_user">
+                <Link to={`user/update/${data.User_ID}`} className='btn'>
+                    <button className='btn-update'>Update</button>
+                  </Link>
+                  <button className='btn-delete'onClick={e => handleDeleteU(data.User_ID)}>Delete</button>
+                </td>
+              </tr>
+            ))}
+          </tbody>
           </table>
          
     </div>

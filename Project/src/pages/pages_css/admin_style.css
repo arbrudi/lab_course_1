@@ -59,19 +59,53 @@ button {
 .user-table td {
   text-align: center;
 }
-
-.edit-btn {
-  background-color: #007bff;
-  border-color: #007bff;
+.btn-new-user{
+  background-color: #2fc797;
   color: #fff;
-  padding: 6px 12px;
-  margin: 0;
+  font-weight:600;
+  width: 25%;
+  margin: 10px;
   cursor: pointer;
   transition: background-color 0.3s ease;
 }
 
-.edit-btn:hover {
-  background-color: #0069d9;
+.btn-new-user:hover {
+  background-color: #62B9B6;
+}
+
+.btn-delete {
+  background-color: #e22f2f;
+  color: #fff;
+  font-weight:600;
+  width: 80%;
+  margin: 10px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.btn-delete:hover {
+  background-color: #c53636;
+}
+
+.btn-update {
+  background-color: #0cd1ca;
+  color: #fff;
+  font-weight:600;
+  width: 80%;
+  
+  margin: 10px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.btn-update:hover {
+  background-color: #62B9B6;
+}
+
+.buttons_user{
+  display: flex;
+  flex-direction: column;
+  
 }
 
 .modal-body label {

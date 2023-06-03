@@ -52,7 +52,7 @@ const Login = () => {
             required 
           />
         </div>
-        <button type="submit" className="btn btn-primary" onClick={loginUser}>Login</button>
+        <button type="submit" className="btn-login" onClick={loginUser}>Login</button>
         <div className='go-to-register'><Link to="/register">Register</Link></div> 
       </form>  
     </div>
