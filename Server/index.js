@@ -15,6 +15,8 @@ const PORT=3001;
 
 app.use(cors());
 app.use(json());
+app.use(express.json());
+
 //Arbi - Register, Login, User Management CRUD
 
 // CREATE NEW USER (UM CRUD)
@@ -213,25 +215,30 @@ app.post('/createe', (req, res) => {
 // eris - articles
 
 app.post('/admin/articles/create', (req, res) => {
-  console.log(req.body);
-  const Article_ID = req.body.Article_ID;
-  const Article_image = req.body.Article_image;
-  const Article_title = req.body.Article_title;
-  const Article_type = req.body.Article_type;
-  const Article_Description = req.body.Article_Description;
-
-  db.query(
-    'INSERT INTO articles (Article_ID, Article_image, Article_title, Article_type, Article_Description) VALUES (?, ?, ?, ?, ?)',
-    [Article_ID, Article_image, Article_title, Article_type, Article_Description],
-    (err, result) => {
-      if (err) {
-        console.log(err);
-      } else {
-        res.send('Value inserted');
-      }
-    }
-  );
+   
+ const sql='INSERT INTO articles (Article_ID, Article_image, Article_title, Article_type, Article_Description) VALUES (?, ?, ?, ?, ?)'
+ const values=[
+  req.body.Article_ID,
+  req.body.Article_image,
+  req.body.Article_title,
+  req.body.Article_type,
+  req.body.Article_Description
+ ]
+ db.query(sql, values, (err, data) => { 
+  if(err){
+      console.log(err);
+      res.send("Error registering user");
+  } else {
+      res.send("User Registered Successfully");
+  }
+}
+);
 });
+
+
+
+
+
 
 app.get('/admin/articles/', (req, res) => {
   db.query('SELECT * FROM articles', (err, result) => {
@@ -243,25 +250,31 @@ app.get('/admin/articles/', (req, res) => {
   });
 });
 
-app.put('/admin/articles/update', (req, res) => {
-  const Article_ID = req.body.Article_ID;
-  const Article_image = req.body.Article_image;
-  const Article_title = req.body.Article_title;
-  const Article_type = req.body.Article_type;
-  const Article_Description = req.body.Article_Description;
+app.put('/admin/articles/update/:Article_ID', (req, res) => {
+  const Article_ID = req.body.User_ID;
+  const sql='UPDATE articles SET Article_image = ? ,Article_title = ? ,Article_type = ?, Article_Description = ?  WHERE Article_ID = ?'
+  const values=[ 
   
-  db.query(
-    'UPDATE articles SET Article_image=?, Article_title=?, Article_type=?, Article_Description=? WHERE Article_ID=?',
-    [Article_image, Article_title, Article_type, Article_Description, Article_ID],
-    (err, result) => {
-      if (err) {
-        console.log(err);
-      } else {
-        res.send(result);
-      }
-    }
-  );
-});
+   req.body.Article_image,
+   req.body.Article_title,
+   req.body.Article_type,
+   req.body.Article_Description,
+   req.body.Article_ID
+  ]
+  
+
+  db.query(sql, [...values,Article_ID], (err, data) => { 
+   if(err){
+       console.log(err);
+       res.send("Error");
+   } else {
+       res.send("Success");
+   }
+ }
+ );
+ });
+
+
 
 app.delete('/admin/articles/delete/:Article_ID', (req, res) => {
   const Article_ID = req.params.Article_ID;

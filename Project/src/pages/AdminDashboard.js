@@ -40,81 +40,32 @@ const handleDeleteU =async (User_ID)=>{
       console.log(err);
     }
   }
+
   //erisi
-  const [Article_ID, setArticle_ID] = useState("");
-  const [Article_image	, setArticle_image	] = useState("");
-  const [Article_title, setArticle_title] = useState("");
-  const [Article_type, setArticle_type] = useState("");
-  const [Article_Description, setArticle_Description] = useState("");
+
+
   const [Article_list, setArticle_list] = useState([]);
 
+
+  useEffect(()=>{
+    Axios.get("http://localhost:3001/admin/articles")
+    .then(res => setArticle_list(res.data))
+    .catch(err => console.log(err))
+
+},
+[])
   
-  const [newArticle_image, setNewArticle_image] = useState("");
-  const [newArticle_title, setNewArticle_title] = useState("");
-  const [newArticle_type, setNewArticle_type] = useState("");
-  const [newArticle_Description, setNewArticle_Description] = useState("");
+const deletearticles = async(Article_ID) => 
+{
+  try{
+    await Axios.delete(`http://localhost:3001/admin/articles/delete/${Article_ID}`)
+    window.location.reload() 
+    
+  }catch(err){
+    console.log(err);
+  }
+}
 
-  const addArticle = () => {
-    Axios.post('http://localhost:3001/admin/articles/create', {
-      Article_ID: Article_ID,
-      Article_image	: Article_image	,
-      Article_title: Article_title,
-      Article_type: Article_type,
-
-      Article_Description: Article_Description
-    }).then(() => {
-      setArticle_list([...Article_list, {
-        Article_ID: Article_ID,
-        Article_image	: Article_image	,
-        Article_title: Article_title,
-        Article_type: Article_type,
-        Article_Description: Article_Description
-      }]);
-    });
-  };
-
-  const getArticle = () => {
-    Axios.get("http://localhost:3001/admin/articles").then((response) => {
-      setArticle_list(response.data);
-    });
-  };
-
-
- const updateAllArticles= (Article_ID) => {
-    Axios.put("http://localhost:3001/admin/articles/update", { 
-      Article_image	 :newArticle_image,
-      Article_title :newArticle_title,
-      Article_type :newArticle_type,
-      Article_Description:newArticle_Description,
-      Article_ID: Article_ID }).then(
-      (response) => {
-      setArticle_list(Article_list.map((val)=>{
-
-      return val.Article_ID=== Article_ID ?
-       {
-      
-        Article_image	 :newArticle_image	,
-        Article_title :newArticle_title,
-        Article_type :newArticle_type,
-        Article_Description:newArticle_Description
-      }:val
-      }));
-    }   
-  );
-};
-
-
-const deletearticles =(Article_ID) =>{
-  Axios.delete(`http://localhost:3001/admin/articles/delete/${Article_ID}`).then((response) => {
- 
-     setArticle_list(Article_list.filter((val)=>{
-
-  return  val.Article_ID !== Article_ID;
- 
-     }))
-   
-  })
-};
 
 {/*Leka */}
 
@@ -289,68 +240,46 @@ const deletebooks = (ISBN) => {
     
 
 {/*eris */}
+
+
+
+
       </div>
-      <div className='information'>
+      <div className='d-flex  bg-primary justify-content-center align-items-center'>
+         <div className='bg-white rounded p-3'>
+            <Link to="/admin/articles/create" className='btn btn-success' >Add +</Link>
+            <table className='table'>
+                <thead> 
+                    <tr>
+                    <th>ID</th>
+                    <th>Article_image</th>
+                    <th>Article_title</th>
+                    <th>Article_type</th>
+                    <th>Article_Description</th>
+                    <th>Action</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {
+                        Article_list.map((data,i)=>(
+                            <tr key={i}>
+                                <td>{data.Article_ID}</td>
+                                <td>{data.Article_image}</td>
+                                <td>{data.Article_title}</td>
+                                <td>{data.Article_type}</td>
+                                <td>{data.Article_Description}</td>
+                                <td>
+                                    <Link to={`articles/update/${data.Article_ID}`} className='btn btn-primary'>Update</Link>
+                                    <button className='btn btn-danger ms-2' onClick={e => deletearticles(data.Article_ID)}>Delete</button>
+                                </td>
+                            </tr>
+                        ))
+                    }
+                </tbody>
 
-     
-
-      <table>
-       <label>ID	</label> 
-       <td><input type='text' onChange={(event) => {setArticle_ID	(event.target.value)} } /></td> 
-
-        <label>Image	</label> 
-       <td><input type='text' onChange={(event) => {setArticle_image	(event.target.value)} } /></td> 
-
-        <label>Title</label>
-       <td><input type='text' onChange={(event) => {setArticle_title(event.target.value)} } /></td> 
-
-        <label>Type</label>
-    <td><input type='url' onChange={(event) => {setArticle_type(event.target.value)} }/></td>     
-
-
-
-        <label>Description (year)</label>
-        <input type='text' onChange={(event) => {setArticle_Description(event.target.value)} } />
-</table>
-        <button onClick={addArticle} >Add Article</button>
-      </div>
-
-      <div className="Articles">
-        <button onClick={getArticle}>Show Articles</button>
-        </div>
-        <table className="user-table">
-            <thead>
-              <tr>
-                <th>Article ID</th>
-                <th>Article Image</th>
-                <th>Article Title</th>
-                <th>Article Type</th>
-                <th>Article Description</th>
-                <th>Edit</th>
-                <th>Delete</th>
-              </tr>
-            </thead>
-            <tbody>
-            {Article_list.map((val, key) => ( 
-                <tr key={val.key}>
-                  <td>{val.Article_ID}</td>
-                  <td></td>
-                  <td>{val.Article_title}</td>
-                  <td>{val.Article_type}</td>
-                  <td>{val.Article_Description}</td>
-                  <td>
-                      <input placeholder ="Article Title" defaultValue={val.Article_title} onChange={(event) => setNewArticle_title(event.target.value)} />
-                      <input placeholder ="Article Type" defaultValue={val.Article_type} onChange={(event) => setNewArticle_type(event.target.value)} />
-                      <input placeholder ="Article Description" defaultValue={val.Article_Description} onChange={(event) => setNewArticle_Description(event.target.value)} />
-                       <button variant="primary" onClick={() =>{updateAllArticles(val.Article_ID)} }>
-                      Edit
-                    </button>
-                  </td>
-                  <td><button onClick={()=>{deletearticles(val.Article_ID)}}>Delete</button></td>
-                </tr>
-                ))}
-            </tbody>
-          </table>
+            </table>
+         </div>
+    </div>   
 
 </div>
 {/* LEKA */}

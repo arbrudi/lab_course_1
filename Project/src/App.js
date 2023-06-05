@@ -1,5 +1,6 @@
 import './App.css';
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
+import 'bootstrap/dist/css/bootstrap.min.css'
 import HomePage from './pages/HomePage';
 import AboutPage from './pages/AboutPage';
 import BookList from './pages/BookList';
@@ -15,6 +16,9 @@ import Createe from './pages/createe';
 import Update from './pages/Update'; 
 import CreateUser from './components/CRUDS/User_Management/CreateUser';
 import UpdateUser from './components/CRUDS/User_Management/UpdateUser';
+
+import CreateArticle from './components/CRUDS/Article_Managment/CreateArticle';
+import UpdateArticle from './components/CRUDS/Article_Managment/UpdateArticle';
 function App() {
   return (
     <BrowserRouter>
@@ -40,6 +44,9 @@ function App() {
             <Route path="/update/:Event_ID" element={<Update />} />
             <Route path="/admin/user/create" element={<CreateUser />} />
             <Route path="/admin/user/update/:User_ID" element={<UpdateUser />} />
+            <Route path="/admin/articles/create" element={<CreateArticle />} />
+            <Route path='/admin/articles/update/:Article_ID' element={<UpdateArticle />} />
+
           </Routes>
         </div>
       </div>

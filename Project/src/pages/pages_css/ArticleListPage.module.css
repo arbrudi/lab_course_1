@@ -1,0 +1,25 @@
+.container {
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 20px;
+    align-items: flex-start;
+  }
+  
+  .articleList {
+    list-style: none;
+    padding: 0;
+  }
+  
+  .articleItem {
+    margin-bottom: 20px;
+  }
+  
+  .articleItem h2 {
+    margin: 0;
+  }
+  
+  .articleItem p {
+    margin: 0;
+    color: #999;
+  }
+  
