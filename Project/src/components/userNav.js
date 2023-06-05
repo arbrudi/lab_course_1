@@ -9,12 +9,12 @@ const UserNav = () => {
             <nav className="admin-nav-sidebar">
             <ul>
                        
-                <li><Link to="/admin">User Dashboard</Link></li>
-                <li><Link to="/admin">Favorite Books</Link></li>
-                <li><Link to="/admin">Favorite Articles</Link></li>
-                <li><Link to="/admin">Events</Link></li>
+                <li><Link to="/user">User Dashboard</Link></li>
+                <li><Link to="/user/favorite_books">Favorite Books</Link></li>
+                <li><Link to="/user/favorite_articles ">Favorite Articles</Link></li>
+                <li><Link to="/user/events">Events</Link></li>
                 <li><Link to="/admin">Logout</Link></li>
-                
+              
             </ul>
         </nav>
 

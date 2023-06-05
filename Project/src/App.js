@@ -17,18 +17,9 @@ import CreateUser from './components/CRUDS/User_Management/CreateUser';
 import UpdateUser from './components/CRUDS/User_Management/UpdateUser';
 import CreateArticle from './components/CRUDS/Article_Managment/CreateArticle';
 import UpdateArticle from './components/CRUDS/Article_Managment/UpdateArticle';
-
-<<<<<<< HEAD
-<<<<<<< HEAD
-
-=======
 import CreateBook from './components/CRUDS/Book_Managment/CreateBook';
 import UpdateBook from './components/CRUDS/Book_Managment/UpdateBook';
->>>>>>> 58ca2004a1849e1d099974dec6e51c848e913ed9
-=======
-import CreateBook from './components/CRUDS/Book_Managment/CreateBook';
-import UpdateBook from './components/CRUDS/Book_Managment/UpdateBook';
->>>>>>> 58ca2004a1849e1d099974dec6e51c848e913ed9
+
 
 function App() {
   return (
@@ -56,22 +47,11 @@ function App() {
             <Route path="/admin/user/create" element={<CreateUser />} />
             <Route path="/admin/user/update/:User_ID" element={<UpdateUser />} />
             <Route path="/admin/articles/create" element={<CreateArticle />} />
-
             <Route path='/admin/articles/update/:Article_ID' element={<UpdateArticle />} />
-<<<<<<< HEAD
-<<<<<<< HEAD
-           
-=======
             <Route path="/admin/books/create" element={<CreateBook />} />
             <Route path='/admin/books/update/:ISBN' element={<UpdateBook/>} />
-
->>>>>>> 58ca2004a1849e1d099974dec6e51c848e913ed9
-=======
             <Route path="/admin/books/create" element={<CreateBook />} />
             <Route path='/admin/books/update/:ISBN' element={<UpdateBook/>} />
-
->>>>>>> 58ca2004a1849e1d099974dec6e51c848e913ed9
-
           </Routes>
         </div>
       </div>

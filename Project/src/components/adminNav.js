@@ -8,10 +8,10 @@ const AdminNav = () =>{
             <ul>
                        
                 <li><Link to="/admin">Users</Link></li>
-                <li><Link to="/admin">Books</Link></li>
-                <li><Link to="/admin">Articles</Link></li>
-                <li><Link to="/admin">Events</Link></li>
-                <li><Link to="/admin">Donations</Link></li>
+                <li><Link to="/admin/books">Books</Link></li>
+                <li><Link to="/admin/articles">Articles</Link></li>
+                <li><Link to="/admin/events">Events</Link></li>
+                <li><Link to="/admin/donations">Donations</Link></li>
                 <li><Link to ="/admin">Logout</Link></li>
             </ul>
         </nav>

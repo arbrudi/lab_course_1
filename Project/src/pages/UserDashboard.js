@@ -10,7 +10,7 @@ const UserDashboard = () =>{
         <div className='page'>
         <UserNav />
         <div className='user-container'>
-        
+      
         </div>
         </div>
         <Footer />

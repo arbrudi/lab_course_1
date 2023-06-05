@@ -17,6 +17,7 @@ const AdminDashboard = ()=> {
       .then(res => setUsers(res.data))
       .catch(err => console.log(err));
   }, []);
+  
 const handleDeleteU =async (User_ID)=>{
   try{
     await Axios.delete(`http://localhost:3001/admin/user/delete/${User_ID}`) 
@@ -90,7 +91,54 @@ const deletebooks = (ISBN) => {
     }))
   })
 };
+const [count, setCount] = useState(null);
 
+  useEffect(() => {
+   
+    fetch('http://localhost:3001/admin')
+      .then(response => response.json())
+      .then(data => setCount(data.count))
+      .catch(error => console.error(error));
+  }, []);
+
+
+  const [booksCount, setBooksCount] = useState(null);
+
+  useEffect(() => {
+    Axios.get('http://localhost:3001/admin/books/count')
+      .then(res => {
+        setBooksCount(res.data.count);
+      })
+      .catch(err => {
+        console.log(err);
+      });
+  }, []);
+
+
+  const [articlesCount, setArticlesCount] = useState(null);
+
+  useEffect(() => {
+    Axios.get('http://localhost:3001/admin/articles/count')
+      .then(res => {
+        setArticlesCount(res.data.count);
+      })
+      .catch(err => {
+        console.log(err);
+      });
+  }, []);
+
+
+  const [EventsCount, setEventsCount] = useState(null);
+
+  useEffect(() => {
+    Axios.get('http://localhost:3001/admin/events/count')
+      .then(res => {
+        setEventsCount(res.data.count);
+      })
+      .catch(err => {
+        console.log(err);
+      });
+  }, []);
 
     return (
      <>
@@ -100,6 +148,56 @@ const deletebooks = (ISBN) => {
       <AdminNav />
     </div>
     <div className="test">
+
+        <div className="User-count">
+        {count !== null ? (
+          <div className="count-box">
+        <p className="user-count-text">Total number of users: {count}</p>
+        </div>
+      ) : (
+        <div className="loading-box">
+        <p className="loading-text">Loading...</p>
+        </div>
+      )}
+
+      <div>
+      {booksCount !== null ? (
+         <div className="count-box">
+        <p className="user-count-text">Total number of books: {booksCount}</p>
+        </div>
+      ) : (
+        <div className="loading-box">
+        <p className="loading-text">Loading...</p>
+        </div>
+      )}
+      </div>
+
+      <div>
+      {articlesCount !== null ? (
+         <div className="count-box">
+        <p className="user-count-text">Total number of articles: {articlesCount}</p>
+        </div>
+      ) : (
+        <div className="loading-box">
+        <p className="loading-text">Loading...</p>
+        </div>
+      )}
+      </div>
+
+      <div>
+      {EventsCount !== null ? (
+         <div className="count-box">
+        <p className="user-count-text">Total number of events: {EventsCount}</p>
+        </div>
+      ) : (
+        <div className="loading-box">
+        <p className="loading-text">Loading...</p>
+        </div>
+      )}
+      </div>
+     
+    
+        </div>
         <div className="users-list">
         <Link to="/admin/user/create" className='btn'>
           <button className='btn-new-user rounded'>Create New User</button>

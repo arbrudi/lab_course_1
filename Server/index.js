@@ -17,6 +17,65 @@ app.use(cors());
 app.use(json());
 app.use(express.json());
 
+
+app.get('/admin', (req, res) => {
+  const sql = 'SELECT COUNT(User_ID) AS count FROM client';
+
+  db.query(sql, (err, result) => {
+    if (err) {
+      console.log(err);
+      res.send("Error counting users");
+    } else {
+      const userCount = result[0].count;
+      res.json({ count: userCount });
+    }
+  });
+});
+
+app.get('/admin/books/count', (req, res) => {
+  const sql = "SELECT COUNT(ISBN) AS books FROM books";
+
+  db.query(sql, (err, result) => {
+    if (err) {
+      console.log(err);
+      res.send("Error counting users");
+    } else {
+      const booksCount = result[0].books;
+      res.json({ count: booksCount });
+    }
+  });
+});
+
+app.get('/admin/articles/count', (req, res) => {
+  const sql = "SELECT COUNT(Article_ID) AS articles FROM articles";
+
+  db.query(sql, (err, result) => {
+    if (err) {
+      console.log(err);
+      res.send("Error counting users");
+    } else {
+      const articleCount = result[0].articles;
+      res.json({ count: articleCount });
+    }
+  });
+});
+
+app.get('/admin/events/count', (req, res) => {
+  const sql = "SELECT COUNT(Event_ID) AS events FROM events";
+
+  db.query(sql, (err, result) => {
+    if (err) {
+      console.log(err);
+      res.send("Error counting users");
+    } else {
+      const eventCount = result[0].events;
+      res.json({ count: eventCount });
+    }
+  });
+});
+
+
+
 //Arbi - Register, Login, User Management CRUD
 
 // CREATE NEW USER (UM CRUD)
