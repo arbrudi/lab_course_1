@@ -9,7 +9,7 @@
 img {
   width: 1400px;
   height: 900px;
-  margin-bottom: 20px; 
+ 
   
 }
 
@@ -55,16 +55,14 @@ img {
   height: 70px;
   width: 70px;
   cursor: pointer;
-  margin-top: 20px;
-  padding-left: 20px;
+
 }
 
 .slidern img {
   height: 70px;
   width: 70px;
   cursor: pointer;
-  margin-top: 0px;
-  padding-right: 20px;
+
 }
 
 .elements {

@@ -19,6 +19,10 @@ import UpdateUser from './components/CRUDS/User_Management/UpdateUser';
 
 import CreateArticle from './components/CRUDS/Article_Managment/CreateArticle';
 import UpdateArticle from './components/CRUDS/Article_Managment/UpdateArticle';
+
+import CreateBook from './components/CRUDS/Book_Managment/CreateBook';
+import UpdateBook from './components/CRUDS/Book_Managment/UpdateBook';
+
 function App() {
   return (
     <BrowserRouter>
@@ -45,7 +49,11 @@ function App() {
             <Route path="/admin/user/create" element={<CreateUser />} />
             <Route path="/admin/user/update/:User_ID" element={<UpdateUser />} />
             <Route path="/admin/articles/create" element={<CreateArticle />} />
+
             <Route path='/admin/articles/update/:Article_ID' element={<UpdateArticle />} />
+            <Route path="/admin/books/create" element={<CreateBook />} />
+            <Route path='/admin/books/update/:ISBN' element={<UpdateBook/>} />
+
 
           </Routes>
         </div>
