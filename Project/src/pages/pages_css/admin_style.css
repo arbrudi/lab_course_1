@@ -63,7 +63,7 @@ button {
   background-color: #2fc797;
   color: #fff;
   font-weight:600;
-  width: 25%;
+  width: 100%;
   margin: 10px;
   cursor: pointer;
   transition: background-color 0.3s ease;
@@ -91,9 +91,7 @@ button {
   background-color: #0cd1ca;
   color: #fff;
   font-weight:600;
-  width: 80%;
-  
-  margin: 10px;
+  width: 103%;
   cursor: pointer;
   transition: background-color 0.3s ease;
 }

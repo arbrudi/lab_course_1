@@ -1,4 +1,5 @@
 import AdminNav from "../components/adminNav";
+import 'bootstrap/dist/css/bootstrap.min.css'
 import "../pages/pages_css/admin_style.css"
 import Axios from 'axios';
 import React, {useEffect, useState } from 'react';
@@ -157,7 +158,7 @@ const deletebooks = (ISBN) => {
     <div className="test">
         <div className="users-list">
         <Link to="/admin/user/create" className='btn'>
-          <button className='btn-new-user'>Create New User</button>
+          <button className='btn-new-user rounded'>Create New User</button>
         </Link>
           <table className="user-table">
             <thead>
@@ -185,9 +186,9 @@ const deletebooks = (ISBN) => {
                 <td>{data.Password}</td> 
                 <td className="buttons_user">
                 <Link to={`user/update/${data.User_ID}`} className='btn'>
-                    <button className='btn-update'>Update</button>
+                    <button className='btn-update rounded'>Update</button>
                   </Link>
-                  <button className='btn-delete'onClick={e => handleDeleteU(data.User_ID)}>Delete</button>
+                  <button className='btn-delete rounded'onClick={e => handleDeleteU(data.User_ID)}>Delete</button>
                 </td>
               </tr>
             ))}
@@ -245,7 +246,7 @@ const deletebooks = (ISBN) => {
 
 
       </div>
-      <div className='d-flex  bg-primary justify-content-center align-items-center'>
+      <div className='d-flex justify-content-center align-items-center'>
          <div className='bg-white rounded p-3'>
             <Link to="/admin/articles/create" className='btn btn-success' >Add +</Link>
             <table className='table'>
@@ -264,7 +265,13 @@ const deletebooks = (ISBN) => {
                         Article_list.map((data,i)=>(
                             <tr key={i}>
                                 <td>{data.Article_ID}</td>
-                                <td>{data.Article_image}</td>
+                                <td> {data.Article_image && (
+                    <img
+                    src={data.Article_image}
+                      alt='Article Image'
+                      style={{ maxWidth: '100px', maxHeight: '100px' }}
+                    />
+                  )}</td>
                                 <td>{data.Article_title}</td>
                                 <td>{data.Article_type}</td>
                                 <td>{data.Article_Description}</td>

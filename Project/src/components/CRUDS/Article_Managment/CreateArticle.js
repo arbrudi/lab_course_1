@@ -48,7 +48,7 @@ function CreateArticle(){
                     </div>
                     <div className='mb-2'>
                         <label htmlFor="Article_image">Article_image</label>
-                        <input type='text' placeholder=' Enter Article_image' className='form-control'
+                        <input type='url' placeholder=' Enter Article_image' className='form-control'
                         onChange={e=> setArticle_image(e.target.value)}
                         />
                     </div>
