@@ -1,7 +1,9 @@
+
 .admin_page{
   display: flex;
   flex-direction: row;
- 
+  width: auto;
+  height: auto;
 }
 
 table {
@@ -25,7 +27,7 @@ tr:hover {
 }
 
 button {
-  background-color: #7F7EDB;
+
   color: white;
   border: none;
   padding: 8px 16px;

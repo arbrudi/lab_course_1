@@ -1,10 +1,18 @@
 import NavBar from '../components/NavBar';
 import Footer from '../components/Footer';
+import UserNav from '../components/userNav';
+
 const UserDashboard = () =>{
     return (
         <>
         <NavBar />
-        <h1>This is the User Dashboard!</h1>
+       
+        <div className='page'>
+        <UserNav />
+        <div className='user-container'>
+        
+        </div>
+        </div>
         <Footer />
         </>
     )

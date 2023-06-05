@@ -70,74 +70,18 @@ const deletearticles = async(Article_ID) =>
 
 {/*Leka */}
 
-const [ISBN, setISBN] = useState()
-const [Book_image, setBook_image] = useState('')
-const [Book_title, setBook_title] = useState('')
-const [Book_author, setBook_author] = useState('')
-const [Book_genre, setBook_genre] = useState('')
-const [Book_description, setBook_description] = useState('')
-
-const [newBook_description, setNewBook_description] = useState('')
-const [newBook_image, setnewBook_image] = useState('')
-const [newBook_title, setnewBook_title] = useState('')
-const [newBook_author, setnewBook_author] = useState('')
-const [newBook_genre, setnewBook_genre] = useState('')
-
 
 
 const [booksList, setbooksList] = useState([]);
 
-const addbooks = () => {
-  Axios.post("http://localhost:3001/admin/books/create", {
-    ISBN:ISBN,
-    Book_image: Book_image,
-    Book_title: Book_title,
-    Book_author: Book_author,
-    Book_genre: Book_genre,
-    Book_description: Book_description
-  }).then(() => {
-    setbooksList([
-      ...booksList, 
-      {
-        ISBN: ISBN,
-        Book_image: Book_image,
-        Book_title: Book_title,
-        Book_author: Book_author,
-        Book_genre: Book_genre,
-        Book_description: Book_description
-      }
-    ]);
-  });
-};
 
-const getbooks = () => {
-  Axios.get("http://localhost:3001/admin/books/").then((response) => {
-    console.log(response);
-    setbooksList(response.data);
-  });
-};
+useEffect(()=>{
+  Axios.get("http://localhost:3001/admin/books")
+  .then(res => setbooksList(res.data))
+  .catch(err => console.log(err))
 
-const updateAll_books = (ISBN) => {
-  Axios.put("http://localhost:3001/admin/books/update" ,{
-     Book_description: newBook_description, 
-      ISBN: ISBN  ,
-     Book_image: newBook_image
-  , Book_author: newBook_author
-  , Book_title: newBook_title
-  , Book_genre: newBook_genre }).then(
-    (response) => {
-      setbooksList(booksList.map((val)=> {
-        return val.ISBN === ISBN ? 
-        {ISBN: val.ISBN, 
-          Book_image: newBook_image
-          , Book_author: newBook_author
-          , Book_title: newBook_title
-          , Book_genre: newBook_genre
-          , Book_description: newBook_description} : val
-      }))
-    }
-  );
-};
+},
+[])
 
 const deletebooks = (ISBN) => {
   Axios.delete(`http://localhost:3001/admin/books/delete/${ISBN}`).then((response)=> {
@@ -290,81 +234,50 @@ const deletebooks = (ISBN) => {
 
 </div>
 {/* LEKA */}
-<div className="information">
-      <label>ISBN:</label>
-        <input type="number"
-          onChange={(event) => {
-            setISBN(event.target.value);
-          }} />
-        <label>Book_image:</label>
-        <input type="url"
-          onChange={(event) => {
-            setBook_image(event.target.value);
-          }} />
-        <label>Book_title:</label>
-        <input type="text"
-          onChange={(event) => {
-            setBook_title(event.target.value);
-          }} />
-        <label>Book_author:</label>
-        <input type="text"
-          onChange={(event) => {
-            setBook_author(event.target.value);
-          }} />
-        <label>Book_genre:</label>
-        <input type="text"
-          onChange={(event) => {
-            setBook_genre(event.target.value);
-          }} />
-        <label>Book_description:</label>
-        <input type="text"
-          onChange={(event) => {
-            setBook_description(event.target.value);
-          }} />
-        <button onClick={addbooks}>Add books</button> 
-        <button onClick={getbooks}>Show books</button>
-      </div>
 
-      <div className="books">
-      <button onClick={getbooks}>Show Books</button>
-        </div>
-        <table className="user-table">
-            <thead>
-              <tr>
-                <th>ISBN</th>
-                <th>Book Image</th>
-                <th>Book Title</th> 
-                <th>Book author</th>
-                <th>Book genre</th>
-               
-                <th>Book Description</th>
-                <th>Edit</th>
-                <th>Delete</th>
-              </tr>
-            </thead>
-            <tbody>
-            {booksList.map((val, key) => ( 
-                <tr key={val.key}>
-                  <td>{val.ISBN}</td>
-                  <td></td>
-                  <td>{val.Book_title}</td>
-                  <td>{val.Book_author}</td>
-                  <td>{val.Book_genre}</td>
-                  <td>{val.Book_description}</td>
-                  <td>
-                      <input placeholder ="book title" defaultValue={val.Book_title} onChange={(event) => setnewBook_title(event.target.value)} />
-                      <input placeholder ="book author" defaultValue={val.Book_author} onChange={(event) => setnewBook_author(event.target.value)} />
-                      <input placeholder ="book genre" defaultValue={val.Book_genre} onChange={(event) => setnewBook_genre(event.target.value)} />
-                      <input placeholder ="book Description" defaultValue={val.Book_description} onChange={(event) => setNewBook_description(event.target.value)} />
-                        <button variant="primary" onClick={() =>{updateAll_books(val.ISBN)} }>
-                      Edit
-                    </button>
-                  </td>
-                  <td><button onClick={()=>{deletebooks(val.ISBN)}}>Delete</button></td>
-                </tr>
-                ))}
-            </tbody>
-          </table>
+<div className='d-flex justify-content-center align-items-center'>
+         <div className='bg-white rounded p-3'>
+            <Link to="/admin/books/create" className='btn btn-success' >Add +</Link>
+            <table className='table'>
+                <thead> 
+                    <tr>
+                    <th>ISBN</th>
+                    <th>Book_image</th>
+                    <th>Book_title</th>
+                    <th>Book_title</th>
+                    <th>Book_genre</th>
+                    <th>Book_Description</th>
+                    <th>Action</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {
+                        booksList.map((data,i)=>(
+                            <tr key={i}>
+                                <td>{data.ISBN}</td>
+                                <td> {data.Book_image && (
+                    <img
+                    src={data.Book_image}
+                      alt='Book Image'
+                      style={{ maxWidth: '100px', maxHeight: '100px' }}
+                    />
+                  )}</td>
+                                <td>{data.Book_title}</td>
+                                <td>{data.Book_author}</td>
+                                <td>{data.Book_genre}</td>    
+                                <td>{data.Book_description}</td> 
+                                <td>
+                                    <Link to={`books/update/${data.ISBN}`} className='btn btn-primary'>Update</Link>
+                                    <button className='btn btn-danger ms-2' onClick={e => deletebooks(data.ISBN)}>Delete</button>
+                                </td>
+                            </tr>
+                        ))
+                    }
+                </tbody>
+
+            </table>
+         </div>
+    </div>   
 </div>
 
 

@@ -1,0 +1,30 @@
+.sidebar_user {
+    background-color: #f8f8f8;
+    width: 200px;
+    height: 100vh;
+    padding: 20px;
+  }
+  
+  .sidebar_user, #bb {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+  }
+  
+  .sidebar_user, #bb button {
+    display:contents;
+    width: 100%;
+    padding: 10px 20px;
+    border: none;
+    background-color: transparent;
+    text-align: left;
+    color: #333;
+    font-size: 16px;
+    transition: background-color 0.3s ease;
+  }
+  
+  .sidebar_user, .user_nav nav ul li button:hover,
+  .sidebar_user, .user_nav nav ul li button.active {
+    background-color: #eaeaea;
+  }
+  
