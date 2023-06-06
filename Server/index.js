@@ -78,7 +78,7 @@ app.get('/admin/events/count', (req, res) => {
 
 //Arbi - Register, Login, User Management CRUD
 
-// CREATE NEW USER (UM CRUD)
+// -----------------------------------------------------------------CREATE NEW USER (UM CRUD)---------------------------------------------------------------------
 app.post('/admin/user/create', (req,res) =>{
 
  
@@ -203,7 +203,7 @@ app.put('/admin/user/update/:User_ID',(req,res)=>{
     }
   })
 })
-
+// DELETE USERS
 app.delete('/admin/user/delete/:id',(req,res)=>{
   const User_ID = req.params.id
   db.query("DELETE FROM client WHERE User_ID=?", [User_ID],(err,result)=>{
@@ -215,7 +215,97 @@ app.delete('/admin/user/delete/:id',(req,res)=>{
   })
 })
 
-//Riona - Events Management 
+// --------------------------------------------------------NEWS CRUD----------------------------------------------------------------------
+
+app.get('/admin/news', (req, res) => {
+  const sql = 'SELECT News_ID, News_title, News_description, News_tags, Publishing_date, News_image FROM news';
+
+  db.query(sql, (err, result) => {
+    if (err) {
+      console.log(err);
+      res.send("Error retrieving news");
+    } else {
+      res.json(result);
+    }
+  });
+});
+
+
+app.post('/admin/news/create', (req, res) => {
+   
+  const sql='INSERT INTO news (News_ID, News_title, News_description, News_tags, Publishing_date, News_image) VALUES (?, ?, ?, ?, ?,?)'
+  const values=[
+   req.body.News_ID,
+   req.body.News_title,
+   req.body.News_description,
+   req.body.News_tags,
+   req.body.Publishing_date,
+   req.body.News_image
+  ]
+  db.query(sql, values, (err, data) => { 
+   if(err){
+       console.log(err);
+       res.send("Error uploading news");
+   } else {
+       res.send("News Uploaded Successfully");
+   }
+ }
+ );
+ });
+ 
+app.put('/admin/news/update/:News_ID', (req, res) => {
+  const News_ID = req.body.News_ID;
+  const sql='UPDATE news SET News_title = ? ,News_description = ? ,News_tags = ?, Publishing_date = ?, News_image = ? WHERE News_ID = ?'
+  const values=[ 
+  
+   req.body.News_title,
+   req.body.News_description,
+   req.body.News_tags,
+   req.body.Publishing_date,
+   req.body.News_image,
+   req.body.News_ID
+  ]
+  
+
+  db.query(sql, [...values,News_ID], (err, data) => { 
+   if(err){
+       console.log(err);
+       res.send("Error");
+   } else {
+       res.send("Success");
+   }
+ }
+ );
+ });
+
+ app.delete('/admin/news/delete/:News_ID', (req, res) => {
+  const News_ID = req.params.News_ID;
+  db.query('DELETE FROM news WHERE News_ID=?', News_ID, (err, result) => {
+    if (err) {
+      console.log(err);
+    } else {
+      res.send(result);
+    }
+  });
+});
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+//Riona - -------------------------------------------------------------------------Events Management CRUD ----------------------------------------------------------------------
 app.get("/", (req, res) => {
   const sql = "SELECT * FROM events";
   db.query(sql, (err, data) => {
@@ -293,10 +383,6 @@ app.post('/admin/articles/create', (req, res) => {
 }
 );
 });
-
-
-
-
 
 
 app.get('/admin/articles/', (req, res) => {

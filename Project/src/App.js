@@ -19,6 +19,9 @@ import CreateArticle from './components/CRUDS/Article_Managment/CreateArticle';
 import UpdateArticle from './components/CRUDS/Article_Managment/UpdateArticle';
 import CreateBook from './components/CRUDS/Book_Managment/CreateBook';
 import UpdateBook from './components/CRUDS/Book_Managment/UpdateBook';
+import NewsList from './pages/admin/NewsList';
+import News from '../src/pages/admin/News';
+import Create_News from './components/CRUDS/News_Management/Create_News';
 
 
 function App() {
@@ -52,6 +55,9 @@ function App() {
             <Route path='/admin/books/update/:ISBN' element={<UpdateBook/>} />
             <Route path="/admin/books/create" element={<CreateBook />} />
             <Route path='/admin/books/update/:ISBN' element={<UpdateBook/>} />
+            <Route path='/newsList' element={<NewsList />} />
+            <Route path='/admin/news' element={<News />} />
+            <Route path='/admin/news/create' element={<Create_News />} />
           </Routes>
         </div>
       </div>
