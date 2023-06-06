@@ -68,6 +68,7 @@ function UpdateArticle(){
                 </form>
             </div>
         </div>
+        
     )
 }
 

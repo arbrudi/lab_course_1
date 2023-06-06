@@ -27,7 +27,7 @@ function CreateBook(){
 
               }).then(res=>{
                 console.log(res);
-                navigate('/admin');
+                navigate('/admin/books');
               }).catch(err=> { 
                 console.log(err) 
              });

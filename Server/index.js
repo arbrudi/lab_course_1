@@ -465,7 +465,7 @@ if (err) {
 });
 });
 
-app.put("/admin/books/update", (req, res) => {
+app.put("/admin/books/update/:ISBN", (req, res) => {
   const ISBN = req.body.ISBN; 
   const Book_image = req.body.Book_image;
   const Book_title = req.body.Book_title;
@@ -484,6 +484,8 @@ app.put("/admin/books/update", (req, res) => {
     }
   );
 });
+
+
 
 app.delete('/admin/books/delete/:ISBN', (req, res) => {
   const ISBN = req.params.ISBN

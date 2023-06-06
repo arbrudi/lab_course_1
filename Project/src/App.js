@@ -23,6 +23,9 @@ import NewsList from './pages/admin/NewsList';
 import News from './pages/admin/News';
 import Create_News from './components/CRUDS/News_Management/Create_News';
 import Update_News from '../src/components/CRUDS/News_Management/Update_News';
+import Article from './pages/admin/Article';
+import Book from './pages/admin/Book';
+
 
 
 function App() {
@@ -60,6 +63,9 @@ function App() {
             <Route path='/admin/news' element={<News />} />
             <Route path='/admin/news/create' element={<Create_News />} />
             <Route path='/admin/news/update/:News_ID' element={<Update_News />} />
+            <Route path='/admin/articles' element={<Article />} />
+            <Route path='/admin/books' element={<Book />} />
+
           </Routes>
         </div>
       </div>
