@@ -11,8 +11,7 @@ import UserDashboard from './pages/UserDashboard';
 import AdminDashboard from './pages/AdminDashboard';
 import Login from './pages/Login';
 import Register from './pages/Register'; 
-import Createe from './pages/createe';
-import Update from './pages/Update'; 
+import Update from './components/CRUDS/Events/Update'; 
 import CreateUser from './components/CRUDS/User_Management/CreateUser';
 import UpdateUser from './components/CRUDS/User_Management/UpdateUser';
 import CreateArticle from './components/CRUDS/Article_Managment/CreateArticle';
@@ -25,6 +24,8 @@ import Create_News from './components/CRUDS/News_Management/Create_News';
 import Update_News from '../src/components/CRUDS/News_Management/Update_News';
 import Article from './pages/admin/Article';
 import Book from './pages/admin/Book';
+import Createe from './components/CRUDS/Events/createe';
+import Events from './pages/admin/Events'; 
 
 
 
@@ -49,8 +50,8 @@ function App() {
             <Route path="/login" element={<Login />} />
             <Route path="/register" element={<Register />} />
             <Route path="/home" element={<HomePage />} />
-            <Route path="/create" element={<Createe />} /> 
-            <Route path="/update/:Event_ID" element={<Update />} />
+            <Route path="/admin/events/createe" element={<Createe />} /> 
+            <Route path="/admin/events/update/:Event_ID" element={<Update />} />
             <Route path="/admin/user/create" element={<CreateUser />} />
             <Route path="/admin/user/update/:User_ID" element={<UpdateUser />} />
             <Route path="/admin/articles/create" element={<CreateArticle />} />
@@ -65,6 +66,7 @@ function App() {
             <Route path='/admin/news/update/:News_ID' element={<Update_News />} />
             <Route path='/admin/articles' element={<Article />} />
             <Route path='/admin/books' element={<Book />} />
+            <Route path='/admin/events' element={<Events />} />
 
           </Routes>
         </div>

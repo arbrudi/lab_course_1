@@ -27,21 +27,6 @@ const handleDeleteU =async (User_ID)=>{
   }
 }
     //Riona  
-    const [events, setEvents] = useState([]);
-
-    useEffect(() => {
-      Axios.get('http://localhost:3001/')
-        .then(res => setEvents(res.data))
-        .catch(err => console.log(err));
-    }, []);
-  const handleDelete =async (Event_ID)=>{
-    try{
-      await Axios.delete('http://localhost:3001/events/'+Event_ID) 
-      window.location.reload() 
-    } catch(err){
-      console.log(err);
-    }
-  }
 
 
 
@@ -199,47 +184,7 @@ const [count, setCount] = useState(null);
          
     </div>
    
-    <div className="App">
-      <div className='users-list'>
-      <Link to="/create" className='btn'>
-          <button className='btn'>Create</button>
-        </Link>
-        <table className='users-table'>
-          <thead>
-            <tr>
-              <th>ID</th>
-              <th>Image</th>
-              <th>Description</th>
-              <th>Date</th> 
-              <th>Action</th>
-            </tr>
-          </thead>
-          <tbody>
-            {events.map((data, i) => (
-              <tr key={i}>
-                <td>{data.Event_ID}</td>
-                <td>
-                  {data.Event_image && (
-                    <img
-                    src={data.Event_image}
-                      alt='Event Image'
-                      style={{ maxWidth: '100px', maxHeight: '100px' }}
-                    />
-                  )}
-                </td>
-                <td>{data.Event_description}</td>
-                <td>{data.Event_date}</td> 
-                <td>
-                <Link to={`/update/${data.Event_ID}`} className='btn'>
-                    <button className='btn'>Update</button>
-                  </Link>
-                  <button className='btn 'onClick={e => handleDelete(data.Event_ID)}>Delete</button>
-                </td>
-              </tr>
-            ))}
-          </tbody>
-        </table>
-      </div>
+    
     
 
       </div>
@@ -249,7 +194,7 @@ const [count, setCount] = useState(null);
 {/* LEKA */}
 
   
-</div>
+
 
 
 <Footer />

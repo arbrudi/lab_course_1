@@ -313,7 +313,7 @@ app.get("/", (req, res) => {
     return res.json(data);
   });
 }); 
-app.post('/createe', (req, res) => {
+app.post('/admin/events/createe', (req, res) => {
     const sql = "INSERT INTO events (Event_ID, Event_image, Event_description, Event_date) VALUES (?, ?, ?, ?)";
     const values = [
       req.body.Event_ID,
@@ -331,7 +331,7 @@ app.post('/createe', (req, res) => {
       return res.json(data);
     });
   }); 
-  app.put('/update/:Event_ID', (req, res) => {
+  app.put('/admin/events/update/:Event_ID', (req, res) => {
     const sql = "UPDATE events SET Event_image = ?, Event_description = ?, Event_date = ? WHERE Event_ID = ?";
     const values = [
       req.body.Event_image,
@@ -349,17 +349,16 @@ app.post('/createe', (req, res) => {
       return res.json(data);
     });
   }); 
-  app.delete('/events/:Event_ID', (req, res) => {
-    const sql = "delete from events where Event_ID=?"; 
-    const Event_ID= req.params.Event_ID
-  
-  
-    db.query(sql, [Event_ID], (err, data) => {
-      if (err) 
-        return res.json("Error");
-      return res.json(data);
-    });
-  }); 
+  app.delete('/admin/events/delete/:Event_ID',(req,res)=>{
+    const Event_ID = req.params.Event_ID
+    db.query("DELETE FROM events WHERE Event_ID=?", [Event_ID],(err,result)=>{
+      if(err){
+        console.log(err)
+      }else{
+        res.send(result);
+      }
+    })
+  }) 
 
 // eris - articles
 

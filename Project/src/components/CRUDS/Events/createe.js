@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
-
+import "../Events/events.css";
 function Createe() {
   const [Event_ID, setEvent_ID] = useState('');
   const [Event_image, setEvent_image] = useState('');
@@ -12,7 +12,7 @@ function Createe() {
   function handleSubmit(event) {
     event.preventDefault();
     axios
-      .post('http://localhost:3001/createe', {
+      .post('http://localhost:3001/admin/events/createe', {
         Event_ID,
         Event_image,
         Event_description,
@@ -20,14 +20,14 @@ function Createe() {
       })
       .then((res) => {
         console.log(res);
-        navigate('/');
+        navigate('/admin/events');
       })
       .catch((err) => console.log(err));
   }
 
   return (
-    <div className="d-flex vh-100 bg-primary justify-content-center align-items-center">
-      <div className="w-50 bg-white rounded p-3">
+    <div className="container">
+      <div className="cont">
         <form onSubmit={handleSubmit}>
           <h2>Create Events</h2>
           <div className="mb-2">

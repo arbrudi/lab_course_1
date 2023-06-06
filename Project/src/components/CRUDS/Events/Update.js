@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import axios from 'axios';
 import { useNavigate,useParams } from 'react-router-dom';
-
+import "../Events/events.css";
 function Update() {
   const [Event_image, setEvent_image] = useState('');
   const [Event_description, setEvent_description] = useState('');
@@ -12,21 +12,21 @@ function Update() {
   function handleSubmit(event) {
     event.preventDefault();
     axios
-      .put('http://localhost:3001/update/'+Event_ID, {
+      .put(`http://localhost:3001/admin/events/update/${Event_ID}`, {
         Event_image,
         Event_description,
         Event_date 
       })
       .then((res) => {
         console.log(res);
-        navigate('/');
+        navigate('/admin/events');
       })
       .catch((err) => console.log(err));
   }
 
   return (
-    <div className="d-flex vh-100 bg-primary justify-content-center align-items-center">
-      <div className="w-50 bg-white rounded p-3">
+    <div className="container">
+      <div className="cont">
         <form onSubmit={handleSubmit}>
           <h2>Update Events</h2>
           <div className="mb-2">
