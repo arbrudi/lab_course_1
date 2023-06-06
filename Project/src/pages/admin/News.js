@@ -5,7 +5,6 @@ import Axios from 'axios';
 import React, {useEffect, useState } from 'react';
 import NavBar from '../../components/NavBar'
 import Footer from '../../components/Footer';
-import Create_News from '../../components/CRUDS/News_Management/Create_News';
 import {Link} from 'react-router-dom';
 
 
@@ -76,7 +75,7 @@ const deleteNews = async(News_ID) =>
                                  />
                                 )}</td>
                                 <td>
-                                    <Link to={`news/update/${data.News_ID}`} className='btn btn-primary'>Update</Link>
+                                    <Link to={`update/${data.News_ID}`} className='btn btn-primary'>Update</Link>
                                     <button className='btn btn-danger ms-2' onClick={e => deleteNews(data.News_ID)}>Delete</button>
                                 </td>
                             </tr>
