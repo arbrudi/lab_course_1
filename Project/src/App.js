@@ -26,6 +26,7 @@ import Article from './pages/admin/Article';
 import Book from './pages/admin/Book';
 import Createe from './components/CRUDS/Events/createe';
 import Events from './pages/admin/Events'; 
+import NewsPage from './pages/NewsPage';
 
 
 
@@ -67,6 +68,7 @@ function App() {
             <Route path='/admin/articles' element={<Article />} />
             <Route path='/admin/books' element={<Book />} />
             <Route path='/admin/events' element={<Events />} />
+            <Route path = 'newsList/news/:News_ID' element = {<NewsPage />} />
 
           </Routes>
         </div>

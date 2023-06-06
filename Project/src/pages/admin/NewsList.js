@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import NavBar from '../../components/NavBar';
 import './NewsList_style.css'
+import { Link } from 'react-router-dom';
 
     const NewsList = ()=> {
         const [news, setNews] = useState([]);
@@ -32,7 +33,9 @@ import './NewsList_style.css'
                   <div className="news-info">
                     <p>{item.Publishing_date}</p>
                     <p>{item.News_tags}</p>
-                    <button className='read_more'>Read more...</button>
+                    <Link to={`/newsList/news/${item.News_ID}`} className='read_more'>
+                Read more...
+              </Link>
                   </div>
                 </div>
               ))}

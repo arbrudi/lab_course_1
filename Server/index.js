@@ -76,9 +76,10 @@ app.get('/admin/events/count', (req, res) => {
 
 
 
-//Arbi - Register, Login, User Management CRUD
+
 
 // -----------------------------------------------------------------CREATE NEW USER (UM CRUD)---------------------------------------------------------------------
+//Arbi - Register, Login, User Management CRUD
 app.post('/admin/user/create', (req,res) =>{
 
  
@@ -216,6 +217,24 @@ app.delete('/admin/user/delete/:id',(req,res)=>{
 })
 
 // --------------------------------------------------------NEWS CRUD----------------------------------------------------------------------
+
+
+app.get('/newsList/news/:News_ID', (req, res) => {
+  const sql = 'SELECT * FROM news WHERE News_ID = ?';
+  const newsID = req.params.News_ID;
+
+  db.query(sql, newsID, (err, result) => {
+    if (err) {
+      console.log(err);
+      res.send("Error retrieving news");
+    } else {
+      res.json(result);
+    }
+  });
+});
+
+
+
 
 app.get('/admin/news', (req, res) => {
   const sql = 'SELECT News_ID, News_title, News_description, News_tags, Publishing_date, News_image FROM news';

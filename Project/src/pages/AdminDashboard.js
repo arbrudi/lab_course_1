@@ -7,8 +7,7 @@ import NavBar from '../components/NavBar';
 import Footer from '../components/Footer'; 
 import {Link} from 'react-router-dom';
 
-
-//Arbi
+// Arbi
 const AdminDashboard = ()=> {
   const [User, setUsers] = useState([]);
 
@@ -26,15 +25,7 @@ const handleDeleteU =async (User_ID)=>{
     console.log(err);
   }
 }
-    //Riona  
-
-
-
-
-
-
-
-
+    
 
 const [count, setCount] = useState(null);
 
@@ -183,20 +174,10 @@ const [count, setCount] = useState(null);
           </table>
          
     </div>
-   
-    
-    
-
       </div>
   
 
 </div>
-{/* LEKA */}
-
-  
-
-
-
 <Footer />
 
       </>
