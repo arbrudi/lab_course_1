@@ -4,7 +4,6 @@ import HomePage from './pages/HomePage';
 import AboutPage from './pages/AboutPage';
 import BookList from './pages/BookList';
 import BookPage from './pages/BookPage';
-import ArticleList from './pages/ArticleList';
 import ArticlePage from './pages/ArticlePage';
 import PageNotFound from './pages/PageNotFound';
 import UserDashboard from './pages/UserDashboard';
@@ -27,6 +26,7 @@ import Book from './pages/admin/Book';
 import Createe from './components/CRUDS/Events/createe';
 import Events from './pages/admin/Events'; 
 import NewsPage from './pages/NewsPage';
+import Articlelist from './pages/admin/Articlelist';
 
 
 
@@ -43,7 +43,6 @@ function App() {
             <Route path="/about" element={<AboutPage />} />
             <Route path="/books" element={<BookList />} />
             <Route path="/books/:bookid" element={<BookPage />} />
-            <Route path="/articles" element={<ArticleList />} />
             <Route path="/articles/:articleid" element={<ArticlePage />} />
             <Route path="/user" element={<UserDashboard />} />
             <Route path="/admin" element={<AdminDashboard />} />
@@ -69,6 +68,10 @@ function App() {
             <Route path='/admin/books' element={<Book />} />
             <Route path='/admin/events' element={<Events />} />
             <Route path = 'newsList/news/:News_ID' element = {<NewsPage />} />
+            <Route path = '/Articlelist' element = {<Articlelist />} />
+            <Route path = 'Articlelist/articles/:Article_ID' element = {<ArticlePage />} />
+
+
 
           </Routes>
         </div>
