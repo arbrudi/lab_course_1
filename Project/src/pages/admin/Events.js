@@ -88,7 +88,7 @@ const handleDeletee = async (Event_ID) => {
         </table>
       </div> 
       <Link to="/admin/events/createparticipants" className='btn'>
-          <button className='btn'>Create event participants</button>
+          <button className='btn-new-user rounded '>Create event participants</button>
         </Link>
         <table className='users-table'>
           <thead>
@@ -117,9 +117,9 @@ const handleDeletee = async (Event_ID) => {
                 <td>{data.Surname}</td>
                 <td>
                   <Link to={`updateparticipants/${data.Event_ID}`} className='btn'>
-                    <button className='btn'>Update event participants</button>
+                    <button className='btn-update rounded'>Update event participants</button>
                   </Link>
-                  <button className='btn' onClick={e => handleDeletee(data.Event_ID)}>Delete event participants</button>
+                  <button className='btn-delete rounded ' onClick={e => handleDeletee(data.Event_ID)}>Delete event participants</button>
                 </td>
               </tr>
             ))}
