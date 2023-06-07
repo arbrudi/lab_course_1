@@ -23,7 +23,22 @@ import "../../components/CRUDS/Events/events.css"
         } catch(err){
           console.log(err);
         }
-      }
+      } 
+      const [event_participants, setEvent_participants] = useState([]); 
+useEffect(() => {
+  Axios.get('http://localhost:3001/events')
+    .then(res => setEvent_participants(res.data))
+    .catch(err => console.log(err));
+}, []);
+
+const handleDeletee = async (Event_ID) => {
+  try {
+    await Axios.delete('http://localhost:3001/admin/events/' + Event_ID);
+    window.location.reload();
+  } catch (err) {
+    console.log(err);
+  }
+} 
   return ( 
     <>
     <NavBar />
@@ -71,10 +86,49 @@ import "../../components/CRUDS/Events/events.css"
             ))}
           </tbody>
         </table>
+      </div> 
+      <Link to="/admin/events/createparticipants" className='btn'>
+          <button className='btn'>Create event participants</button>
+        </Link>
+        <table className='users-table'>
+          <thead>
+            <tr>
+              <th>ID</th>
+              <th>User_ID</th>
+              <th>Event_image</th>
+              <th>Event_description</th>
+              <th>Event_date</th>
+              <th>Name</th>
+              <th>Surname</th>
+              <th>Action</th>
+            </tr>
+          </thead>
+          <tbody>
+            {event_participants.map((data, i) => (
+              <tr key={i}>
+                <td>{data.Event_ID}</td>
+                <td>{data.User_ID}</td>
+                <td>
+                  <img src={data.Event_image} alt="Event" />
+                </td>
+                <td>{data.Event_description}</td>
+                <td>{data.Event_date}</td>
+                <td>{data.Name}</td>
+                <td>{data.Surname}</td>
+                <td>
+                  <Link to={`updateparticipants/${data.Event_ID}`} className='btn'>
+                    <button className='btn'>Update event participants</button>
+                  </Link>
+                  <button className='btn' onClick={e => handleDeletee(data.Event_ID)}>Delete event participants</button>
+                </td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
       </div>
     </div>
 
-      </div> 
+       
       <Footer />
 </>
   )

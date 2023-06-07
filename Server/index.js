@@ -378,7 +378,72 @@ app.post('/admin/events/createe', (req, res) => {
       }
     })
   }) 
-
+  app.get("/events", (req, res) => {
+    const sql = "Select ep.Event_ID, e.Event_image, e.Event_description, e.Event_date, ep.User_ID, c.Name, c.Surname From Event_participants ep INNER JOIN Events e on e.Event_ID = ep.Event_ID INNER JOIN client c on c.User_ID = ep.User_ID "
+    db.query(sql, (err, data) => {
+      if (err) return res.json("Error");
+      return res.json(data);
+    });
+  }); 
+  app.post('/admin/events/createparticipants', (req, res) => {
+      const sql = "INSERT INTO event_participants (Event_ID, User_ID) VALUES (?,?)";
+      const values = [ 
+        req.body.Event_ID,
+        req.body.User_ID 
+      ];
+    
+      db.query(sql, values, (err, data) => {
+        if (err) {
+          console.log(err);
+          return res.json("Error");
+        }
+        console.log("Data inserted successfully");
+        return res.json(data);
+      });
+    }); 
+    app.put('/admin/events/updateparticipants/:Event_ID', (req, res) => {
+      const sql = "UPDATE event_participants SET User_ID=? WHERE Event_ID = ?";
+      const values = [
+        req.body.User_ID,
+        req.params.Event_ID
+      ];
+    
+      db.query(sql, values, (err, data) => {
+        if (err) {
+          console.log(err);
+          return res.json("Error");
+        }
+        console.log("Data updated successfully");
+        return res.json(data);
+      });
+    }); 
+    app.post('/admin/events/joinevent/:Event_ID', (req, res) => {
+      const sql = "INSERT INTO event_participants (Event_ID, User_ID) VALUES (?, ?)";
+      const values = [
+        req.params.Event_ID,
+        req.body.User_ID
+      ];
+    
+      db.query(sql, values, (err, data) => {
+        if (err) {
+          console.log(err);
+          return res.json("Error");
+        }
+        console.log("Data inserted successfully");
+        return res.json(data);
+      });
+    }); 
+    app.delete('/admin/events/:Event_ID', (req, res) => {
+      const sql = "delete from event_participants where Event_ID=?"; 
+      const Event_ID= req.params.Event_ID
+    
+    
+      db.query(sql, [Event_ID], (err, data) => {
+        if (err) 
+          return res.json("Error");
+        return res.json(data);
+      });
+    }); 
 // eris - articles
 
 app.post('/admin/articles/create', (req, res) => {

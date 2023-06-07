@@ -27,7 +27,8 @@ import Createe from './components/CRUDS/Events/createe';
 import Events from './pages/admin/Events'; 
 import NewsPage from './pages/NewsPage';
 import Articlelist from './pages/admin/Articlelist';
-
+import Createparticipants from './components/CRUDS/Events/createparticipants';
+import Updateparticipants from './components/CRUDS/Events/Updateparticipants'; 
 
 
 function App() {
@@ -69,7 +70,9 @@ function App() {
             <Route path='/admin/events' element={<Events />} />
             <Route path = 'newsList/news/:News_ID' element = {<NewsPage />} />
             <Route path = '/Articlelist' element = {<Articlelist />} />
-            <Route path = 'Articlelist/articles/:Article_ID' element = {<ArticlePage />} />
+            <Route path = 'Articlelist/articles/:Article_ID' element = {<ArticlePage />} /> 
+            <Route path="/admin/events/createparticipants" element={<Createparticipants />} /> 
+            <Route path="/admin/events/Updateparticipants/:Event_ID" element={<Updateparticipants />} />
 
 
 
