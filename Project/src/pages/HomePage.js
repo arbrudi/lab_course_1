@@ -1,14 +1,36 @@
-import React from 'react';
+import React, {useEffect, useState }from 'react';
 import './pages_css/Homepage_style.css';
 import ImageSlider from '../components/ImageSlider';
 import NavBar from '../components/NavBar';
 import Footer from '../components/Footer';
-
-
+import Axios from 'axios';
+import { useNavigate,useParams } from 'react-router-dom'; 
+import './pages_css/Page.css'
 function HomePage() {
     
   
-  
+  const [events, setEvents] = useState([]);
+
+  useEffect(() => {
+    Axios
+      .get('http://localhost:3001/')
+      .then((res) => setEvents(res.data))
+      .catch((err) => console.log(err));
+  }, []);
+  const [User_ID, setUser_ID] = useState(''); 
+  const {Event_ID} =useParams();
+  const navigate = useNavigate();
+
+  function handleSubmit(event) {
+    event.preventDefault();
+    Axios
+      .post(`http://localhost:3001/admin/events/${Event_ID}`, { User_ID })
+      .then((res) => {
+        console.log(res);
+        navigate('/');
+      })
+      .catch((err) => console.log(err));
+  }
     const slides = [
       { url: "http://localhost:3000/image-1.jpg", title: "beach" },
       { url: "http://localhost:3000/image-2.jpg", title: "boat" },
@@ -37,7 +59,55 @@ return (
           <h2>Welcome to the E-Library</h2>
           <p>Explore our vast collection of books, articles, and documents.</p>
           <a href="/login" className="btn-primary">Get Started</a>
-        </section>  
+        </section> 
+        <div className=''>
+      <div className=''>
+        <table className='table'>
+          <thead>
+            <tr>
+              <th></th>
+              
+              <th></th>
+            </tr>
+          </thead>
+          <tbody>
+            {events.map((data, i) => (
+              <tr key={i}>
+                <td className='image-cell'>
+                  {data.Event_image && (
+                    <img
+                      src={data.Event_image}
+                      alt='Event Image'
+                      className='event-image'
+                    />
+                  )}
+                </td> 
+               <div className='element'> 
+                <td className='title'>Description:</td>
+                <td>{data.Event_description}</td> 
+                <td className='title'>Date:{data.Event_date}</td> 
+        <form onSubmit={handleSubmit}>
+          <h2 className='t2'>Register
+            <input 
+  type="text"
+  id="User_ID"
+  placeholder="User_ID"
+  className="btn"
+  value={User_ID}
+  onChange={(e) => setUser_ID(e.target.value)}
+/></h2> 
+          
+          <button type="submit" className="btn btn-success">
+            Update Event_participants 
+          </button>
+        </form> 
+                </div>
+              </tr>
+            ))}
+          </tbody>
+        </table>
+      </div>
+    </div>
         <div>
                 <h1>Test slider 1
                   
