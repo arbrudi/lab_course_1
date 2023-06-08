@@ -2,11 +2,14 @@ import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 import '../pages/pages_css/Login_style.css';
 import Axios from 'axios';
+import { useNavigate } from 'react-router-dom';
 
 
 const Login = () => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
+  const navigate = useNavigate();
+
 
   const loginUser = () => {
     Axios.post('http://localhost:3001/login', {
@@ -15,10 +18,10 @@ const Login = () => {
     }).then((response) => {
       if (response.data.role === 'user') {
         // Redirect to user dashboard
-        window.location.href = '/user';
+        navigate('/user',{replace:true})
       } else if (response.data.role === 'admin') {
         // Redirect to admin dashboard
-        window.location.href = '/admin';
+        navigate('/admin',{replace:true})
       }
     }).catch((error) => {
       console.log(error);
@@ -52,7 +55,7 @@ const Login = () => {
             required 
           />
         </div>
-        <button type="submit" className="btn-login" onClick={loginUser}>Login</button>
+        <button type="submit" className="btn-login" onClick={(event) => {event.preventDefault(); loginUser();}}>Login</button>
         <div className='go-to-register'><Link to="/register">Register</Link></div> 
       </form>  
     </div>

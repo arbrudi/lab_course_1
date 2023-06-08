@@ -2,6 +2,7 @@ import {Link} from 'react-router-dom';
 import React, { useState } from 'react';
 import '../pages/pages_css/Register_style.css';
 import Axios from 'axios';
+import { useNavigate } from 'react-router-dom';
 
 const Register = () => {
   const [name, setName] = useState('');
@@ -10,8 +11,18 @@ const Register = () => {
   const [email, setEmail] = useState('');
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
+  const navigate = useNavigate();
 
   const handleSubmit = (event) => {
+    console.log({
+      name: name,
+      surname: surname,
+      user_role: user_role,
+      email: email,
+      username: username,
+      password: password
+    }, "Register Object")
+
     event.preventDefault();
     if (name === '' || surname === '' || user_role === '' || email === '' || username === '' || password === '') {
       alert('Please fill in all the fields');
@@ -23,9 +34,15 @@ const Register = () => {
         email: email,
         username: username,
         password: password
-      }).then(() => {
+      }).then((response) => {
+        if(response){
+          navigate('/login',{replace:true});
+        }
+
         console.log('Successful');
-        window.location.href = '/login';
+       
+      }).catch((err)=>{
+        console.log(err);
       });
     }
   };

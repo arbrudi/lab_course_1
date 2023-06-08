@@ -132,7 +132,8 @@ app.post('/register', (req,res) =>{
   const username = req.body.username;
   const password = req.body.password;
 
-
+console.log(res,'Response')
+console.log(req,'Request')
   // Check if email or username already exist in the database
   db.query('SELECT * FROM client WHERE email = ? OR username = ?', [email, username], (err, result) => {
       if (err) {
