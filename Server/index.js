@@ -510,6 +510,22 @@ app.post('/admin/events/createe', (req, res) => {
     }); 
 
 // Erisi -------------------------------------------Articles--------------------------------------------------------------------------------
+app.get('/Articlelist/articles/:Article_ID', (req, res) => {
+  const sql = 'SELECT * FROM articles WHERE Article_ID = ?';
+  const Article_ID = req.params.Article_ID;
+
+  db.query(sql,Article_ID, (err, result) => {
+    if (err) {
+      console.log(err);
+      res.send("Error retrieving Article ");
+    } else {
+      res.json(result);
+    }
+  });
+});
+
+
+
 
 app.post('/admin/articles/create', (req, res) => {
    
