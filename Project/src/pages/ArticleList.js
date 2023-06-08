@@ -5,23 +5,10 @@ import styles from '../pages/pages_css/ArticleListPage.module.css';
 
 const ArticleList = ()=>{
 
-    const articles = [
-        {
-          id: 1,
-          title: 'Introduction to React',
-          author: 'John Doe',
-        },
-        {
-          id: 2,
-          title: 'CSS Modules in React',
-          author: 'Jane Smith',
-        },
-        // Add more articles as needed
-      ];
-    
+  
   
    
-    
+
     return(
         <>
         <NavBar />

@@ -66,7 +66,7 @@ function CreateArticle(){
                     </div>
                     <div className='mb-2'>
                         <label htmlFor="Article_Description">Article_Description</label>
-                        <input type='text' placeholder=' Enter Article_Description' className='form-control'
+                        <textarea  placeholder=' Enter Article_Description' className='form-control'
                         onChange={e=> setArticle_Description(e.target.value)}
                         />
                     </div>

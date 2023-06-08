@@ -32,7 +32,7 @@ import { Link } from 'react-router-dom';
                   </div>
                   <div className="news-info">
                     <p>{item.Article_type}</p>
-                    <p>{item.Article_Description}</p>
+          
                     <Link to={`/Articlelist/articles/${item.Article_ID}`} className='read_more'>
                 Read more...
               </Link>
