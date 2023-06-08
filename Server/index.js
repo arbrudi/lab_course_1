@@ -308,12 +308,76 @@ app.put('/admin/news/update/:News_ID', (req, res) => {
   });
 });
 
+// ----------------------------------------------------------------REVIEWS CRUD -------------------------------------------------------------------
+
+app.get('/admin/reviews', (req, res) => {
+  const sql = 'SELECT * FROM reviews';
+
+  db.query(sql, (err, result) => {
+    if (err) {
+      console.log(err);
+      res.send("Error retrieving reviews");
+    } else {
+      res.json(result);
+    }
+  });
+});
+
+app.post('/admin/reviews/create', (req, res) => {
+   
+  const sql='INSERT INTO reviews (Reviews_ID, Reviewer_Name, Reviewer_Surname, Reviews_Comment) VALUES (?, ?, ?, ?)'
+  const values=[
+   req.body.Reviews_ID,
+   req.body.Reviewer_Name,
+   req.body.Reviewer_Surname,
+   req.body.Reviews_Comment,
+  ]
+  db.query(sql, values, (err, data) => { 
+   if(err){
+       console.log(err);
+       res.send("Error uploading review");
+   } else {
+       res.send("Review Uploaded Successfully");
+   }
+ }
+ );
+ });
+
+ app.put('/admin/reviews/update/:Reviews_ID', (req, res) => {
+  const Reviews_ID = req.body.Reviews_ID;
+  const sql='UPDATE reviews SET Reviewer_Name = ? , Reviewer_Surname = ? , Reviews_Comment = ? WHERE Reviews_ID = ?'
+  const values=[ 
+  
+   req.body.Reviewer_Name,
+   req.body.Reviewer_Surname,
+   req.body.Reviews_Comment,
+   req.body.Reviews_ID
+  ]
+  
+
+  db.query(sql, [...values,Reviews_ID], (err, data) => { 
+   if(err){
+       console.log(err);
+       res.send("Error");
+   } else {
+       res.send("Success");
+   }
+ }
+ );
+ });
 
 
+ app.delete('/admin/reviews/delete/:Reviews_ID', (req, res) => {
+  const Reviews_ID = req.params.Reviews_ID;
 
-
-
-
+  db.query('DELETE FROM reviews WHERE Reviews_ID=?', Reviews_ID, (err, result) => {
+    if (err) {
+      console.log(err);
+    } else {
+      res.send(result);
+    }
+  });
+});
 
 
 
@@ -444,7 +508,8 @@ app.post('/admin/events/createe', (req, res) => {
         return res.json(data);
       });
     }); 
-// eris - articles
+
+// Erisi -------------------------------------------Articles--------------------------------------------------------------------------------
 
 app.post('/admin/articles/create', (req, res) => {
    
@@ -514,7 +579,7 @@ app.delete('/admin/articles/delete/:Article_ID', (req, res) => {
     }
   });
 });
-// Leka - 
+// Leka ----------------------------------------------------------------Books-----------------------------------------------------------
 
 app.post('/admin/books/create', (req, res) => {
   console.log(req.body);

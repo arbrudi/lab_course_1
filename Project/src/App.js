@@ -29,6 +29,9 @@ import NewsPage from './pages/NewsPage';
 import Articlelist from './pages/admin/Articlelist';
 import Createparticipants from './components/CRUDS/Events/createparticipants';
 import Updateparticipants from './components/CRUDS/Events/Updateparticipants'; 
+import Reviews from './pages/admin/Reviews';
+import Create_Review from './components/CRUDS/Reviews_Management/Create_Review';
+import Update_Reviews from './components/CRUDS/Reviews_Management/Update_Review';
 
 
 function App() {
@@ -73,6 +76,10 @@ function App() {
             <Route path = 'Articlelist/articles/:Article_ID' element = {<ArticlePage />} /> 
             <Route path="/admin/events/createparticipants" element={<Createparticipants />} /> 
             <Route path="/admin/events/Updateparticipants/:Event_ID" element={<Updateparticipants />} />
+            <Route path='/admin/reviews' element={<Reviews />} />
+            <Route path='/admin/reviews/create' element={<Create_Review />} />
+            <Route path='/admin/reviews/update/:Reviews_ID' element={<Update_Reviews />} />
+
 
 
 
