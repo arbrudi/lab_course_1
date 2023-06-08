@@ -1,10 +1,10 @@
-import React, {useEffect, useState }from 'react';
+import React, { useEffect, useState } from 'react';
+import { Link } from 'react-router-dom';  
 import './pages_css/Homepage_style.css';
 import ImageSlider from '../components/ImageSlider';
 import NavBar from '../components/NavBar';
 import Footer from '../components/Footer';
-import Axios from 'axios';
-import { useNavigate,useParams } from 'react-router-dom'; 
+import Axios from 'axios';  
 import './pages_css/Page.css'
 function HomePage() {
     
@@ -17,20 +17,6 @@ function HomePage() {
       .then((res) => setEvents(res.data))
       .catch((err) => console.log(err));
   }, []);
-  const [User_ID, setUser_ID] = useState(''); 
-  const {Event_ID} =useParams();
-  const navigate = useNavigate();
-
-  function handleSubmit(event) {
-    event.preventDefault();
-    Axios
-      .post(`http://localhost:3001/admin/events/${Event_ID}`, { User_ID })
-      .then((res) => {
-        console.log(res);
-        navigate('/');
-      })
-      .catch((err) => console.log(err));
-  }
     const slides = [
       { url: "http://localhost:3000/image-1.jpg", title: "beach" },
       { url: "http://localhost:3000/image-2.jpg", title: "boat" },
@@ -70,9 +56,17 @@ return (
               <th></th>
             </tr>
           </thead>
+         
+          <div className='title'>
+        <table className='table'>
+          <thead>
+            <tr> 
+            </tr>
+          </thead>
           <tbody>
             {events.map((data, i) => (
               <tr key={i}>
+                <td>ID{data.Event_ID}</td>
                 <td className='image-cell'>
                   {data.Event_image && (
                     <img
@@ -81,34 +75,25 @@ return (
                       className='event-image'
                     />
                   )}
-                </td> 
-               <div className='element'> 
-                <td className='title'>Description:</td>
-                <td>{data.Event_description}</td> 
-                <td className='title'>Date:{data.Event_date}</td> 
-        <form onSubmit={handleSubmit}>
-          <h2 className='t2'>Register
-            <input 
-  type="text"
-  id="User_ID"
-  placeholder="User_ID"
-  className="btn"
-  value={User_ID}
-  onChange={(e) => setUser_ID(e.target.value)}
-/></h2> 
-          
-          <button type="submit" className="btn btn-success">
-            Update Event_participants 
-          </button>
-        </form> 
-                </div>
+                </td>
+                <td className='title'>Description</td>
+                <td>{data.Event_description}</td>
+                <td>Data:{data.Event_date}</td>
+                <td>
+                <Link to={`/joinevent/${data.Event_ID}`} className='btn'>
+                    <button className='btn'>Update event_participants</button>
+                  </Link>
+                </td>
               </tr>
             ))}
           </tbody>
         </table>
+      </div> 
+      </table> 
+      </div> 
       </div>
-    </div>
-        <div>
+
+      <div>
                 <h1>Test slider 1
                   
              </h1>

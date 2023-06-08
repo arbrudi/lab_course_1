@@ -481,7 +481,7 @@ app.post('/admin/events/createe', (req, res) => {
         return res.json(data);
       });
     }); 
-    app.post('/admin/events/:Event_ID', (req, res) => {
+    app.post('/joinevent/:Event_ID', (req, res) => {
       const sql = "INSERT INTO event_participants (Event_ID, User_ID) VALUES (?, ?)";
       const values = [
         req.params.Event_ID,

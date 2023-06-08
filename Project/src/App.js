@@ -31,9 +31,8 @@ import Createparticipants from './components/CRUDS/Events/createparticipants';
 import Updateparticipants from './components/CRUDS/Events/Updateparticipants'; 
 import Reviews from './pages/admin/Reviews';
 import Create_Review from './components/CRUDS/Reviews_Management/Create_Review';
-import Update_Reviews from './components/CRUDS/Reviews_Management/Update_Review';
-
-
+import Update_Reviews from './components/CRUDS/Reviews_Management/Update_Review'; 
+import Joinevent from './pages/Joinevent'; 
 function App() {
   return (
     <BrowserRouter>
@@ -79,7 +78,7 @@ function App() {
             <Route path='/admin/reviews' element={<Reviews />} />
             <Route path='/admin/reviews/create' element={<Create_Review />} />
             <Route path='/admin/reviews/update/:Reviews_ID' element={<Update_Reviews />} />
-
+            <Route path="/joinevent/:Event_ID" element={<Joinevent />} /> 
 
 
 
