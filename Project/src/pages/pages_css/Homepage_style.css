@@ -1,4 +1,4 @@
-/* App.css */
+
 .App {
     text-align: center;
   }
@@ -104,4 +104,37 @@
     padding: 10px;
     color: #fff;
   }
+
+  .rev_slider {
+    margin: 10px;
+    padding: 50px;
+    background-color: #62B9B6;
+  }
+
+  #review_h1{
+    margin-bottom: 20px;
+    font-size:300%;
+  }
+
+  .rev_cont {
+    display: flex;
+    flex-direction: row; 
+   
+  }
+  .rev_n_s {
+    margin-bottom: 10px;
+    padding: 5px;
+    border: 1px solid #ccc;
+    color: white;
+  }
+
+  .rev_comm {
+  margin-top: 10px;
+  padding: 10px;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  font-size: 14px;
+  line-height: 1.4;
+}
   

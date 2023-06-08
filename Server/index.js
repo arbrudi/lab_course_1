@@ -132,8 +132,8 @@ app.post('/register', (req,res) =>{
   const username = req.body.username;
   const password = req.body.password;
 
-console.log(res,'Response')
-console.log(req,'Request')
+//console.log(res,'Response')
+//console.log(req,'Request')
   // Check if email or username already exist in the database
   db.query('SELECT * FROM client WHERE email = ? OR username = ?', [email, username], (err, result) => {
       if (err) {
@@ -366,8 +366,6 @@ app.post('/admin/reviews/create', (req, res) => {
  }
  );
  });
-
-
  app.delete('/admin/reviews/delete/:Reviews_ID', (req, res) => {
   const Reviews_ID = req.params.Reviews_ID;
 
@@ -379,15 +377,6 @@ app.post('/admin/reviews/create', (req, res) => {
     }
   });
 });
-
-
-
-
-
-
-
-
-
 
 //Riona - -------------------------------------------------------------------------Events Management CRUD ----------------------------------------------------------------------
 app.get("/", (req, res) => {

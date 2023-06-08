@@ -6,6 +6,11 @@ import NavBar from '../components/NavBar';
 import Footer from '../components/Footer';
 import Axios from 'axios';  
 import './pages_css/Page.css'
+
+
+
+
+
 function HomePage() {
     
   
@@ -31,7 +36,18 @@ function HomePage() {
       margin: "0 auto",
     };
  
-  
+
+    const[reviews,setReviews] = useState([]);
+
+    useEffect (()=>{
+      Axios.get('http://localhost:3001/admin/reviews')
+      .then((res)=>setReviews(res.data))
+      .catch((err)=>console.log(err));
+    },[]);
+
+    if (!reviews) {
+      return <div>Loading...</div>;
+    }
   
 return (
     <>
@@ -130,19 +146,27 @@ return (
           </div>
         </section>
 
-
-<h1>Slider 2</h1>
-      
-
-
-
-
+        <section>
+        <h1 id='review_h1'> Reviews Section</h1>
+          <div className='rev_slider'>
+            
+            <div className='rev_cont'>
+            {reviews.map(item => (
+                <div key={item.Reviews_ID} className='rev_n_s'>
+                <p>{item.Reviewer_Name}</p>
+                <p>{item.Reviewer_Surname}</p>
+                
+                  <div className='rev_comm'>
+                  <p>{item.Reviews_Comment}</p>
+                </div>
+            </div>
+            ))}
+          </div>
+          </div>
+        </section>
 
       </main>
     </div>
-
-
-
     <Footer />
         </>
   );
