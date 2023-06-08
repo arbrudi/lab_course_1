@@ -378,6 +378,74 @@ app.post('/admin/reviews/create', (req, res) => {
   });
 });
 
+// ---------------------------------------------------------- TEXT SECTION CRUD --------------------------------------------------------------------------------------------------
+
+app.get('/admin/text_section', (req, res) => {
+  const sql = 'SELECT * FROM text_section';
+
+  db.query(sql, (err, result) => {
+    if (err) {
+      console.log(err);
+      res.send("Error retrieving sections");
+    } else {
+      res.json(result);
+    }
+  });
+});
+
+app.post('/admin/text_section/create', (req, res) => {
+   
+  const sql='INSERT INTO text_section (Text_section_id, Text_section_title, Text_section_description) VALUES (?, ?, ?)'
+  const values=[
+   req.body.Text_section_id,
+   req.body.Text_section_title,
+   req.body.Text_section_description
+  ]
+  db.query(sql, values, (err, data) => { 
+   if(err){
+       console.log(err);
+       res.send("Error uploading text section");
+   } else {
+       res.send("Text Section Uploaded Successfully");
+   }
+ }
+ );
+ });
+
+ app.put('/admin/text_section/update/:Text_section_id', (req, res) => {
+  const Text_section_id = req.body.Text_section_id;
+  const sql='UPDATE Text_section SET Text_section_title = ? , Text_section_description = ? WHERE Text_section_id = ?'
+  const values=[ 
+  
+   req.body.Text_section_title,
+   req.body.Text_section_description,
+   req.body.Text_section_id
+  ]
+  
+  db.query(sql, [...values,Text_section_id], (err, data) => { 
+   if(err){
+       console.log(err);
+       res.send("Error");
+   } else {
+       res.send("Success");
+   }
+ }
+ );
+ });
+
+ app.delete('/admin/text_section/delete/:Text_section_id', (req, res) => {
+  const Text_section_id = req.params.Text_section_id;
+
+  db.query('DELETE FROM Text_section WHERE Text_section_id=?', Text_section_id, (err, result) => {
+    if (err) {
+      console.log(err);
+    } else {
+      res.send(result);
+    }
+  });
+});
+
+
 //Riona - -------------------------------------------------------------------------Events Management CRUD ----------------------------------------------------------------------
 app.get("/", (req, res) => {
   const sql = "SELECT * FROM events";

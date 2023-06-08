@@ -33,6 +33,10 @@ import Reviews from './pages/admin/Reviews';
 import Create_Review from './components/CRUDS/Reviews_Management/Create_Review';
 import Update_Reviews from './components/CRUDS/Reviews_Management/Update_Review'; 
 import Joinevent from './pages/Joinevent'; 
+import Text_section from './pages/admin/Text_section';
+import Create_Section from './components/CRUDS/Text_Section/Create_Section';
+import Update_Section from './components/CRUDS/Text_Section/Update_Section';
+
 function App() {
   return (
     <BrowserRouter>
@@ -79,6 +83,9 @@ function App() {
             <Route path='/admin/reviews/create' element={<Create_Review />} />
             <Route path='/admin/reviews/update/:Reviews_ID' element={<Update_Reviews />} />
             <Route path="/joinevent/:Event_ID" element={<Joinevent />} /> 
+            <Route path="/admin/text_section" element={<Text_section />} />
+            <Route path="/admin/text_section/create" element={<Create_Section />} />
+            <Route path="/admin/text_section/update/:Text_section_id" element={<Update_Section />} />
 
 
 

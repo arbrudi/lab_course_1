@@ -52,7 +52,7 @@ function Create_Review(){
                     </div>
                     <div className='mb-2'>
                         <label htmlFor="Reviewer_Surname">Reviewer Surname</label>
-                        <textarea  placeholder=' Enter Reviewer Surname' className='form-control'
+                        <input type='text' placeholder=' Enter Reviewer Surname' className='form-control'
                         onChange={e=> setReviewer_Surname(e.target.value)}
                         />
                     </div>

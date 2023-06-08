@@ -120,10 +120,7 @@ return (
           <ImageSlider slides={slides} parentWidth={500} />
         </div>
       </div>
-       
-
-
-       </div>
+     </div>
        <br></br>
         <section className="featured-books">
           <h3>Featured Books</h3>
@@ -149,7 +146,6 @@ return (
         <section>
         <h1 id='review_h1'> Reviews Section</h1>
           <div className='rev_slider'>
-            
             <div className='rev_cont'>
             {reviews.map(item => (
                 <div key={item.Reviews_ID} className='rev_n_s'>

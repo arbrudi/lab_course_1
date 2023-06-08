@@ -1,7 +1,9 @@
-import React, { useState } from "react"; 
+import React, { useState, useEffect } from "react"; 
 import '../pages/pages_css/slider.css' ; 
 import NavBar from '../components/NavBar';
 import Footer from '../components/Footer';
+import  Axios  from "axios";
+
 
 function AboutPage() { 
  
@@ -28,6 +30,19 @@ function AboutPage() {
       active: false,
     } 
   ];
+
+  const[section,setSection] = useState([]);
+
+    useEffect (()=>{
+      Axios.get('http://localhost:3001/admin/text_section')
+      .then((res)=>setSection(res.data))
+      .catch((err)=>console.log(err));
+    },[]);
+
+    if (!section) {
+      return <div>Loading...</div>;
+    }
+  
 
   return (
     <>
@@ -56,41 +71,17 @@ function AboutPage() {
       </div> 
      </div> 
      <div className="text"> 
-     <div className="text-1">
-      <div className="elements">Who are we?</div>
-      <div className="atributes">elibrary is an application that will help students and other people to have access to different books and articles.
-        The material we offer includes a wide range and different genres of art, culture, sports, IT, health and much more. Users will have the opportunity
-        to access the e-bookstore where they will be able to get books, place read books in their reading library, like books, post comments about different
-        books, rate them, access articles, the various news and magazines that are located in our web application. Customers will have the opportunity to make requests
-        about the various books that they want to be part of our electronic system. Also, various events will be organized where users can take part.</div></div> 
-        <div className="line"></div>
-        <div className="text-1"> 
-      <div className="elements">Missions & Goals</div>
-      <div className="atributes">The missions and goals of our elibrary is to offer:
-        Providing access to a wide range of digital resources such as e-books, research papers, magazines
-        and other multimedia materials.
-        Supporting research and education by providing users with access to reliable, authoritative and up-to-date information.
-        Ensuring equal access: Another important mission is to ensure that all users, regardless of location, socio-economic status or physical abilities, have equal
-        access to the digital resources and services provided.
-        Supporting sustainable development reducing the need for physical resources such as paper and ink and providing environmentally friendly digital alternatives.
-        Providing personalized services to users such as personalized reading recommendations, alerts for new material and access to specialized resources tailored to
-        specific research interests or topics.
-        Supporting education and research by providing resources that can help students, researchers and academics access the information they need to succeed.
-        eLibrary is committed to ensuring that every user has a positive experience using our service.</div></div> 
-        <div className="line"></div>
-        <div className="text-1">
-      <div className="elements"> Work with us 
-      </div>
-<div className="atributes">
-    "eLibrary is open to everyone who wants to create a collaboration and partnership together to be more successful in achieving goals
-    and providing the best services for clients. Partnership with others is very important to us, that's why we are very cooperative.
-    The client has the possibility of donating various donations, whether money, old books or something else, and this would also help other
-    users to have a collection of different books. Whoever wants to organize events, we are open to organize together to help users gain
-    new knowledge. Partnership with others would help us to create new experiences and to offer users a wider range of services.
-    Anyone who wants to create a partnership with us or wants to donate can contact us through the data found in our application."
-</div></div>
-</div> 
+     {section.map(item => (
+                <div key={item.Text_section_id } className="text-1">
+                <div className="elements">{item.Text_section_title}</div>
+                <div className="atributes">{item.Text_section_description}</div>
+                <div className="line"></div>     
+                    
 </div>
+ ))} 
+</div>
+</div>
+
  <Footer />
  </>
   );

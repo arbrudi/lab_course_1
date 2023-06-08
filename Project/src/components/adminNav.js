@@ -13,6 +13,7 @@ const AdminNav = () =>{
                 <li><Link to="/admin/news">News</Link></li>
                 <li><Link to="/admin/events">Events</Link></li>
                 <li><Link to="/admin/reviews">Reviews</Link></li>
+                <li><Link to="/admin/Text_section">Text Section</Link></li>
                 <li><Link to ="/admin">Logout</Link></li>
             </ul>
         </nav>
