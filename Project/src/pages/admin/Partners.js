@@ -8,6 +8,7 @@ import Footer from '../../components/Footer';
 import {Link} from 'react-router-dom';
 import "../../components/CRUDS/Events/events.css"
 
+<div>Our Partners</div>
  function Partners() { 
     const [partners, setPartners] = useState([]);
 

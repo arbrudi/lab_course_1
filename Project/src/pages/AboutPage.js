@@ -81,7 +81,7 @@ function AboutPage() {
 </div>
  ))} 
 </div> 
-<Link to={'/pages/admin/OurPartners'} className='btn'>
+<Link to={'/OurPartners'} className='btn'>
                     <button className='btn'>OurPartners</button>
                   </Link>
 </div>

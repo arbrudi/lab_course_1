@@ -43,8 +43,7 @@ import { useEffect } from 'react';
 import Partners from './pages/admin/Partners'; 
 import Create_partners from './components/CRUDS/Partners.js/Create_partners'; 
 import Update_Partner from './components/CRUDS/Partners.js/Update_partners'; 
-import OurPartners from './pages/admin/OurPartners';
-
+import OurPartners from './components/OurPartners';
 
 function App() {
 
@@ -130,7 +129,7 @@ function App() {
             <Route path='/admin/partners' element={<Partners />} /> 
             <Route path='/admin/partners/create' element={<Create_partners />} /> 
             <Route path='/admin/partners/update/:Partner_ID' element={<Update_Partner />} /> 
-            <Route path='/pages/admin/OurPartners' element={<OurPartners />} />
+            <Route path='/OurPartners' element={<OurPartners />} />
            </>
            }
           </Routes>

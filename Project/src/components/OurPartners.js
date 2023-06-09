@@ -1,12 +1,9 @@
-import AdminNav from '../../components/adminNav';
+
 import 'bootstrap/dist/css/bootstrap.min.css';
-import "../../pages/pages_css/admin_style.css";
+
 import Axios from 'axios';
-import React, {useEffect, useState } from 'react';
-import NavBar from '../../components/NavBar'
-import Footer from '../../components/Footer';
-import {Link} from 'react-router-dom';
-import "../../components/CRUDS/Events/events.css"
+import React, {useEffect, useState } from 'react'; 
+
 
  function OurPartners() { 
     const [partners, setPartners] = useState([]);
@@ -23,10 +20,10 @@ import "../../components/CRUDS/Events/events.css"
  
   return ( 
     <>
-    <NavBar />
+
      <div className="admin_page">
      <div className="admin_nav">
-     <AdminNav />
+   
    </div>
     <div className="App">
       <div className='users-list'>
@@ -57,8 +54,7 @@ import "../../components/CRUDS/Events/events.css"
      </div>
     </div>
 
-       
-      <Footer />
+
 </>
   )
 }
