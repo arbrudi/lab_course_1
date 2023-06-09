@@ -4,8 +4,7 @@ import './pages_css/Homepage_style.css';
 import ImageSlider from '../components/ImageSlider';
 import NavBar from '../components/NavBar';
 import Footer from '../components/Footer';
-import Axios from 'axios';  
-import './pages_css/Page.css'
+import Axios from 'axios'; 
 
 
 

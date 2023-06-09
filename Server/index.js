@@ -566,7 +566,70 @@ app.post('/admin/events/createe', (req, res) => {
         return res.json(data);
       });
     }); 
-
+    app.get('/admin/slidercontroller', (req, res) => {
+      const sql = 'SELECT * FROM slider_controller';
+    
+      db.query(sql, (err, result) => {
+        if (err) {
+          console.log(err);
+          res.send("Error retrieving slider");
+        } else {
+          res.json(result);
+        }
+      });
+    });
+    
+    app.post('/admin/slidercontroller/create', (req, res) => {
+       
+      const sql='INSERT INTO slider_controller (Slider_ID, Slider_image, Slider_name) VALUES (?, ?, ?)'
+      const values=[
+       req.body.Slider_ID,
+       req.body.Slider_image,
+       req.body.Slider_name, 
+      ]
+      db.query(sql, values, (err, data) => { 
+       if(err){
+           console.log(err);
+           res.send("Error uploading slider");
+       } else {
+           res.send("Slider Uploaded Successfully");
+       }
+     }
+     );
+     });
+    
+     app.put('/admin/slidercontroller/update/:Slider_ID', (req, res) => {
+      const Slider_ID = req.body.Slider_ID;
+      const sql='UPDATE slider_controller SET Slider_image = ? , Slider_name = ?  WHERE Slider_ID = ?'
+      const values=[ 
+      
+       req.body.Slider_image,
+       req.body.Slider_name,
+       req.body.Slider_ID
+      ]
+      
+    
+      db.query(sql, [...values,Slider_ID], (err, data) => { 
+       if(err){
+           console.log(err);
+           res.send("Error");
+       } else {
+           res.send("Success");
+       }
+     }
+     );
+     });
+     app.delete('/admin/slidercontroller/delete/:Slider_ID', (req, res) => {
+      const Slider_ID = req.params.Slider_ID;
+    
+      db.query('DELETE FROM slider_controller WHERE Slider_ID=?', Slider_ID, (err, result) => {
+        if (err) {
+          console.log(err);
+        } else {
+          res.send(result);
+        }
+      });
+    });
 // Erisi -------------------------------------------Articles--------------------------------------------------------------------------------
 app.get('/Articlelist/articles/:Article_ID', (req, res) => {
   const sql = 'SELECT * FROM articles WHERE Article_ID = ?';

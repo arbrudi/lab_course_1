@@ -36,11 +36,13 @@ import Joinevent from './pages/Joinevent';
 import Text_section from './pages/admin/Text_section';
 import Create_Section from './components/CRUDS/Text_Section/Create_Section';
 import Update_Section from './components/CRUDS/Text_Section/Update_Section';
-
+import SliderController from './pages/admin/SliderControllerr'; 
+import Create_Slider from './components/CRUDS/SliderController.js/Create_Slider'; 
+import Update_Slider from './components/CRUDS/SliderController.js/Update_Slider'; 
 function App() {
   return (
     <BrowserRouter>
-      <div className="App">
+      <div className="App"> 
         
 
         <div className="page-body">
@@ -85,10 +87,10 @@ function App() {
             <Route path="/joinevent/:Event_ID" element={<Joinevent />} /> 
             <Route path="/admin/text_section" element={<Text_section />} />
             <Route path="/admin/text_section/create" element={<Create_Section />} />
-            <Route path="/admin/text_section/update/:Text_section_id" element={<Update_Section />} />
-
-
-
+            <Route path="/admin/text_section/update/:Text_section_id" element={<Update_Section />} /> 
+            <Route path='/admin/slidercontroller' element={<SliderController />} /> 
+            <Route path='/admin/slidercontroller/create' element={<Create_Slider />} /> 
+            <Route path='/admin/slidercontroller/update/:Slider_ID' element={<Update_Slider />} />
           </Routes>
         </div>
       </div>
