@@ -86,7 +86,7 @@ function App() {
            
            {admin &&
            <>
-
+            <Route path="/user" element={<UserDashboard />} />
             <Route path="/about" element={<AboutPage />} />
             <Route path="/books" element={<BookList />} />
             <Route path="/books/:bookid" element={<BookPage />} />
@@ -111,9 +111,9 @@ function App() {
             <Route path='/admin/articles' element={<Article />} />
             <Route path='/admin/books' element={<Book />} />
             <Route path='/admin/events' element={<Events />} />
-            <Route path = 'newsList/news/:News_ID' element = {<NewsPage />} />
-            <Route path = '/Articlelist' element = {<Articlelist />} />
-            <Route path = 'Articlelist/articles/:Article_ID' element = {<ArticlePage />} /> 
+            <Route path='newsList/news/:News_ID' element = {<NewsPage />} />
+            <Route path='/Articlelist' element = {<Articlelist />} />
+            <Route path='Articlelist/articles/:Article_ID' element = {<ArticlePage />} /> 
             <Route path="/admin/events/createparticipants" element={<Createparticipants />} /> 
             <Route path="/admin/events/Updateparticipants/:Event_ID" element={<Updateparticipants />} />
             <Route path='/admin/reviews' element={<Reviews />} />
