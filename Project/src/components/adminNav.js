@@ -8,7 +8,7 @@ const AdminNav = () =>{
     const logoutFunction = ()=>{
         localStorage.removeItem("userToken");
         localStorage.removeItem("adminToken");
-        setTimeout(() => {navigate("/", {replace:true})}, 400);
+        setTimeout(() => {navigate("/login", {replace:true})}, 400);
         setTimeout(()=> { window.location.reload()},500)
     }
     

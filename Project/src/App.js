@@ -86,6 +86,7 @@ function App() {
            
            {admin &&
            <>
+           <Route index element={<HomePage />} />
             <Route path="/user" element={<UserDashboard />} />
             <Route path="/about" element={<AboutPage />} />
             <Route path="/books" element={<BookList />} />

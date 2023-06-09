@@ -8,7 +8,7 @@ const NewsPage = () => {
 
   useEffect(() => {
     Axios.get(`http://localhost:3001/newsList/news/${News_ID}`)
-      .then(res => setNewsPage(res.data[0])) // Assuming the result is an array with a single news item
+      .then(res => setNewsPage(res.data[0])) 
       .catch(err => console.log(err));
   }, [News_ID]);
 

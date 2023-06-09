@@ -62,8 +62,6 @@ const deleteSection = async(Text_section_id) =>
                                 <td>{data.Text_section_id}</td>
                                 <td>{data.Text_section_title}</td>
                                 <td>{data.Text_section_description}</td>
-                                <td>{data.News_tags}</td>
-                                <td>{data.Publishing_date}</td>
                                 <td>
                                     <Link to={`update/${data.Text_section_id}`} className='btn btn-primary'>Update</Link>
                                     <button className='btn btn-danger ms-2' onClick={e => deleteSection(data.Text_section_id)}>Delete</button>
