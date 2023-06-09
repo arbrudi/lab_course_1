@@ -2,6 +2,13 @@ import express, { json } from 'express';
 const app = express();
 import cors from 'cors';
 import { createConnection } from 'mysql';
+import jwt  from 'jsonwebtoken';
+import crypto from  'crypto';
+
+const generateSecretKey = () => {
+  const secretKey = crypto.randomBytes(32).toString('hex');
+  return secretKey;
+};
 
 //db connection
 const db = createConnection({
@@ -162,26 +169,29 @@ app.post('/register', (req,res) =>{
   });
   });
 // Login route
+
 app.post('/login', (req, res) => {
-    const email = req.body.email;
-    const password = req.body.password;
-  
-    db.query('SELECT * FROM client WHERE email = ? AND password = ?', [email, password], (err, result) => {
-      if (err) {
-        console.log(err);
-        res.status(500).send("Error logging in");
+  const email = req.body.email;
+  const password = req.body.password;
+
+  db.query('SELECT * FROM client WHERE email = ? AND password = ?', [email, password], (err, result) => {
+    if (err) {
+      console.log(err);
+      res.status(500).send("Error logging in");
+    } else {
+      if (result.length > 0) {
+        // User exists and password is correct, generate JWT token
+        const role = result[0].User_Role;
+        const token = jwt.sign({ email, role }, generateSecretKey()); // Replace 'your-secret-key' with your actual secret key
+        res.send({ role, token });
       } else {
-        if (result.length > 0) {
-          // User exists and password is correct, return user's role
-          const role = result[0].User_Role;
-          res.send({ role: role });
-        } else {
-          // User does not exist or password is incorrect
-          res.status(401).send("Invalid email or password");
-        }
+        // User does not exist or password is incorrect
+        res.status(401).send("Invalid email or password");
       }
-    });
+    }
   });
+});
+
 //calling all users
 app.get('/admin/user', (req, res) => {
 db.query('SELECT * FROM client',(err,result)=>{

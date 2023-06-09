@@ -1,7 +1,16 @@
-import {Link} from 'react-router-dom';
+import {Link,useNavigate} from 'react-router-dom';
 import "./components_css/admin_nav_style.css";
 
 const AdminNav = () =>{
+
+    const navigate = useNavigate()
+
+    const logoutFunction = ()=>{
+        localStorage.removeItem("userToken");
+        localStorage.removeItem("adminToken");
+        setTimeout(() => {navigate("/", {replace:true})}, 400);
+        setTimeout(()=> { window.location.reload()},500)
+    }
     
     return(
         <nav className="admin-nav-sidebar">
@@ -15,7 +24,7 @@ const AdminNav = () =>{
                 <li><Link to="/admin/reviews">Reviews</Link></li> 
                 <li><Link to="/admin/slidercontroller">Slider controller</Link></li>
                 <li><Link to="/admin/Text_section">Text Section</Link></li>
-                <li><Link to ="/admin">Logout</Link></li>
+                <li onClick={()=> logoutFunction()}>Log out</li>
             </ul>
         </nav>
     );

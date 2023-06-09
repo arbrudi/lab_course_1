@@ -19,9 +19,19 @@ const Login = () => {
       if (response.data.role === 'user') {
         // Redirect to user dashboard
         navigate('/user',{replace:true})
+        localStorage.setItem("userToken", JSON.stringify({
+          role : "user",
+          token : response.data.token
+        }))
+        window.location.reload()
       } else if (response.data.role === 'admin') {
         // Redirect to admin dashboard
         navigate('/admin',{replace:true})
+        localStorage.setItem("adminToken", JSON.stringify({
+          role : "admin",
+          token : response.data.token
+        }))
+        window.location.reload()
       }
     }).catch((error) => {
       console.log(error);

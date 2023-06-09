@@ -39,25 +39,56 @@ import Update_Section from './components/CRUDS/Text_Section/Update_Section';
 import SliderController from './pages/admin/SliderControllerr'; 
 import Create_Slider from './components/CRUDS/SliderController.js/Create_Slider'; 
 import Update_Slider from './components/CRUDS/SliderController.js/Update_Slider'; 
+import { useEffect } from 'react';
+
 function App() {
+
+  const user = localStorage.getItem("userToken");
+  const admin = localStorage.getItem("adminToken");
+
+
+  console.log(user,"user")
+  console.log(admin ,"admin")
   return (
     <BrowserRouter>
       <div className="App"> 
-        
-
         <div className="page-body">
+          
           <Routes>
-
-            <Route path="/" element={<HomePage />} />
+          {user || admin == null &&
+           <>
+           <Route index element={<Login />} />
+              <Route path="/login" element={<Login />} />
+              <Route path="/register" element={<Register />} />
+              <Route path="/*" element={<PageNotFound />} />
+           </> 
+          }
+          {user &&
+          <>
+           <Route index element={<HomePage />} />
             <Route path="/about" element={<AboutPage />} />
             <Route path="/books" element={<BookList />} />
             <Route path="/books/:bookid" element={<BookPage />} />
             <Route path="/articles/:articleid" element={<ArticlePage />} />
             <Route path="/user" element={<UserDashboard />} />
-            <Route path="/admin" element={<AdminDashboard />} />
             <Route path="/*" element={<PageNotFound />} />
-            <Route path="/login" element={<Login />} />
-            <Route path="/register" element={<Register />} />
+            <Route path="/home" element={<HomePage />} />
+            <Route path='/newsList' element={<NewsList />} />
+            <Route path = 'newsList/news/:News_ID' element = {<NewsPage />} />
+            <Route path = '/Articlelist' element = {<Articlelist />} />
+            <Route path = 'Articlelist/articles/:Article_ID' element = {<ArticlePage />} /> 
+          </>
+          }
+           
+           {admin &&
+           <>
+
+            <Route path="/about" element={<AboutPage />} />
+            <Route path="/books" element={<BookList />} />
+            <Route path="/books/:bookid" element={<BookPage />} />
+            <Route path="/articles/:articleid" element={<ArticlePage />} />
+            <Route path="/*" element={<PageNotFound />} />
+            <Route path="/admin" element={<AdminDashboard />} />
             <Route path="/home" element={<HomePage />} />
             <Route path="/admin/events/createe" element={<Createe />} /> 
             <Route path="/admin/events/update/:Event_ID" element={<Update />} />
@@ -91,6 +122,8 @@ function App() {
             <Route path='/admin/slidercontroller' element={<SliderController />} /> 
             <Route path='/admin/slidercontroller/create' element={<Create_Slider />} /> 
             <Route path='/admin/slidercontroller/update/:Slider_ID' element={<Update_Slider />} />
+           </>
+           }
           </Routes>
         </div>
       </div>
