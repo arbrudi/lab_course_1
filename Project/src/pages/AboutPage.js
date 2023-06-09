@@ -2,7 +2,8 @@ import React, { useState, useEffect } from "react";
 import '../pages/pages_css/slider.css' ; 
 import NavBar from '../components/NavBar';
 import Footer from '../components/Footer';
-import  Axios  from "axios";
+import  Axios  from "axios"; 
+import { Link } from 'react-router-dom';
 
 
 function AboutPage() { 
@@ -79,7 +80,10 @@ function AboutPage() {
                     
 </div>
  ))} 
-</div>
+</div> 
+<Link to={'/pages/admin/OurPartners'} className='btn'>
+                    <button className='btn'>OurPartners</button>
+                  </Link>
 </div>
 
  <Footer />

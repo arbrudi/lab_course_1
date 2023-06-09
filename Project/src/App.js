@@ -40,6 +40,11 @@ import SliderController from './pages/admin/SliderControllerr';
 import Create_Slider from './components/CRUDS/SliderController.js/Create_Slider'; 
 import Update_Slider from './components/CRUDS/SliderController.js/Update_Slider'; 
 import { useEffect } from 'react';
+import Partners from './pages/admin/Partners'; 
+import Create_partners from './components/CRUDS/Partners.js/Create_partners'; 
+import Update_Partner from './components/CRUDS/Partners.js/Update_partners'; 
+import OurPartners from './pages/admin/OurPartners';
+
 
 function App() {
 
@@ -121,7 +126,11 @@ function App() {
             <Route path="/admin/text_section/update/:Text_section_id" element={<Update_Section />} /> 
             <Route path='/admin/slidercontroller' element={<SliderController />} /> 
             <Route path='/admin/slidercontroller/create' element={<Create_Slider />} /> 
-            <Route path='/admin/slidercontroller/update/:Slider_ID' element={<Update_Slider />} />
+            <Route path='/admin/slidercontroller/update/:Slider_ID' element={<Update_Slider />} /> 
+            <Route path='/admin/partners' element={<Partners />} /> 
+            <Route path='/admin/partners/create' element={<Create_partners />} /> 
+            <Route path='/admin/partners/update/:Partner_ID' element={<Update_Partner />} /> 
+            <Route path='/pages/admin/OurPartners' element={<OurPartners />} />
            </>
            }
           </Routes>

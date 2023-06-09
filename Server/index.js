@@ -639,6 +639,72 @@ app.post('/admin/events/createe', (req, res) => {
           res.send(result);
         }
       });
+    }); 
+    app.get('/admin/partners', (req, res) => {
+      const sql = 'SELECT * FROM partners';
+    
+      db.query(sql, (err, result) => {
+        if (err) {
+          console.log(err);
+          res.send("Error retrieving partner");
+        } else {
+          res.json(result);
+        }
+      });
+    });
+    
+    app.post('/admin/partners/create', (req, res) => {
+       
+      const sql='INSERT INTO partners (Partner_ID, Partner_image, Partner_name , Partner_description) VALUES (?, ?, ?,? )'
+      const values=[
+       req.body.Partner_ID,
+       req.body.Partner_image,
+       req.body.Partner_name, 
+       req.body.Partner_description,
+      ]
+      db.query(sql, values, (err, data) => { 
+       if(err){
+           console.log(err);
+           res.send("Error uploading partner");
+       } else {
+           res.send("Partner Uploaded Successfully");
+       }
+     }
+     );
+     });
+    
+     app.put('/admin/partners/update/:Partner_ID', (req, res) => {
+      const Partner_ID = req.body.Partner_ID;
+      const sql='UPDATE partners SET Partner_image = ? , Partner_name = ? , Partner_description = ?  WHERE Partner_ID = ?'
+      const values=[ 
+      
+       req.body.Partner_image,
+       req.body.Partner_name, 
+       req.body.Partner_description,
+       req.body.Partner_ID
+      ]
+      
+    
+      db.query(sql, [...values,Partner_ID], (err, data) => { 
+       if(err){
+           console.log(err);
+           res.send("Error");
+       } else {
+           res.send("Success");
+       }
+     }
+     );
+     });
+     app.delete('/admin/partners/delete/:Partner_ID', (req, res) => {
+      const Partner_ID = req.params.Partner_ID;
+    
+      db.query('DELETE FROM partners WHERE Partner_ID=?', Partner_ID, (err, result) => {
+        if (err) {
+          console.log(err);
+        } else {
+          res.send(result);
+        }
+      });
     });
 // Erisi -------------------------------------------Articles--------------------------------------------------------------------------------
 app.get('/Articlelist/articles/:Article_ID', (req, res) => {
