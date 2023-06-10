@@ -50,7 +50,7 @@
   
   .news-info p {
     margin: 0;
-    margin-bottom: 5px;
+    margin-bottom: 15px;
     font-size: 14px;
   }
   
@@ -60,7 +60,7 @@
 
   .read_more{
     margin-top: 15px;
-    background-color: #62CB91;
+    background-color: #62B9B6;
     color:#fff2f2;
     border: none;
     padding: 8px 16px;
@@ -69,5 +69,5 @@
   }
   
   .read_more:hover {
-    background-color: #48a77e;
+    background-color: #7ad8d4;
   }

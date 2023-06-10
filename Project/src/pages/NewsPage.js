@@ -1,6 +1,9 @@
 import Axios from "axios";
 import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
+import './pages_css/News_Page.css';
+import NavBar from "../components/NavBar";
+import Footer from "../components/Footer";
 
 const NewsPage = () => {
   const { News_ID } = useParams();
@@ -18,15 +21,27 @@ const NewsPage = () => {
 
   return (
     <>
-      <h1>This is the NEWS PAGE!</h1>
+    <NavBar />
 
-      <div>
+      <div className="news-page-container">
+        <div className="news-title">
         <h1>{newsPage.News_title}</h1>
-        <p>{newsPage.Publishing_date}</p>
-        <p>{newsPage.News_tags}</p>
+        </div>
+        <div className="news-img">
         <img src={newsPage.News_image} alt={newsPage.title} />
-        <p>{newsPage.News_description}</p>
-      </div>
+        </div>
+        <div className="description"> 
+        <p> {newsPage.News_description}</p>
+        </div>
+        <div className="news-foot">
+        <p>Publishing date: {newsPage.Publishing_date}</p>
+        <div className="news-tag">
+        <p>Tags: {newsPage.News_tags}</p>
+        </div>
+        </div>
+        </div>
+        
+ <Footer />
     </>
   );
 };

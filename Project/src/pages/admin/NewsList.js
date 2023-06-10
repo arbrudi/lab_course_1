@@ -33,6 +33,7 @@ import { Link } from 'react-router-dom';
                   <div className="news-info">
                     <p>{item.Publishing_date}</p>
                     <p>{item.News_tags}</p>
+                    
                     <Link to={`/newsList/news/${item.News_ID}`} className='read_more'>
                 Read more...
               </Link>
