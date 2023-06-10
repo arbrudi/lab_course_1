@@ -7,7 +7,7 @@ import { useNavigate } from 'react-router-dom';
 function CreateArticle(){
 
     const [Article_ID, setArticle_ID] = useState("");
-    const [Article_image	, setArticle_image	] = useState("");
+    const [Article_image, setArticle_image] = useState("");
     const [Article_title, setArticle_title] = useState("");
     const [Article_type, setArticle_type] = useState("");
     const [Article_Description, setArticle_Description] = useState("");

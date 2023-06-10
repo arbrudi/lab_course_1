@@ -1,6 +1,8 @@
 import Axios from "axios";
 import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
+import CommentArticle from "../components/CRUDS/Article_Managment/CommentArticle";
+import RatingArticle from "../components/CRUDS/Article_Managment/RatingArticle";
 
 const ArticlePage = () => {
   const { Article_ID } = useParams();
@@ -26,7 +28,17 @@ const ArticlePage = () => {
         <img src={ArticlePage.Article_image} alt={ArticlePage.Article_title} />
         <p>{ArticlePage.Article_Description}</p>
       </div>
-    </>
+
+      <h1>Comment Section</h1>
+
+
+
+    <CommentArticle/>
+    
+ 
+
+
+   </>
   );
 };
 

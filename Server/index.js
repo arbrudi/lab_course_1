@@ -5,8 +5,11 @@ import { createConnection } from 'mysql';
 import jwt  from 'jsonwebtoken';
 import crypto from  'crypto';
 
+//Function qe kriojn nje string  random hexadecimal 32 bit per ta perdorur si JWT Secret key 
+
 const generateSecretKey = () => {
-  const secretKey = crypto.randomBytes(32).toString('hex');
+  
+  const secretKey = crypto.randomBytes(32).toString('hex'); 
   return secretKey;
 };
 
@@ -172,17 +175,30 @@ app.post('/register', (req,res) =>{
 app.post('/login', (req, res) => {
   const email = req.body.email;
   const password = req.body.password;
+// e merr id e user tu e lyp ne databas me email kur bohet match e bon pull edhe e bon log
+// ne local storage bashk me jwttoken edhe role
+  const User_ID = `SELECT User_ID FROM client WHERE email=${email}` 
 
-  db.query('SELECT * FROM client WHERE email = ? AND password = ?', [email, password], (err, result) => {
+  console.log(User_ID,"ID")
+ 
+
+  db.query('SELECT * FROM client WHERE email = ? AND password = ?  ' , [email, password,User_ID], (err, result) => {
     if (err) {
+
       console.log(err);
       res.status(500).send("Error logging in");
+
     } else {
       if (result.length > 0) {
         // User exists and password is correct, generate JWT token
         const role = result[0].User_Role;
-        const token = jwt.sign({ email, role }, generateSecretKey()); // Replace 'your-secret-key' with your actual secret key
-        res.send({ role, token });
+        console.log(result,"res")
+
+        const token = jwt.sign({ email, role }, generateSecretKey()); 
+        //
+        const ID =result[0].User_ID;
+        res.send({ role, token,ID });
+        
       } else {
         // User does not exist or password is incorrect
         res.status(401).send("Invalid email or password");
@@ -420,6 +436,8 @@ app.post('/admin/text_section/create', (req, res) => {
  }
  );
  });
+
+
 
  app.put('/admin/text_section/update/:Text_section_id', (req, res) => {
   const Text_section_id = req.body.Text_section_id;
@@ -811,9 +829,9 @@ app.post('/admin/articles/create', (req, res) => {
  db.query(sql, values, (err, data) => { 
   if(err){
       console.log(err);
-      res.send("Error registering user");
+      res.send("Error ");
   } else {
-      res.send("User Registered Successfully");
+      res.send(" Success");
   }
 }
 );
@@ -866,6 +884,39 @@ app.delete('/admin/articles/delete/:Article_ID', (req, res) => {
     }
   });
 });
+
+
+
+
+//A-comment
+
+  
+
+app.post('/admin/article/Acomment_create', (req, res) => {
+   const sql= "INSERT INTO article_comments (User_ID, Article_ID,A_comments) VALUES(?,?,?)"
+   const values = [
+    req.body.User_ID,
+    req.body.Article_ID,
+    req.body.A_comments,
+
+  ]
+
+  db.query(sql,values, (err, result) => {
+    if (err) {
+      console.log(err);
+    } else {
+      res.send(result);
+    }
+  });
+});
+
+
+
+
+
+
+
+
 // Leka ----------------------------------------------------------------Books-----------------------------------------------------------
 
 app.post('/admin/books/create', (req, res) => {
