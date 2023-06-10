@@ -86,7 +86,7 @@ app.get('/admin/events/count', (req, res) => {
 
 
 // -----------------------------------------------------------------CREATE NEW USER (UM CRUD)---------------------------------------------------------------------
-//Arbi - Register, Login, User Management CRUD
+//Arbi 
 app.post('/admin/user/create', (req,res) =>{
 
  
@@ -149,8 +149,7 @@ app.post('/register', (req,res) =>{
       } else {
           if (result.length > 0) {
               // Email or username already exist in database, send error message
-              let message = "User with this email or username already exists";
-              res.status(400).send(message);
+              alert("User with this email or username already exists") ;
           } else {
               // Insert new user into the database
               db.query('INSERT INTO client (Name,Surname,User_Role,Email,Username,Password) VALUES (?,?,?,?,?,?)',
@@ -447,6 +446,81 @@ app.post('/admin/text_section/create', (req, res) => {
   const Text_section_id = req.params.Text_section_id;
 
   db.query('DELETE FROM Text_section WHERE Text_section_id=?', Text_section_id, (err, result) => {
+    if (err) {
+      console.log(err);
+    } else {
+      res.send(result);
+    }
+  });
+});
+// -------------------------------------------------------------Contact Page CRUD -----------------------------------------------------------------
+
+app.get('/admin/contact/',(req,res)=>{
+
+  const sql = 'SELECT * FROM contact_us';
+
+  db.query(sql,(err,result)=>{
+    if(err){
+      console.log(err);
+    }else{
+      res.json(result);
+    }
+  })
+})
+
+
+app.post('/admin/contact/create',(req,res)=>{
+
+  const sql = 'INSERT INTO contact_us(Contact_ID, Contact_email, Contact_number, Contact_address, Contact_city, Contact_postal_code) VALUES(?,?,?,?,?,?)';
+  const values = [
+    req.body.Contact_ID,
+    req.body.Contact_email,
+    req.body.Contact_number,
+    req.body.Contact_address,
+    req.body.Contact_city,
+    req.body.Contact_postal_code
+  ]
+
+  db.query(sql, values, (err, data)=>{
+    if(err){
+      console.log(err);
+      res.send('Error inserting data into the database!');
+    }else{
+      res.send('Data inserted successfully!')
+    }
+  })
+})
+
+app.put('/admin/contact/update/:Contact_ID',(req,res)=>{
+
+  const Contact_ID = req.body.Contact_ID;
+  const sql ='UPDATE contact_us SET Contact_email=?, Contact_number=?, Contact_address=?, Contact_city=?, Contact_postal_code=? WHERE Contact_ID=?';
+  const values= [
+
+    req.body.Contact_email,
+    req.body.Contact_number,
+    req.body.Contact_address,
+    req.body.Contact_city,
+    req.body.Contact_postal_code,
+    req.body.Contact_ID
+
+  ];
+
+  db.query(sql,[...values,Contact_ID], (err, data)=>{
+    if(err){
+      console.log(err);
+      res.send('Error');
+    }else{
+      res.send('Successful')
+    }
+  })
+})
+
+
+ app.delete('/admin/contact/delete/:Contact_ID', (req, res) => {
+  const Contact_ID = req.params.Contact_ID;
+
+  db.query('DELETE FROM contact_us WHERE Contact_ID=?', Contact_ID, (err, result) => {
     if (err) {
       console.log(err);
     } else {

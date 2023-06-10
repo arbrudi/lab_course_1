@@ -44,6 +44,10 @@ import Partners from './pages/admin/Partners';
 import Create_partners from './components/CRUDS/Partners.js/Create_partners'; 
 import Update_Partner from './components/CRUDS/Partners.js/Update_partners'; 
 import OurPartners from './components/OurPartners';
+import Contact from './pages/admin/Contact';
+import Contact_Page from './pages/Contact_Page';
+import Create_Contact from './components/CRUDS/Contact_Page/Create_Contact';
+import Update_Contact from './components/CRUDS/Contact_Page/Update_Contact';
 
 function App() {
 
@@ -65,6 +69,7 @@ function App() {
               <Route path="/login" element={<Login />} />
               <Route path="/register" element={<Register />} />
               <Route path="/*" element={<PageNotFound />} />
+              
            </> 
           }
           {user &&
@@ -81,6 +86,7 @@ function App() {
             <Route path = 'newsList/news/:News_ID' element = {<NewsPage />} />
             <Route path = '/Articlelist' element = {<Articlelist />} />
             <Route path = 'Articlelist/articles/:Article_ID' element = {<ArticlePage />} /> 
+            <Route path='/contact' element={<Contact_Page />} />
           </>
           }
            
@@ -131,6 +137,10 @@ function App() {
             <Route path='/admin/partners/create' element={<Create_partners />} /> 
             <Route path='/admin/partners/update/:Partner_ID' element={<Update_Partner />} /> 
             <Route path='/OurPartners' element={<OurPartners />} />
+            <Route path='/admin/contact' element={<Contact />} />
+            <Route path='/admin/contact/create' element={<Create_Contact />} />
+            <Route path='/admin/contact/update/:Contact_ID' element={<Update_Contact />} />
+            <Route path='/contact' element={<Contact_Page />} />
            </>
            }
           </Routes>
