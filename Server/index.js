@@ -910,6 +910,38 @@ app.post('/admin/article/Acomment_create', (req, res) => {
   });
 });
 
+// endpoint per te marrur komentet nga artikulli i caktuar 
+
+app.get('/admin/article/:Article_ID', (req, res) => {
+
+  const Article_ID = req.params.Article_ID;
+  const sql = `SELECT * FROM article_comments WHERE Article_ID = ${Article_ID}`;
+
+  db.query(sql,Article_ID, (err, result) => {
+    if (err) {
+      console.log(err);
+      res.send("Error retrieving Article ");
+    } else {
+      res.send({result});
+    }
+  });
+});
+
+
+app.post('/admin/article/delete', (req, res) => {
+  const Article_ID = req.body.Article_ID;
+  const User_ID =req.body.User_ID
+  db.query(`DELETE FROM article_comments WHERE Article_ID =? AND User_ID =?`, [Article_ID,User_ID], (err, result) => {
+    if (err) {
+      console.log(err);
+    } else {
+      res.send(result);
+    }
+  });
+});
+
+
+
 
 
 

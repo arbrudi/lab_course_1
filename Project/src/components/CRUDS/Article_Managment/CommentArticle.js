@@ -1,12 +1,13 @@
 import React, {  useState} from 'react';
 import "../Article_Managment/CA.css";
-
+import { useParams } from 'react-router-dom';
 import axios from 'axios';
 import NavBar from '../../NavBar';
 import Footer from '../../Footer';
 
 function CommentArticle() {
 
+    const { Article_ID  } = useParams();
     const [A_comments, setA_comments] = useState("");
     //
     const userId =JSON.parse(localStorage.getItem("userToken"))!=null?JSON.parse(localStorage.getItem("userToken")):"";
@@ -16,7 +17,7 @@ function CommentArticle() {
         event.preventDefault()
         axios.post('http://localhost:3001/admin/article/Acomment_create', {
             A_comments:A_comments,
-            Article_ID:"44444",
+            Article_ID: Article_ID,
             User_ID:userIdfix,
             
           }).then(res=>{

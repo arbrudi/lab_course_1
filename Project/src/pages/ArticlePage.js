@@ -12,11 +12,41 @@ import Footer from "../components/Footer";
 const ArticlePage = () => {
   const { Article_ID } = useParams();
   const [ArticlePage, setArticlePage] = useState(null);
+  const [ comments , setComments] = useState();
+
+  console.log(comments , "comment")
+
+  function handleCommentsDelete (user_id,idx)  {
+    const payload = {
+      User_ID : user_id,
+      Article_ID:Article_ID,
+    }
+    Axios.post(`http://localhost:3001/admin/article/delete`,payload)
+    .then((response)=> {
+      console.log(response)
+     getCommentsHandler();
+    }).catch((error)=>{
+      console.log(error)
+    })
+  }
+
+  function getCommentsHandler () {
+    Axios.get(`http://localhost:3001/admin/article/${Article_ID}`)
+    .then((response) => {
+      console.log(response, "response comments")
+      setComments([...response.data.result])
+    }).catch((error) => {
+      console.log(error)
+    })
+  }
 
   useEffect(() => {
     Axios.get(`http://localhost:3001/Articlelist/articles/${Article_ID}`)
       .then(res => setArticlePage(res.data[0]))
       .catch(err => console.log(err));
+
+      getCommentsHandler();
+     
   }, [Article_ID]);
 
   if (!ArticlePage) {
@@ -38,7 +68,20 @@ const ArticlePage = () => {
         <p className="Description">{ArticlePage.Article_Description}</p>
       </div>
       <h1>Comment Section</h1>
+       <div>
+        
+        {
+          comments?.map(((comment , index)=>{
+            return <div>
+                    <div>{comment.A_comments} </div>
+                    <div onClick={()=> handleCommentsDelete(comment.User_ID,index)}>X</div>
+                    <div>Edit</div>
 
+             </div>
+
+          }))
+        }
+       </div>
 
 
 <table className="Extra_parts">
