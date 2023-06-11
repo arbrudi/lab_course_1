@@ -1,3 +1,22 @@
+.A_text{
+
+    justify-content: space-evenly;
+    display: flex;
+    font-family: 'Times New Roman', Times, serif;
+    margin-bottom: 0px;
+    align-items: center;
+}
+
+
+
+.Img{
+    width: 30%;
+    height: 15%;
+    border: 1px solid black;
+    margin: 0px;
+}
+
+
 .Extra_parts{
   border: 1px solid black;
     justify-content: space-evenly;
