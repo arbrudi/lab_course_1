@@ -2,6 +2,8 @@ import React, {  useState} from 'react';
 import "../Article_Managment/CA.css";
 
 import axios from 'axios';
+import NavBar from '../../NavBar';
+import Footer from '../../Footer';
 
 function CommentArticle() {
 
@@ -27,12 +29,12 @@ function CommentArticle() {
          
     }
 
-
   return (
     <> 
+
     <div>CommentArticle</div>
-    <div className='container '>
-            <div className='cont'>
+    <div className=' '>
+            <div className=''>
                 <form onSubmit={handleSubmit}>
                     <h2>Add Comment</h2>
                     <div className='mb-2'>
@@ -47,7 +49,7 @@ function CommentArticle() {
         </div>
    
 
-
+ 
     </>
   )
 }

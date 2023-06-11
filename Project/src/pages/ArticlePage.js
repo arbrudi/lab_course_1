@@ -1,8 +1,10 @@
 import Axios from "axios";
 import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
+import '../pages/pages_css/Articlepage.css'
 import CommentArticle from "../components/CRUDS/Article_Managment/CommentArticle";
 import RatingArticle from "../components/CRUDS/Article_Managment/RatingArticle";
+import FavoriteArticle from "../components/CRUDS/Article_Managment/FavoriteArticle";
 
 const ArticlePage = () => {
   const { Article_ID } = useParams();
@@ -33,7 +35,12 @@ const ArticlePage = () => {
 
 
 
-    <CommentArticle/>
+<table className="Extra_parts">
+  <thead><CommentArticle/></thead>
+  <thead><RatingArticle/></thead>
+  <thead><FavoriteArticle/> </thead>
+</table>
+    
     
  
 

@@ -1,0 +1,7 @@
+.Extra_parts{
+  border: 1px solid black;
+    justify-content: space-evenly;
+    align-items: center;
+    display: flex;
+
+}
