@@ -13,8 +13,13 @@ const ArticlePage = () => {
   const { Article_ID } = useParams();
   const [ArticlePage, setArticlePage] = useState(null);
   const [ comments , setComments] = useState();
+  const [ ARating , setARating] = useState();
   const [ module , setModule] = useState(false);
+  const [ idx , setIdx ] = useState();
+  const [rating, setRating] = useState(0);
+  const [hover, setHover] = useState(0);
 
+  console.log(ARating,"ARating")
   console.log(comments , "comment")
 
   function handleCommentsDelete (user_id,idx)  {
@@ -41,18 +46,33 @@ const ArticlePage = () => {
     })
   }
 
+  function getRatingHandler () {
+    Axios.get(`http://localhost:3001/admin/ARating/${Article_ID}`)
+    .then((response) => {
+      console.log(response, "response Rating")
+      setARating([...response.data.result])
+    }).catch((error) => {
+      console.log(error)
+    })
+  }
+
+
   useEffect(() => {
     Axios.get(`http://localhost:3001/Articlelist/articles/${Article_ID}`)
       .then(res => setArticlePage(res.data[0]))
       .catch(err => console.log(err));
 
       getCommentsHandler();
+      getRatingHandler();
+
      
   }, [Article_ID]);
 
   if (!ArticlePage) {
     return <div>Loading...</div>;
   }
+
+  console.log(ARating,"Arate")
 
   return (
     <>
@@ -89,18 +109,52 @@ const ArticlePage = () => {
                       <td>Username</td>
                       <td><div>{comment.A_comments} </div></td>
                       <td> <div className="btn btn-danger" onClick={()=> handleCommentsDelete(comment.User_ID,index)}>X</div>
-                    <div className="btn btn-success" onClick={() => setModule(!module)}>Edit</div> 
+                    <div className="btn btn-success" onClick={() => {setModule(!module);setIdx(index);}}>Edit</div> 
                     </td>
                     </tbody>
             </table>  
+              {index == idx && 
+              <EditComment articleId={Article_ID} userId={comment.User_ID}/>
+              }
              </div>
 
           }))
         }
        </div>
-       {module && 
-       <EditComment />
-       }
+       
+        <h2>Rating</h2>
+
+        
+          <div className="rating-container">
+            {
+          ARating?.map(((ARate, index)=>(
+            
+            <div className="star-rating">
+            {[...Array(ARate.A_Rating)].map((star, index) => {
+              index += 1;
+              return (
+                <button
+                  type="button"
+                  key={index}
+                  className={"button on"}
+                >
+                  <span className="star">&#9733;</span>
+                </button>
+              );
+            })}
+          </div>
+          )))
+}
+          </div>
+        
+        
+
+       <div>
+
+       
+
+
+       </div>
 
 
 <table className="Extra_parts">

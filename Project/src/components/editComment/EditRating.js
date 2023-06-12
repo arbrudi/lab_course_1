@@ -2,7 +2,7 @@ import React, {useState} from 'react';
 import './editComment.css';
 import axios from 'axios';
 
-const EditComment = (props) =>{
+const EditRating = (props) =>{
 
     const { articleId, userId } = props;
     const [ comment , setComment ] = useState("");
@@ -36,4 +36,4 @@ const EditComment = (props) =>{
   )
 }
 
-export default EditComment
+export default EditRating

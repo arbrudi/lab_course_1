@@ -940,11 +940,65 @@ app.post('/admin/article/delete', (req, res) => {
   });
 });
 
+app.post('/admin/article/edit', (req, res) => {
+  const Article_ID = req.body.Article_ID;
+  const User_ID = req.body.User_ID;
+  const A_comments = req.body.newComment;
+
+  db.query(
+    'UPDATE article_comments SET A_comments=? WHERE Article_ID=? AND User_ID=?',
+    [A_comments, Article_ID, User_ID],
+    (err, result) => {
+      if (err) {
+        console.log(err);
+        res.status(500).send('An error occurred while updating the comment.');
+      } else {
+        res.send(result);
+      }
+    }
+  );
+});
+
+
+//A-ratting
+
+app.post('/admin/ARating/ARating_create', (req, res) => {
+  const sql= "INSERT INTO article_ratings (User_ID, Article_ID,A_Rating) VALUES(?,?,?)"
+  const values = [
+   req.body.User_ID,
+   req.body.Article_ID,
+   req.body.A_Rating,
+
+ ]
+
+ db.query(sql,values, (err, result) => {
+   if (err) {
+     console.log(err);
+   } else {
+     res.send(result);
+   }
+ });
+});
 
 
 
+app.get('/admin/ARating/:Article_ID', (req, res) => {
+
+  const Article_ID = req.params.Article_ID;
+  const sql = `SELECT * FROM article_ratings WHERE Article_ID = ${Article_ID}`;
+
+  db.query(sql,Article_ID, (err, result) => {
+    if (err) {
+      console.log(err);
+      res.send("Error retrieving Rating ");
+    } else {
+      res.send({result});
+    }
+  });
+});
 
 
+//
 
 
 
