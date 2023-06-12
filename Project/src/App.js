@@ -68,7 +68,7 @@ function App() {
            <Route index element={<Login />} />
               <Route path="/login" element={<Login />} />
               <Route path="/register" element={<Register />} />
-              <Route path="/*" element={<PageNotFound />} />
+              {/*<Route path="/*" element={<PageNotFound />} /> */}
               
            </> 
           }
@@ -80,7 +80,7 @@ function App() {
             <Route path="/books/:bookid" element={<BookPage />} />
             <Route path="/articles/:articleid" element={<ArticlePage />} />
             <Route path="/user" element={<UserDashboard />} />
-            <Route path="/*" element={<PageNotFound />} />
+         {/*<Route path="/*" element={<PageNotFound />} /> */}
             <Route path="/home" element={<HomePage />} />
             <Route path='/newsList' element={<NewsList />} />
             <Route path = 'newsList/news/:News_ID' element = {<NewsPage />} />
@@ -98,7 +98,7 @@ function App() {
             <Route path="/books" element={<BookList />} />
             <Route path="/books/:bookid" element={<BookPage />} />
             <Route path="/articles/:articleid" element={<ArticlePage />} />
-            <Route path="/*" element={<PageNotFound />} />
+           {/*<Route path="/*" element={<PageNotFound />} /> */}
             <Route path="/admin" element={<AdminDashboard />} />
             <Route path="/home" element={<HomePage />} />
             <Route path="/admin/events/createe" element={<Createe />} /> 

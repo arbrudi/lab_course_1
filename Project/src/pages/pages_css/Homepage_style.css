@@ -4,7 +4,7 @@
   }
   
   .App-header {
-    background-color: #333;
+    background-color: #62CB91;
     padding: 20px;
     color: #fff;
   }
@@ -48,12 +48,14 @@
   }
   
   .hero {
-  
-
     background-color: #f1f1f1;
     padding: 40px;
     border-radius: 4px;
     margin-bottom: 40px;
+  
+  }
+  .h-hero{
+    margin-top: 10.5%;
   }
   
   .hero h2 {
@@ -61,7 +63,7 @@
   }
   
   .btn-primary {
-    background-color: #007bff;
+    background-color:#62B9B6;
     color: #fff;
     padding: 10px 20px;
     border: none;
@@ -72,7 +74,7 @@
   }
   
   .btn-primary:hover {
-    background-color: #0056b3;
+    background-color: #4f9492;
   }
   
   .featured-books h3 {
