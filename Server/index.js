@@ -927,7 +927,7 @@ app.get('/admin/article/:Article_ID', (req, res) => {
   });
 });
 
-
+// deletign by post 
 app.post('/admin/article/delete', (req, res) => {
   const Article_ID = req.body.Article_ID;
   const User_ID =req.body.User_ID

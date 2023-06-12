@@ -73,10 +73,25 @@ const ArticlePage = () => {
         {
           comments?.map(((comment , index)=>{
             return <div>
-                    <div>{comment.A_comments} </div>
-                    <div onClick={()=> handleCommentsDelete(comment.User_ID,index)}>X</div>
-                    <div>Edit</div>
 
+          
+                  <table>
+                    <thead>
+                      <tr> 
+                          <th>Username</th>
+                          <th>Comment</th>
+                          <th>Action</th>
+                         
+                      </tr>
+                    </thead>
+                  <tbody>
+                      <td>Username</td>
+                      <td><div>{comment.A_comments} </div></td>
+                      <td> <div className="btn btn-danger" onClick={()=> handleCommentsDelete(comment.User_ID,index)}>X</div>
+                    <div className="btn btn-success">Edit</div> 
+                    </td>
+                    </tbody>
+            </table>  
              </div>
 
           }))
