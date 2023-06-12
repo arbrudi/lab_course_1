@@ -8,11 +8,13 @@ import RatingArticle from "../components/CRUDS/Article_Managment/RatingArticle";
 import FavoriteArticle from "../components/CRUDS/Article_Managment/FavoriteArticle";
 import NavBar from "../components/NavBar";
 import Footer from "../components/Footer";
+import EditComment from "../components/editComment/EditComment";
 
 const ArticlePage = () => {
   const { Article_ID } = useParams();
   const [ArticlePage, setArticlePage] = useState(null);
   const [ comments , setComments] = useState();
+  const [ module , setModule] = useState(false);
 
   console.log(comments , "comment")
 
@@ -88,7 +90,7 @@ const ArticlePage = () => {
                       <td>Username</td>
                       <td><div>{comment.A_comments} </div></td>
                       <td> <div className="btn btn-danger" onClick={()=> handleCommentsDelete(comment.User_ID,index)}>X</div>
-                    <div className="btn btn-success">Edit</div> 
+                    <div className="btn btn-success" onClick={() => setModule(!module)}>Edit</div> 
                     </td>
                     </tbody>
             </table>  
@@ -97,6 +99,9 @@ const ArticlePage = () => {
           }))
         }
        </div>
+       {module && 
+       <EditComment />
+       }
 
 
 <table className="Extra_parts">
