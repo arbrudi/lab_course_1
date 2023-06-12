@@ -998,6 +998,40 @@ app.get('/admin/ARating/:Article_ID', (req, res) => {
 });
 
 
+
+app.post('/admin/ARating/delete', (req, res) => {
+  const Article_ID = req.body.Article_ID;
+  const User_ID =req.body.User_ID
+  db.query(`DELETE FROM article_ratings WHERE Article_ID =? AND User_ID =?`, [Article_ID,User_ID], (err, result) => {
+    if (err) {
+      console.log(err);
+    } else {
+      res.send(result);
+    }
+  });
+});
+
+app.post('/admin/ARating/edit', (req, res) => {
+  const Article_ID = req.body.Article_ID;
+  const User_ID = req.body.User_ID;
+  const A_Rating = req.body.newRating;
+
+  db.query(
+    'UPDATE article_ratings SET A_Rating=? WHERE Article_ID=? AND User_ID=?',
+    [A_Rating, Article_ID, User_ID],
+    (err, result) => {
+      if (err) {
+        console.log(err);
+        res.status(500).send('An error occurred while updating the comment.');
+      } else {
+        res.send(result);
+      }
+    }
+  );
+});
+
+
+
 //
 
 

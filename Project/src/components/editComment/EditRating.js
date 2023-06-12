@@ -5,17 +5,17 @@ import axios from 'axios';
 const EditRating = (props) =>{
 
     const { articleId, userId } = props;
-    const [ comment , setComment ] = useState("");
+    const [ Rating , setRating ] = useState("");
 
-    function handleEditRequest (articleId,userId,newComment) {
+    function handleEditRequest (articleId,userId,newRating) {
 
     const payload = {
         Article_ID: articleId,
         User_ID :userId,
-        newComment : newComment,
+        newRating : newRating,
     }
 
-    axios.post("http://localhost:3001/admin/article/edit",payload)
+    axios.post("http://localhost:3001/admin/ARating/edit",payload)
     .then((response) =>{
         console.log(response);
     }).catch((error) =>{
@@ -26,11 +26,11 @@ const EditRating = (props) =>{
   return (
     <div>
         <div>
-            Edit selected comment
+            Edit the Rating
         </div>
         <div>
-         <input placeholder='Write new comment...' onChange={(e) => setComment(e.target.value)}/>
-         <button onClick={() => handleEditRequest(articleId,userId,comment)}>Change selected comment</button>
+         <input placeholder='Write new Rating...' onChange={(e) => setRating(e.target.value)}/>
+         <button onClick={() => handleEditRequest(articleId,userId,Rating)}>Change selected Rating</button>
         </div>     
     </div>
   )

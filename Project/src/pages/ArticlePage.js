@@ -8,6 +8,7 @@ import FavoriteArticle from "../components/CRUDS/Article_Managment/FavoriteArtic
 import NavBar from "../components/NavBar";
 import Footer from "../components/Footer";
 import EditComment from "../components/editComment/EditComment";
+import EditRating from "../components/editComment/EditRating";
 
 const ArticlePage = () => {
   const { Article_ID } = useParams();
@@ -27,6 +28,9 @@ const ArticlePage = () => {
       User_ID : user_id,
       Article_ID:Article_ID,
     }
+
+
+    
     Axios.post(`http://localhost:3001/admin/article/delete`,payload)
     .then((response)=> {
       console.log(response)
@@ -56,6 +60,22 @@ const ArticlePage = () => {
     })
   }
 
+  function handleRatingDelete(user_id,idx)  {
+    const payload = {
+      User_ID : user_id,
+      Article_ID:Article_ID,
+    }
+
+
+    
+    Axios.post(`http://localhost:3001/admin/ARating/delete`,payload)
+    .then((response)=> {
+      console.log(response)
+      getRatingHandler();
+    }).catch((error)=>{
+      console.log(error)
+    })
+  }
 
   useEffect(() => {
     Axios.get(`http://localhost:3001/Articlelist/articles/${Article_ID}`)
@@ -64,6 +84,7 @@ const ArticlePage = () => {
 
       getCommentsHandler();
       getRatingHandler();
+      
 
      
   }, [Article_ID]);
@@ -121,29 +142,42 @@ const ArticlePage = () => {
           }))
         }
        </div>
-       
-        <h2>Rating</h2>
 
+      
+        <h2>Rating</h2>
+          
         
-          <div className="rating-container">
+          <div>
             {
-          ARating?.map(((ARate, index)=>(
-            
-            <div className="star-rating">
-            {[...Array(ARate.A_Rating)].map((star, index) => {
-              index += 1;
-              return (
-                <button
-                  type="button"
-                  key={index}
-                  className={"button on"}
-                >
-                  <span className="star">&#9733;</span>
-                </button>
-              );
-            })}
-          </div>
-          )))
+          ARating?.map(((ARate, index)=>{
+            return <div>
+
+          
+                  <table>
+                    <thead>
+                      <tr> 
+                          <th>Username</th>
+                          <th>Rating</th>
+                          <th>Action</th>
+                         
+                      </tr>
+                    </thead>
+                  <tbody>
+                      <td>Username</td>
+                      <td><div>{ARate.A_Rating} </div></td>
+                      <td> <div className="btn btn-danger" onClick={()=> handleRatingDelete(ARate.User_ID,index)}>X</div>
+                    <div className="btn btn-success" onClick={() => {setModule(!module);setIdx(index);}}>Edit</div> 
+                    </td>
+                    </tbody>
+            </table>  
+              {index == idx && 
+              <EditRating articleId={Article_ID} userId={ARate.User_ID}/>
+              }
+             </div>
+         
+              
+  
+           }))
 }
           </div>
         
