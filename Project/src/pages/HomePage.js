@@ -57,9 +57,11 @@ return (
       </header>
       <main>
         <section className="hero">
+          <div className='h-hero'>
           <h2>Welcome to the E-Library</h2>
           <p>Explore our vast collection of books, articles, and documents.</p>
           <a href="/login" className="btn-primary">Get Started</a>
+          </div>
         </section> 
         <div className=''>
       <div className=''>
