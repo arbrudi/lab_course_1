@@ -66,47 +66,44 @@ return (
         <div className=''>
       <div className=''>
         <table className='table'>
-          <thead>
-            <tr>
-              <th></th>
-              
-              <th></th>
-            </tr>
-          </thead>
+        
+      
+       
          
-          <div className='title'>
-        <table className='table'>
-          <thead>
-            <tr> 
-            </tr>
-          </thead>
-          <tbody>
-            {events.map((data, i) => (
-              <tr key={i}>
-                <td>ID{data.Event_ID}</td>
-                <td className='image-cell'>
-                  {data.Event_image && (
-                    <img
-                      src={data.Event_image}
-                      alt='Event Image'
-                      className='event-image'
-                    />
-                  )}
-                </td>
-                <td className='title'>Description</td>
-                <td>{data.Event_description}</td>
-                <td>Data:{data.Event_date}</td>
-                <td>
-                <Link to={`/joinevent/${data.Event_ID}`} className='btn'>
-                    <button className='btn'>Update event_participants</button>
-                  </Link>
-                </td>
-              </tr>
-            ))}
+          <tbody> 
+           
+          
+         <div className='events'>
+  {events.map((data, i) => (
+    <div key={i} className="event-card">
+      <div className="event-image-container">
+      <div className="event-image-container">
+  {data.Event_image && (
+    <img
+      src={data.Event_image}
+      alt="Event Image"
+      className="event-image style"
+    />
+  )}
+</div> 
+      </div>
+      <div className="event-info">
+      <p><span className="info">Description:</span></p>
+  <p>{data.Event_description}</p>
+  <p ><span className='info'>Data:</span></p>
+  <p>{data.Event_date}</p>
+  <Link to={`/joinevent/${data.Event_ID}`} className="btn">
+    <button className="btn-update rounded">Register</button>
+  </Link>
+</div>
+</div>
+  ))}</div>
+
+
           </tbody>
         </table>
-      </div> 
-      </table> 
+    
+    
       </div> 
       </div>
 
