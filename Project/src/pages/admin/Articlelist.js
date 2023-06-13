@@ -20,7 +20,7 @@ import { Link } from 'react-router-dom';
         return (
             <div>
                 <NavBar />
-            <h1>Article</h1>
+            <h1>Article u whore</h1>
             <div className="news-cont">
               {Alist.map(item => (
                 <div key={item.Article_ID} className="news-part">
@@ -34,6 +34,7 @@ import { Link } from 'react-router-dom';
                     <p>{item.Article_type}</p>
           
                     <Link to={`/Articlelist/articles/${item.Article_ID}`} className='read_more'>
+                      
                 Read more...
               </Link>
                   </div>

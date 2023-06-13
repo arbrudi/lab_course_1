@@ -17,11 +17,7 @@ const ArticlePage = () => {
   const [ ARating , setARating] = useState();
   const [ module , setModule] = useState(false);
   const [ idx , setIdx ] = useState();
-  const [rating, setRating] = useState(0);
-  const [hover, setHover] = useState(0);
 
-  console.log(ARating,"ARating")
-  console.log(comments , "comment")
 
   function handleCommentsDelete (user_id,idx)  {
     const payload = {

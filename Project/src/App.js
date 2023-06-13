@@ -2,7 +2,6 @@ import './App.css';
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import HomePage from './pages/HomePage';
 import AboutPage from './pages/AboutPage';
-import BookList from './pages/BookList';
 import BookPage from './pages/BookPage';
 import ArticlePage from './pages/ArticlePage';
 import PageNotFound from './pages/PageNotFound';
@@ -27,6 +26,7 @@ import Createe from './components/CRUDS/Events/createe';
 import Events from './pages/admin/Events'; 
 import NewsPage from './pages/NewsPage';
 import Articlelist from './pages/admin/Articlelist';
+import Booklist from './pages/admin/Booklist';
 import Createparticipants from './components/CRUDS/Events/createparticipants';
 import Updateparticipants from './components/CRUDS/Events/Updateparticipants'; 
 import Reviews from './pages/admin/Reviews';
@@ -76,8 +76,7 @@ function App() {
           <>
            <Route index element={<HomePage />} />
             <Route path="/about" element={<AboutPage />} />
-            <Route path="/books" element={<BookList />} />
-            <Route path="/books/:bookid" element={<BookPage />} />
+            <Route path="/BookList/books/:ISBN" element={<BookPage />} />
             <Route path="/articles/:articleid" element={<ArticlePage />} />
             <Route path="/user" element={<UserDashboard />} />
          {/*<Route path="/*" element={<PageNotFound />} /> */}
@@ -86,6 +85,9 @@ function App() {
             <Route path = 'newsList/news/:News_ID' element = {<NewsPage />} />
             <Route path = '/Articlelist' element = {<Articlelist />} />
             <Route path = 'Articlelist/articles/:Article_ID' element = {<ArticlePage />} /> 
+            <Route path='/Booklist' element={<Booklist /> } />
+
+
             <Route path='/contact' element={<Contact_Page />} />
           </>
           }
@@ -95,8 +97,7 @@ function App() {
            <Route index element={<HomePage />} />
             <Route path="/user" element={<UserDashboard />} />
             <Route path="/about" element={<AboutPage />} />
-            <Route path="/books" element={<BookList />} />
-            <Route path="/books/:bookid" element={<BookPage />} />
+            <Route path="/BookList/books/:ISBN" element={<BookPage />} />
             <Route path="/articles/:articleid" element={<ArticlePage />} />
            {/*<Route path="/*" element={<PageNotFound />} /> */}
             <Route path="/admin" element={<AdminDashboard />} />
@@ -121,6 +122,11 @@ function App() {
             <Route path='newsList/news/:News_ID' element = {<NewsPage />} />
             <Route path='/Articlelist' element = {<Articlelist />} />
             <Route path='Articlelist/articles/:Article_ID' element = {<ArticlePage />} /> 
+
+            <Route path='/Booklist' element={<Booklist /> } />
+            <Route path="Booklist/books/:ISBN" element={<BookPage />} />
+
+            
             <Route path="/admin/events/createparticipants" element={<Createparticipants />} /> 
             <Route path="/admin/events/Updateparticipants/:Event_ID" element={<Updateparticipants />} />
             <Route path='/admin/reviews' element={<Reviews />} />

@@ -1039,6 +1039,20 @@ app.post('/admin/ARating/edit', (req, res) => {
 
 // Leka ----------------------------------------------------------------Books-----------------------------------------------------------
 
+app.get('/BooksList/books/:ISBN', (req, res) => {
+  const sql = 'SELECT * FROM books WHERE ISBN = ?';
+  const ISBN = req.params.ISBN;
+
+  db.query(sql, ISBN, (err, result) => {
+    if (err) {
+      console.log(err);
+      res.send("Error retrieving ISBN");
+    } else {
+      res.json(result);
+    }
+  });
+});
+
 app.post('/admin/books/create', (req, res) => {
   console.log(req.body);
   const ISBN = req.body.ISBN; 
@@ -1105,7 +1119,135 @@ app.delete('/admin/books/delete/:ISBN', (req, res) => {
 })
 
 
+app.post('/admin/BRating/BRating_create', (req, res) => {
+  const sql= "INSERT INTO book_ratings (User_ID, ISBN,B_Rating) VALUES(?,?,?)"
+  const values = [
+   req.body.User_ID,
+   req.body.ISBN,
+   req.body.B_Rating,
 
+ ]
+
+ db.query(sql,values, (err, result) => {
+   if (err) {
+     console.log(err);
+   } else {
+     res.send(result);
+   }
+ });
+});
+
+
+app.post('/admin/BRating/edit', (req, res) => {
+  const ISBN = req.body.ISBN;
+  const User_ID = req.body.User_ID;
+  const B_Rating = req.body.newRating;
+
+  db.query(
+    'UPDATE book_ratings SET B_Rating=? WHERE ISBN=? AND User_ID=?',
+    [B_Rating, ISBN, User_ID],
+    (err, result) => {
+      if (err) {
+        console.log(err);
+        res.status(500).send('An error occurred while updating the comment.');
+      } else {
+        res.send(result);
+      }
+    }
+  );
+});
+
+app.post('/admin/BRating/delete', (req, res) => {
+  const ISBN = req.body.ISBN;
+  const User_ID =req.body.User_ID
+  db.query(`DELETE FROM book_ratings WHERE ISBN =? AND User_ID =?`, [ISBN,User_ID], (err, result) => {
+    if (err) {
+      console.log(err);
+    } else {
+      res.send(result);
+    }
+  });
+});
+
+app.get('/admin/BRating/:ISBN', (req, res) => {
+
+  const ISBN = req.params.ISBN;
+  const sql = `SELECT * FROM book_ratings WHERE ISBN = ${ISBN}`;
+
+  db.query(sql,ISBN, (err, result) => {
+    if (err) {
+      console.log(err);
+      res.send("Error retrieving Rating ");
+    } else {
+      res.send({result});
+    }
+  });
+});
+
+//Book comments
+app.post('/admin/books/Bcomment_create', (req, res) => {
+  const sql= "INSERT INTO book_comments (User_ID, ISBN,B_comments) VALUES(?,?,?)"
+  const values = [
+   req.body.User_ID,
+   req.body.ISBN,
+   req.body.B_comments,
+
+ ]
+
+ db.query(sql,values, (err, result) => {
+   if (err) {
+     console.log(err);
+   } else {
+     res.send(result);
+   }
+ });
+});
+
+app.get('/admin/book/:ISBN', (req, res) => {
+
+  const ISBN = req.params.ISBN;
+  const sql = `SELECT * FROM book_comments WHERE ISBN = ${ISBN}`;
+
+  db.query(sql,ISBN, (err, result) => {
+    if (err) {
+      console.log(err);
+      res.send("Error retrieving books");
+    } else {
+      res.send({result});
+    }
+  });
+});
+
+app.post('/admin/book/delete', (req, res) => {
+  const Article_ID = req.body.Article_ID;
+  const User_ID =req.body.User_ID
+  db.query(`DELETE FROM book_comments WHERE book_ID =? AND User_ID =?`, [ISBN,User_ID], (err, result) => {
+    if (err) {
+      console.log(err);
+    } else {
+      res.send(result);
+    }
+  });
+});
+
+app.post('/admin/book/edit', (req, res) => {
+  const ISBN = req.body.ISBN;
+  const User_ID = req.body.User_ID;
+  const B_comments = req.body.newComment;
+
+  db.query(
+    'UPDATE book_comments SET B_comments=? WHERE book_ID=? AND User_ID=?',
+    [B_comments, ISBN, User_ID],
+    (err, result) => {
+      if (err) {
+        console.log(err);
+        res.status(500).send('An error occurred while updating the comment.');
+      } else {
+        res.send(result);
+      }
+    }
+  );
+});
 
 app.listen(PORT,()=>{
 console.log(`The server is running on port ${PORT}`);
