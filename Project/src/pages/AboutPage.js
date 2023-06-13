@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 import Slider from "react-slick";
@@ -12,6 +12,7 @@ function AboutPage() {
   const [slidercontroller, setSliderController] = useState([]);
   const [currentSlide, setCurrentSlide] = useState(0);
   const [section, setSection] = useState([]);
+  const sliderRef = useRef(null);
 
   useEffect(() => {
     Axios.get("http://localhost:3001/admin/text_section")
@@ -23,21 +24,19 @@ function AboutPage() {
       .catch((err) => console.log(err));
   }, []);
 
+  useEffect(() => {
+    const interval = setInterval(() => {
+      if (sliderRef.current) {
+        sliderRef.current.slickNext();
+      }
+    },1000);
+
+    return () => clearInterval(interval);
+  }, []);
+
   if (!section || !slidercontroller) {
     return <div>Loading...</div>;
   }
-
-  const nextSlide = () => {
-    setCurrentSlide((prevSlide) =>
-      prevSlide === slidercontroller.length - 1 ? 0 : prevSlide + 1
-    );
-  };
-
-  const prevSlide = () => {
-    setCurrentSlide((prevSlide) =>
-      prevSlide === 0 ? slidercontroller.length - 1 : prevSlide - 1
-    );
-  };
 
   const settings = {
     dots: true,
@@ -45,6 +44,8 @@ function AboutPage() {
     speed: 500,
     slidesToShow: 1,
     slidesToScroll: 1,
+    autoplay: true,
+    autoplaySpeed: 50000, // Change the autoplay speed to 5000ms (5 seconds)
     beforeChange: (_, nextSlide) => setCurrentSlide(nextSlide),
   };
 
@@ -55,7 +56,7 @@ function AboutPage() {
       </div>
 
       <div className="slider-container">
-        <Slider {...settings} initialSlide={currentSlide}>
+        <Slider {...settings} ref={sliderRef} initialSlide={currentSlide}>
           {slidercontroller.map((data, i) => (
             <div key={i}>
               <img
@@ -66,9 +67,6 @@ function AboutPage() {
             </div>
           ))}
         </Slider>
-
-        <button className="btn-prev" onClick={prevSlide}></button>
-        <button className="btn-next" onClick={nextSlide}></button>
       </div>
 
       <div className="text">
