@@ -161,6 +161,7 @@ img {
   padding: 20px;
   border: 1px solid rgba(164, 95, 255, 0.596);
   border-radius: 5px;
+  margin-right: 20px;
 }
 
 .loading-box {
