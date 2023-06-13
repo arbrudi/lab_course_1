@@ -20,7 +20,7 @@ function Booklist() {
   return (
     <div>
         <NavBar />
-    <h1>Books u whore</h1>
+    <h1>Book List</h1>
     <div className="news-cont">
       {Blist.map(item => (
         <div key={item.ISBN} className="news-part">

@@ -45,7 +45,7 @@ const deleteNews = async(News_ID) =>
 
       <div className='d-flex justify-content-center align-items-center'>
          <div className='bg-white rounded p-3'>
-            <Link to="/admin/news/create" className='btn btn-success' >Add +</Link>
+            <Link to="/admin/news/create" className='btn btn-success' >Add </Link>
             <table className='table'>
                 <thead> 
                     <tr>

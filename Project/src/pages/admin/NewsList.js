@@ -18,7 +18,7 @@ import { Link } from 'react-router-dom';
         }, []);
       
         return (
-            <div>
+            <div className='bod'>
                 <NavBar />
             <h1>News List</h1>
             <div className="news-cont">

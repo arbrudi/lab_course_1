@@ -108,12 +108,9 @@ return (
       </div>
 
       <div>
-                <h1>Test slider 1
-                  
-             </h1>
 
              <div>
-        <h1>ImageSlider</h1>
+        <h1>Image Slider</h1>
         <div style={containerStyles}>
           <ImageSlider slides={slides} parentWidth={500} />
         </div>

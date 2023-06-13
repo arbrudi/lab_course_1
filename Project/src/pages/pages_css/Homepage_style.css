@@ -41,17 +41,16 @@ main {
 }
 
 section{
-  
-  
-  height:500px
-   ;
+  min-height:300px;
+ 
 }
 
 .hero {
   background-color: #f1f1f1;
   padding: 40px;
   border-radius: 4px;
-  margin-bottom: 40px;
+  height: 500px;
+  margin-bottom: 100px;
 
 }
 .h-hero{
@@ -101,16 +100,10 @@ section{
   margin-bottom: 10px;
 }
 
-footer {
-  background-color: #333;
-  padding: 10px;
-  color: #fff;
-}
-
 .rev_slider {
   margin: 10px;
   padding: 50px;
-  background-color: #62B9B6;
+  background-color: #ebe7e7;
 }
 
 #review_h1{
@@ -121,13 +114,20 @@ footer {
 .rev_cont {
   display: flex;
   flex-direction: row; 
- 
+ flex-wrap: wrap;
 }
 .rev_n_s {
-  margin-bottom: 10px;
-  padding: 5px;
-  border: 1px solid #ccc;
-  color: white;
+  width: 250px;
+  background-color: #f1f1f1;
+  border-radius: 15px;
+  border-color: #62B9B6;
+  padding: 20px;
+  text-align: center;
+  margin-bottom: 15px;
+  margin-right: 21px;
+}
+.rev_n_s:hover {
+  box-shadow: 0 0 20px #807edbc2;
 }
 
 .rev_comm {
@@ -139,18 +139,25 @@ box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
 font-size: 14px;
 line-height: 1.4;
 } 
+
 .event-card {
 display: flex;
 align-items: center;
-padding: 5px; /* Add padding to create space for the outline */
+padding: 5px; 
 box-sizing: border-box;
-outline: 1px solid rgb(180, 176, 176); /* Use outline instead of border */
+border-radius: 15px;
+outline: 1px solid rgb(196, 194, 194); 
 margin-bottom: 20px; 
 
 }
+
+.event-card:hover {
+  box-shadow: 0 0 15px #62CB91;
+}
+
 .event-image.style {
-width: 700px; /* Adjust the width as per your requirements */
-height: 400px; /* Maintain aspect ratio */ 
+width: 700px; 
+height: 400px; 
 margin-right: 50px;
 }
 
@@ -163,7 +170,7 @@ word-break: break-word;
 margin-right: 20px;
 }
 .info {
-font-size: 20px; /* Adjust the font size as desired */
-font-weight: bold; /* Optional: Apply bold font weight */
+font-size: 30px; 
+font-weight: bold; 
 } 
 
