@@ -1032,7 +1032,79 @@ app.post('/admin/ARating/edit', (req, res) => {
 
 
 
-//
+//F-Article
+
+
+app.post('/user/FArticle/F_Article_create', (req, res) => {
+  const sql= "INSERT INTO favorite_articles (User_ID, Article_ID) VALUES(?,?)"
+  const values = [
+   req.body.User_ID,
+   req.body.Article_ID,
+  
+
+ ]
+
+ db.query(sql,values, (err, result) => {
+   if (err) {
+     console.log(err);
+   } else {
+     res.send(result);
+   }
+ });
+});
+
+
+app.get('/user/FArticle/:User_ID', (req, res) => {
+  const User_ID = req.params.User_ID;
+
+  const sql = `SELECT f.Article_ID, a.Article_image, a.Article_title, a.Article_type FROM favorite_articles AS f INNER JOIN articles AS a ON a.Article_ID = f.Article_ID WHERE User_ID = ${User_ID}`;
+
+  db.query(sql, (err, result) => {
+    if (err) {
+      console.log(err);
+      res.status(500).send("Error retrieving favorite articles");
+    } else {
+      res.send(result);
+    }
+  });
+});
+
+
+
+
+// app.post('/admin/ARating/delete', (req, res) => {
+//   const Article_ID = req.body.Article_ID;
+//   const User_ID =req.body.User_ID
+//   db.query(`DELETE FROM article_ratings WHERE Article_ID =? AND User_ID =?`, [Article_ID,User_ID], (err, result) => {
+//     if (err) {
+//       console.log(err);
+//     } else {
+//       res.send(result);
+//     }
+//   });
+// });
+
+// app.post('/admin/ARating/edit', (req, res) => {
+//   const Article_ID = req.body.Article_ID;
+//   const User_ID = req.body.User_ID;
+//   const A_Rating = req.body.newRating;
+
+//   db.query(
+//     'UPDATE article_ratings SET A_Rating=? WHERE Article_ID=? AND User_ID=?',
+//     [A_Rating, Article_ID, User_ID],
+//     (err, result) => {
+//       if (err) {
+//         console.log(err);
+//         res.status(500).send('An error occurred while updating the comment.');
+//       } else {
+//         res.send(result);
+//       }
+//     }
+//   );
+// });
+
+
+
 
 
 

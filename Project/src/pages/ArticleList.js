@@ -13,18 +13,7 @@ const ArticleList = ()=>{
         <>
         <NavBar />
         
-         <div className={styles.container}>
-          <h1>Article List</h1>
-          <ul className={styles.articleList}>
-            {articles.map(article => (
-              <li key={article.id} className={styles.articleItem}>
-                <h2>{article.title}</h2>
-                <p>Author: {article.author}</p>
-              </li>
-            ))}
-          </ul>
-        </div>
-
+        <div></div>
 
         <Footer />
         </>

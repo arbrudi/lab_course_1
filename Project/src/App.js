@@ -48,6 +48,7 @@ import Contact from './pages/admin/Contact';
 import Contact_Page from './pages/Contact_Page';
 import Create_Contact from './components/CRUDS/Contact_Page/Create_Contact';
 import Update_Contact from './components/CRUDS/Contact_Page/Update_Contact';
+import U_FavoriteArticle from './pages/User/U_FavoriteArticle';
 
 function App() {
 
@@ -86,6 +87,7 @@ function App() {
             <Route path = '/Articlelist' element = {<Articlelist />} />
             <Route path = 'Articlelist/articles/:Article_ID' element = {<ArticlePage />} /> 
             <Route path='/Booklist' element={<Booklist /> } />
+            <Route path='/user/FavoriteArticle' element={<U_FavoriteArticle/>} />
 
 
             <Route path='/contact' element={<Contact_Page />} />
