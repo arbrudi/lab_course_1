@@ -8,6 +8,7 @@ import CommentBook from '../components/CRUDS/Book_Managment/CommentBook';
 import RatingBook from '../components/CRUDS/Book_Managment/RatingBook';
 import FavoriteBook from '../components/CRUDS/Book_Managment/FavortieBook';
 import EditBookComment from '../components/BookExtras/EditBookComment';
+import EditBookRating from '../components/BookExtras/EditBookRating';
 
 const BookPage = ()=>{
     const { ISBN } = useParams();
@@ -16,7 +17,7 @@ const BookPage = ()=>{
     const [ BRating , setBRating] = useState();
     const [ module , setModule] = useState(false);
     const [ idx , setIdx ] = useState();
-  
+    
   
     function handleBookCommentsDelete (user_id,idx)  {
       const payload = {
@@ -139,6 +140,38 @@ const BookPage = ()=>{
 
 <h1> Rating section </h1>
 <div>
+{
+          BRating?.map(((BRate, index)=>{
+            return <div>
+
+          
+                  <table>
+                    <thead>
+                      <tr> 
+                          <th>Username</th>
+                          <th>Rating</th>
+                          <th>Action</th>
+                         
+                      </tr>
+                    </thead>
+                  <tbody>
+                      <td>Username</td>
+                      <td><div>{BRate.B_Rating} </div></td>
+                      <td> <div className="btn btn-danger" onClick={()=> handleBRatingDelete(BRate.User_ID,index)}>X</div>
+                    <div className="btn btn-success" onClick={() => {setModule(!module);setIdx(index);}}>Edit</div> 
+                    </td>
+                    </tbody>
+            </table>  
+              {index == idx && 
+              <EditBookRating ISBN={ISBN} userId={BRate.User_ID}/>
+              }
+             </div>
+         
+              
+  
+           }))
+}
+
 
 </div>
 

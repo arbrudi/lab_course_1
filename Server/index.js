@@ -1141,7 +1141,7 @@ app.post('/admin/BRating/BRating_create', (req, res) => {
 app.post('/admin/BRating/edit', (req, res) => {
   const ISBN = req.body.ISBN;
   const User_ID = req.body.User_ID;
-  const B_Rating = req.body.newRating;
+  const B_Rating = req.body.B_Rating;
 
   db.query(
     'UPDATE book_ratings SET B_Rating=? WHERE ISBN=? AND User_ID=?',

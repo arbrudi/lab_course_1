@@ -1,18 +1,18 @@
 import React, {useState} from 'react';
-import './editComment.css';
+import './EditComment.css';
 import axios from 'axios';
 
 const EditBookRating = (props) =>{
 
     const { ISBN, userId } = props;
-    const [ Rating , setRating ] = useState("");
+    const [ B_Rating , setB_Rating ] = useState("");
 
-    function handleEditRequest (ISBN,userId,newRating) {
+    function handleEditRequest (ISBN,userId,B_Rating) {
 
     const payload = {
         ISBN: ISBN,
         User_ID :userId,
-        newRating : newRating,
+        B_Rating : B_Rating,
     }
 
     axios.post("http://localhost:3001/admin/BRating/edit",payload)
@@ -29,8 +29,8 @@ const EditBookRating = (props) =>{
             Edit the Rating
         </div>
         <div>
-         <input placeholder='Write new Rating...' onChange={(e) => setRating(e.target.value)}/>
-         <button onClick={() => handleEditRequest(ISBN,userId,Rating)}>Change selected Rating</button>
+         <input placeholder='Write new Rating...' onChange={(e) => setB_Rating(e.target.value)}/>
+         <button onClick={() => handleEditRequest(ISBN,userId,B_Rating)}>Change selected Rating</button>
         </div>     
     </div>
   )
