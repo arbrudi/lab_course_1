@@ -4,6 +4,10 @@ import Axios from "axios";
 import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import '../pages/pages_css/Articlepage.css'
+import CommentBook from '../components/CRUDS/Book_Managment/CommentBook';
+import RatingBook from '../components/CRUDS/Book_Managment/RatingBook';
+import FavoriteBook from '../components/CRUDS/Book_Managment/FavortieBook';
+import EditBookComment from '../components/BookExtras/EditBookComment';
 
 const BookPage = ()=>{
     const { ISBN } = useParams();
@@ -22,7 +26,7 @@ const BookPage = ()=>{
   
   
       
-      Axios.post(`http://localhost:3001/admin/article/delete`,payload)
+      Axios.post(`http://localhost:3001/admin/book/delete`,payload)
       .then((response)=> {
         console.log(response)
        getCommentsHandler();
@@ -32,10 +36,10 @@ const BookPage = ()=>{
     }
   
     function getCommentsHandler () {
-      Axios.get(`http://localhost:3001/admin/article/${Article_ID}`)
+      Axios.get(`http://localhost:3001/admin/books/${ISBN}`)
       .then((response) => {
         console.log(response, "response comments")
-        setComments([...response.data.result])
+        setBookComments([...response.data.result])
       }).catch((error) => {
         console.log(error)
       })
@@ -51,10 +55,10 @@ const BookPage = ()=>{
       })
     }
   
-    function handleRatingDelete(user_id,idx)  {
+    function handleBRatingDelete(user_id,idx)  {
       const payload = {
         User_ID : user_id,
-        Article_ID:Article_ID,
+        ISBN:ISBN,
       }
   
   
@@ -72,7 +76,8 @@ const BookPage = ()=>{
         Axios.get(`http://localhost:3001/BooksList/books/${ISBN}`)
           .then(res => setBookPage(res.data[0]))
           .catch(err => console.log(err));
-    
+          getRatingHandler();
+          getCommentsHandler()
 
           
     
@@ -96,6 +101,55 @@ const BookPage = ()=>{
  <img className="Img" src={BookPage.Book_image} alt={BookPage.Book_title} />
   <p className="Description">{BookPage.Book_description}</p>
 </div>
+
+
+<h1> comment Section</h1>
+<div>
+{
+          BookComments?.map(((Bcomment , index)=>{
+            return <div>
+
+          
+                  <table>
+                    <thead>
+                      <tr> 
+                          <th>Username</th>
+                          <th>Comment</th>
+                          <th>Action</th>
+                         
+                      </tr>
+                    </thead>
+                  <tbody>
+                      <td>Username</td>
+                      <td><div>{Bcomment.B_comments} </div></td>
+                      <td> <div className="btn btn-danger" onClick={()=> handleBookCommentsDelete(Bcomment.User_ID,index)}>X</div>
+                    <div className="btn btn-success" onClick={() => {setModule(!module);setIdx(index);}}>Edit</div> 
+                    </td>
+                    </tbody>
+            </table>  
+              {index == idx && 
+              <EditBookComment ISBN={ISBN} userId={Bcomment.User_ID}/>
+              }
+             </div>
+
+          }))
+        }
+
+</div>
+
+<h1> Rating section </h1>
+<div>
+
+</div>
+
+
+
+
+<table className='Extra_parts'>
+        <thead><CommentBook/></thead>
+        <thead> <RatingBook/> </thead>
+        <thead> <FavoriteBook/></thead>
+</table>
         <Footer />
         </>
     )

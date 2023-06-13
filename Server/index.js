@@ -1185,7 +1185,7 @@ app.get('/admin/BRating/:ISBN', (req, res) => {
 });
 
 //Book comments
-app.post('/admin/books/Bcomment_create', (req, res) => {
+app.post('/admin/book/Bcomment_create', (req, res) => {
   const sql= "INSERT INTO book_comments (User_ID, ISBN,B_comments) VALUES(?,?,?)"
   const values = [
    req.body.User_ID,
@@ -1203,7 +1203,7 @@ app.post('/admin/books/Bcomment_create', (req, res) => {
  });
 });
 
-app.get('/admin/book/:ISBN', (req, res) => {
+app.get('/admin/books/:ISBN', (req, res) => {
 
   const ISBN = req.params.ISBN;
   const sql = `SELECT * FROM book_comments WHERE ISBN = ${ISBN}`;
@@ -1219,9 +1219,9 @@ app.get('/admin/book/:ISBN', (req, res) => {
 });
 
 app.post('/admin/book/delete', (req, res) => {
-  const Article_ID = req.body.Article_ID;
+  const ISBN = req.body.ISBN;
   const User_ID =req.body.User_ID
-  db.query(`DELETE FROM book_comments WHERE book_ID =? AND User_ID =?`, [ISBN,User_ID], (err, result) => {
+  db.query(`DELETE FROM book_comments WHERE ISBN =? AND User_ID =?`, [ISBN,User_ID], (err, result) => {
     if (err) {
       console.log(err);
     } else {
@@ -1236,7 +1236,7 @@ app.post('/admin/book/edit', (req, res) => {
   const B_comments = req.body.newComment;
 
   db.query(
-    'UPDATE book_comments SET B_comments=? WHERE book_ID=? AND User_ID=?',
+    'UPDATE book_comments SET B_comments=? WHERE ISBN=? AND User_ID=?',
     [B_comments, ISBN, User_ID],
     (err, result) => {
       if (err) {
