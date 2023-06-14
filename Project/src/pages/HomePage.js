@@ -1,7 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';  
 import './pages_css/Homepage_style.css';
-import ImageSlider from '../components/ImageSlider';
 import NavBar from '../components/NavBar';
 import Footer from '../components/Footer';
 import Axios from 'axios'; 
@@ -67,7 +66,7 @@ return (
          
           <tbody> 
            
-          
+          <h1>Events</h1>
          <div className='events'>
   {events.map((data, i) => (
     <div key={i} className="event-card">
@@ -105,6 +104,7 @@ return (
       <div>
 
              <div>
+              <h1>Benefits</h1>
              <div className="benefits-container">
              <div className="benefits-container">
   <div className="benefits-row">
@@ -144,26 +144,7 @@ return (
       </div>
      </div>
        <br></br>
-        <section className="featured-books">
-          <h3>Featured Books</h3>
-          <div className="book-list">
-            <div className="book-card">
-              <img src="book1.jpg" alt="Book Cover" />
-              <h4>Book Title</h4>
-              <p>Author Name</p>
-            </div>
-            <div className="book-card">
-              <img src="book2.jpg" alt="Book Cover" />
-              <h4>Book Title</h4>
-              <p>Author Name</p>
-            </div>
-            <div className="book-card">
-              <img src="book3.jpg" alt="Book Cover" />
-              <h4>Book Title</h4>
-              <p>Author Name</p>
-            </div>
-          </div>
-        </section>
+  
 
         <section>
         <h1 id='review_h1'> Reviews Section</h1>
