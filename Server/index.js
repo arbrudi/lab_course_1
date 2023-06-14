@@ -1325,3 +1325,74 @@ app.post('/admin/book/edit', (req, res) => {
 app.listen(PORT,()=>{
 console.log(`The server is running on port ${PORT}`);
 }); 
+
+//F- Books
+
+app.post('/user/FBook/F_Book_create', (req, res) => {
+  const sql= "INSERT INTO favorite_books (User_ID, ISBN) VALUES(?,?)"
+  const values = [
+   req.body.User_ID,
+   req.body.ISBN,
+  
+
+ ]
+
+ db.query(sql,values, (err, result) => {
+   if (err) {
+     console.log(err);
+   } else {
+     res.send(result);
+   }
+ });
+});
+
+
+// app.get('/user/FArticle/:User_ID', (req, res) => {
+//   const User_ID = req.params.User_ID;
+
+//   const sql = `SELECT f.Article_ID, a.Article_image, a.Article_title, a.Article_type FROM favorite_articles AS f INNER JOIN articles AS a ON a.Article_ID = f.Article_ID WHERE User_ID = ${User_ID}`;
+
+//   db.query(sql, (err, result) => {
+//     if (err) {
+//       console.log(err);
+//       res.status(500).send("Error retrieving favorite articles");
+//     } else {
+//       res.send(result);
+//     }
+//   });
+// });
+
+
+
+
+// app.delete('/user/FArticle/F_Article_Delete/:Article_ID', (req, res) => {
+//   const Article_ID = req.params.Article_ID;
+
+//   db.query('DELETE FROM favorite_articles WHERE Article_ID =? ', [Article_ID], (err, result) => {
+//     if (err) {
+//       console.log(err);
+//     } else {
+//       res.send(result);
+//     }
+//   });
+// });
+
+
+
+// app.put('/user/FArticle/F_Article_Update/:Article_ID', (req, res) => {
+//   const Article_ID = req.params.Article_ID;
+//   const newArticle = req.body.newArticle;
+
+//   db.query(
+//     'UPDATE favorite_articles SET Article_ID=? WHERE Article_ID=?',
+//     [newArticle, Article_ID],
+//     (err, result) => {
+//       if (err) {
+//         console.log(err);
+//         res.status(500).send('An error occurred while updating the article.');
+//       } else {
+//         res.send(result);
+//       }
+//     }
+//   );
+// });
