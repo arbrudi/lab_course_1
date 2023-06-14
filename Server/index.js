@@ -1347,52 +1347,52 @@ app.post('/user/FBook/F_Book_create', (req, res) => {
 });
 
 
-// app.get('/user/FArticle/:User_ID', (req, res) => {
-//   const User_ID = req.params.User_ID;
+app.get('/user/FBook/:User_ID', (req, res) => {
+  const User_ID = req.params.User_ID;
 
-//   const sql = `SELECT f.Article_ID, a.Article_image, a.Article_title, a.Article_type FROM favorite_articles AS f INNER JOIN articles AS a ON a.Article_ID = f.Article_ID WHERE User_ID = ${User_ID}`;
+  const sql = `SELECT f.ISBN, a.Book_image, a.Book_title, a.Book_genre FROM favorite_books AS f INNER JOIN books AS a ON a.ISBN = f.ISBN WHERE User_ID = ${User_ID}`;
 
-//   db.query(sql, (err, result) => {
-//     if (err) {
-//       console.log(err);
-//       res.status(500).send("Error retrieving favorite articles");
-//     } else {
-//       res.send(result);
-//     }
-//   });
-// });
-
-
-
-
-// app.delete('/user/FArticle/F_Article_Delete/:Article_ID', (req, res) => {
-//   const Article_ID = req.params.Article_ID;
-
-//   db.query('DELETE FROM favorite_articles WHERE Article_ID =? ', [Article_ID], (err, result) => {
-//     if (err) {
-//       console.log(err);
-//     } else {
-//       res.send(result);
-//     }
-//   });
-// });
+  db.query(sql, (err, result) => {
+    if (err) {
+      console.log(err);
+      res.status(500).send("Error retrieving favorite articles");
+    } else {
+      res.send(result);
+    }
+  });
+});
 
 
 
-// app.put('/user/FArticle/F_Article_Update/:Article_ID', (req, res) => {
-//   const Article_ID = req.params.Article_ID;
-//   const newArticle = req.body.newArticle;
 
-//   db.query(
-//     'UPDATE favorite_articles SET Article_ID=? WHERE Article_ID=?',
-//     [newArticle, Article_ID],
-//     (err, result) => {
-//       if (err) {
-//         console.log(err);
-//         res.status(500).send('An error occurred while updating the article.');
-//       } else {
-//         res.send(result);
-//       }
-//     }
-//   );
-// });
+app.delete('/user/FBook/F_Book_Delete/:ISBN', (req, res) => {
+  const ISBN = req.params.ISBN;
+
+  db.query('DELETE FROM favorite_books WHERE ISBN =? ', [ISBN], (err, result) => {
+    if (err) {
+      console.log(err);
+    } else {
+      res.send(result);
+    }
+  });
+});
+
+
+
+app.put('/user/FBook/F_Book_Update/:ISBN', (req, res) => {
+  const ISBN = req.params.ISBN;
+  const newBook = req.body.newBook;
+
+  db.query(
+    'UPDATE favorite_books SET ISBN=? WHERE ISBN=?',
+    [newBook, ISBN],
+    (err, result) => {
+      if (err) {
+        console.log(err);
+        res.status(500).send('An error occurred while updating the article.');
+      } else {
+        res.send(result);
+      }
+    }
+  );
+});

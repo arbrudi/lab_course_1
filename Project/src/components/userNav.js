@@ -19,7 +19,7 @@ const UserNav = () => {
             <ul>
                        
                 <li><Link to="/user">User Dashboard</Link></li>
-                <li><Link to="/user/favorite_books">Favorite Books</Link></li>
+                <li><Link to="/user/FavoriteBook">Favorite Books</Link></li>
                 <li><Link to="/user/FavoriteArticle ">Favorite Articles</Link></li>
                 <li><Link to="/user/events">Events</Link></li>
                 <li onClick={()=> logoutFunction()}>Logout</li>

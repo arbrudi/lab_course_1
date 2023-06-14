@@ -50,6 +50,9 @@ import Create_Contact from './components/CRUDS/Contact_Page/Create_Contact';
 import Update_Contact from './components/CRUDS/Contact_Page/Update_Contact';
 import U_FavoriteArticle from './pages/User/U_FavoriteArticle';
 import U_EditFavoritArticle from './pages/User/U_EditFavoritArticle';
+import U_FavoriteBook from './pages/User/U_FavoriteBook';
+import U_EditFavoritBook from './pages/User/U_EditFavoritBook';
+
 
 function App() {
 
@@ -90,6 +93,8 @@ function App() {
             <Route path='/Booklist' element={<Booklist /> } />
             <Route path='/user/FavoriteArticle' element={<U_FavoriteArticle/>} />
             <Route path='/user/FavoriteArticle/U_EditFavoritArticle/:Article_ID' element={<U_EditFavoritArticle/>} />
+            <Route path='/user/FavoriteBook' element={<U_FavoriteBook/>} /> 
+            <Route path='/user/FavoriteArticle/U_EditFavoritBook/:ISBN' element={<U_EditFavoritBook/>} />
 
 
             <Route path='/contact' element={<Contact_Page />} />
