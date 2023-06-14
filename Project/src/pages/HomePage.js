@@ -21,19 +21,14 @@ function HomePage() {
       .then((res) => setEvents(res.data))
       .catch((err) => console.log(err));
   }, []);
-    const slides = [
-      { url: "http://localhost:3000/image-1.jpg", title: "beach" },
-      { url: "http://localhost:3000/image-2.jpg", title: "boat" },
-      { url: "http://localhost:3000/image-3.jpg", title: "forest" },
-      { url: "http://localhost:3000/image-4.jpg", title: "city" },
-      { url: "http://localhost:3000/image-5.jpg", title: "italy" },
-    ];
+  const [benefits, setBenefits] = useState([]);
 
-    const containerStyles = {
-      width: "500px",
-      height: "280px",
-      margin: "0 auto",
-    };
+    useEffect(() => {
+      Axios.get('http://localhost:3001/admin/benefits')
+        .then(res => setBenefits(res.data))
+        .catch(err => console.log(err));
+    }, []);
+ 
  
 
     const[reviews,setReviews] = useState([]);
@@ -110,10 +105,42 @@ return (
       <div>
 
              <div>
-        <h1>Image Slider</h1>
-        <div style={containerStyles}>
-          <ImageSlider slides={slides} parentWidth={500} />
-        </div>
+             <div className="benefits-container">
+             <div className="benefits-container">
+  <div className="benefits-row">
+  <div className="benefits-container">
+  <div className="benefits-row">
+    {benefits.slice(0, 3).map((data, i) => (
+      <div className="benefit large" key={i}>
+        {data.Benefit_img && (
+          <img
+            src={data.Benefit_img}
+            alt='Event Image'
+            style={{ maxWidth: '300px', maxHeight: '300px' }}
+          />
+        )}
+        <div className="benefit-title">{data.Benefit_title}</div>
+      </div>
+    ))}
+  </div>
+  <div className="benefits-row">
+    {benefits.slice(3, 6).map((data, i) => (
+      <div className="benefit" key={i}>
+        {data.Benefit_img && (
+          <img
+            src={data.Benefit_img}
+            alt='Event Image'
+            style={{ maxWidth: '150px', maxHeight: '150px' }}
+          />
+        )}
+        <div className="benefit-title">{data.Benefit_title}</div>
+      </div>
+    ))}
+  </div>
+</div>
+  </div>
+</div>
+</div>
       </div>
      </div>
        <br></br>
