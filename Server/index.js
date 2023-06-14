@@ -1072,36 +1072,37 @@ app.get('/user/FArticle/:User_ID', (req, res) => {
 
 
 
-// app.post('/admin/ARating/delete', (req, res) => {
-//   const Article_ID = req.body.Article_ID;
-//   const User_ID =req.body.User_ID
-//   db.query(`DELETE FROM article_ratings WHERE Article_ID =? AND User_ID =?`, [Article_ID,User_ID], (err, result) => {
-//     if (err) {
-//       console.log(err);
-//     } else {
-//       res.send(result);
-//     }
-//   });
-// });
+app.delete('/user/FArticle/F_Article_Delete/:Article_ID', (req, res) => {
+  const Article_ID = req.params.Article_ID;
 
-// app.post('/admin/ARating/edit', (req, res) => {
-//   const Article_ID = req.body.Article_ID;
-//   const User_ID = req.body.User_ID;
-//   const A_Rating = req.body.newRating;
+  db.query('DELETE FROM favorite_articles WHERE Article_ID =? ', [Article_ID], (err, result) => {
+    if (err) {
+      console.log(err);
+    } else {
+      res.send(result);
+    }
+  });
+});
 
-//   db.query(
-//     'UPDATE article_ratings SET A_Rating=? WHERE Article_ID=? AND User_ID=?',
-//     [A_Rating, Article_ID, User_ID],
-//     (err, result) => {
-//       if (err) {
-//         console.log(err);
-//         res.status(500).send('An error occurred while updating the comment.');
-//       } else {
-//         res.send(result);
-//       }
-//     }
-//   );
-// });
+
+
+app.put('/user/FArticle/F_Article_Update/:Article_ID', (req, res) => {
+  const Article_ID = req.params.Article_ID;
+  const newArticle = req.body.newArticle;
+
+  db.query(
+    'UPDATE favorite_articles SET Article_ID=? WHERE Article_ID=?',
+    [newArticle, Article_ID],
+    (err, result) => {
+      if (err) {
+        console.log(err);
+        res.status(500).send('An error occurred while updating the article.');
+      } else {
+        res.send(result);
+      }
+    }
+  );
+});
 
 
 

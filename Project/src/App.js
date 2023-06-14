@@ -89,7 +89,7 @@ function App() {
             <Route path = 'Articlelist/articles/:Article_ID' element = {<ArticlePage />} /> 
             <Route path='/Booklist' element={<Booklist /> } />
             <Route path='/user/FavoriteArticle' element={<U_FavoriteArticle/>} />
-            <Route path='/user/FavoriteArticle/U_EditFavoritArticle' element={<U_EditFavoritArticle/>} />
+            <Route path='/user/FavoriteArticle/U_EditFavoritArticle/:Article_ID' element={<U_EditFavoritArticle/>} />
 
 
             <Route path='/contact' element={<Contact_Page />} />
