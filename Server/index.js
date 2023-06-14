@@ -797,6 +797,97 @@ app.post('/admin/events/createe', (req, res) => {
           res.send(result);
         }
       });
+    }); 
+    app.get('/admin/benefits', (req, res) => {
+      const sql = 'SELECT * FROM benefits';
+    
+      db.query(sql, (err, result) => {
+        if (err) {
+          console.log(err);
+          res.send("Error retrieving reviews");
+        } else {
+          res.json(result);
+        }
+      });
+    });
+    
+    app.post('/admin/benefits/createbenefits', (req, res) => {
+       
+      const sql='INSERT INTO benefits (Benefit_ID, Benefit_img, Benefit_title) VALUES (?, ?, ?)'
+      const values=[
+       req.body.Benefit_ID,
+       req.body.Benefit_img,
+       req.body.Benefit_title,
+      ]
+      db.query(sql, values, (err, data) => { 
+       if(err){
+           console.log(err);
+           res.send("Error uploading review");
+       } else {
+           res.send("Benefit Uploaded Successfully");
+       }
+     }
+     );
+     });
+    
+     app.put('/admin/benefits/updatebenefits/:Benefit_ID', (req, res) => {
+      const Benefit_ID = req.body.Benefit_ID;
+      const sql='UPDATE benefits SET Benefit_img = ? , Benefit_title = ?  WHERE Benefit_ID=?'
+      const values=[ 
+      
+       req.body.Benefit_img,
+       req.body.Benefit_title,
+       req.body.Benefit_ID
+      ]
+      
+    
+      db.query(sql, [...values,Benefit_ID], (err, data) => { 
+       if(err){
+           console.log(err);
+           res.send("Error");
+       } else {
+           res.send("Success");
+       }
+     }
+     );
+     });
+     app.delete('/admin/benefits/delete/:Benefit_ID', (req, res) => {
+      const Benefit_ID = req.params.Benefit_ID;
+    
+      db.query('DELETE FROM benefits WHERE Benefit_ID=?', Benefit_ID, (err, result) => {
+        if (err) {
+          console.log(err);
+        } else {
+          res.send(result);
+        }
+      });
+    });
+    app.get('/user/joinuser/:User_ID', (req, res) => {
+      const { User_ID } = req.params;
+      const sql = `SELECT ep.Event_ID, e.Event_image, e.Event_description, e.Event_date, ep.User_ID, c.Name, c.Surname FROM Event_participants ep INNER JOIN Events e ON e.Event_ID = ep.Event_ID INNER JOIN client c ON c.User_ID = ep.User_ID WHERE ep.User_ID = ?`;
+    
+      db.query(sql, [User_ID], (err, data) => {
+        if (err) {
+          console.error('Error while fetching events:', err);
+          res.status(500).json('Error');
+        } else {
+          res.json(data);
+        }
+      });
+    });
+    app.post('/user/joinuser/:Event_ID', (req, res) => {
+      const { event_id } = req.params;
+      const { User_ID } = req.body;
+      const sql = 'INSERT INTO Event_participants (Event_ID, User_ID) VALUES (?, ?)';
+    
+      db.query(sql, [event_id, User_ID], (err) => {
+        if (err) {
+          console.error('Error while creating event participant:', err);
+          res.status(500).json('Error');
+        } else {
+          res.sendStatus(200);
+        }
+      });
     });
 // Erisi -------------------------------------------Articles--------------------------------------------------------------------------------
 app.get('/Articlelist/articles/:Article_ID', (req, res) => {

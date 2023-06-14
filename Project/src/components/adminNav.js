@@ -23,9 +23,10 @@ const AdminNav = () =>{
                 <li><Link to="/admin/events">Events</Link></li>
                 <li><Link to="/admin/reviews">Reviews</Link></li> 
                 <li><Link to="/admin/slidercontroller">Slider controller</Link></li> 
+                <li><Link to="/admin/benefits">Benefits</Link></li> 
                 <li><Link to="/admin/partners">Partners</Link></li>
                 <li><Link to="/admin/Text_section">Text Section</Link></li>
-                <li><Link to="/admin/contact">Contact Page</Link></li>
+                <li><Link to="/admin/contact">Contact Page</Link></li> 
                 <li onClick={()=> logoutFunction()}>Log out</li>
             </ul>
         </nav>

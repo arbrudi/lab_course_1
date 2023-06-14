@@ -48,11 +48,15 @@ import Contact from './pages/admin/Contact';
 import Contact_Page from './pages/Contact_Page';
 import Create_Contact from './components/CRUDS/Contact_Page/Create_Contact';
 import Update_Contact from './components/CRUDS/Contact_Page/Update_Contact';
-import U_FavoriteArticle from './pages/User/U_FavoriteArticle';
-import U_EditFavoritArticle from './pages/User/U_EditFavoritArticle';
-import U_FavoriteBook from './pages/User/U_FavoriteBook';
-import U_EditFavoritBook from './pages/User/U_EditFavoritBook';
-
+import U_FavoriteArticle from './pages/user/U_FavoriteArticle';
+import U_EditFavoritArticle from './pages/user/U_EditFavoritArticle';
+import U_FavoriteBook from './pages/user/U_FavoriteBook';
+import U_EditFavoritBook from './pages/user/U_EditFavoritBook';
+import Userevents from './pages/user/userevents'; 
+import Joinuser from './pages/user/Joinuser'; 
+import Benefits from './pages/admin/Benefits'; 
+import Createbenefits from './components/CRUDS/Benefit/createbenefits'; 
+import Updatebenefits from './components/CRUDS/Benefit/Updatebenefits'; 
 
 function App() {
 
@@ -155,7 +159,12 @@ function App() {
             <Route path='/admin/contact' element={<Contact />} />
             <Route path='/admin/contact/create' element={<Create_Contact />} />
             <Route path='/admin/contact/update/:Contact_ID' element={<Update_Contact />} />
-            <Route path='/contact' element={<Contact_Page />} />
+            <Route path='/contact' element={<Contact_Page />} /> 
+            <Route path='/user/userevents' element={<Userevents />} /> 
+            <Route path='/user/joinuser' element={<Joinuser />} /> 
+            <Route path='/admin/benefits' element={<Benefits />} /> 
+            <Route path='/admin/benefits/createbenefits' element={<Createbenefits />} /> 
+            <Route path='/admin/benefits/updatebenefits/:Benefit_ID' element={<Updatebenefits />} />
            </>
            }
           </Routes>
